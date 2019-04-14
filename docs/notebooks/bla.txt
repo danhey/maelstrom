@@ -1,0 +1,35 @@
+digraph {
+	mean_flux [label="mean_flux ~ Normal"]
+	logperiod [label="logperiod ~ Normal"]
+	t0 [label="t0 ~ Normal"]
+	varpi [label="varpi ~ Angle"]
+	eccen [label="eccen ~ Uniform"]
+	tref [label="tref ~ Deterministic" shape=box]
+	gammav [label="gammav ~ Normal"]
+	logs [label="logs ~ Normal"]
+	period [label="period ~ Deterministic" shape=box]
+	subgraph cluster3 {
+		lighttime [label="lighttime ~ Normal"]
+		W_hat_cos [label="W_hat_cos ~ Normal"]
+		W_hat_sin [label="W_hat_sin ~ Normal"]
+		label=3 labeljust=r labelloc=b style=rounded
+	}
+	subgraph "cluster64,844" {
+		obs [label="obs ~ Normal" style=filled]
+		label="64,844" labeljust=r labelloc=b style=rounded
+	}
+	logperiod -> period
+	t0 -> tref
+	period -> tref
+	eccen -> tref
+	varpi -> tref
+	W_hat_sin -> obs
+	mean_flux -> obs
+	varpi -> obs
+	lighttime -> obs
+	W_hat_cos -> obs
+	eccen -> obs
+	tref -> obs
+	logs -> obs
+	period -> obs
+}
