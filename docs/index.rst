@@ -1,20 +1,22 @@
-.. maelstrom documentation master file, created by
-   sphinx-quickstart on Sun Apr 14 17:48:03 2019.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. include:: ../README.rst
 
-Welcome to maelstrom's documentation!
-=====================================
+User guide
+----------
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
 
+License & attribution
+---------------------
 
-Indices and tables
-==================
+Copyright 2018, 2019 Daniel Hey.
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+The source code is made available under the terms of the MIT license.
+
+
+Changelog
+---------
+
+.. include:: ../CHANGES.rst
