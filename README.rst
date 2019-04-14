@@ -11,9 +11,8 @@ modelling binary orbits through the phase modulation technique.
 This approach fully captures variations in a light curve caused by 
 an orbital companion.
 
-To install the current developer version:
+To install the current developer version::
 
-.. codeblock:: bash
     git clone https://github.com/danielhey/maelstrom.git
     cd maelstrom
     pip install -e .
