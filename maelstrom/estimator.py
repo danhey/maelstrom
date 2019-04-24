@@ -48,7 +48,7 @@ def estimate_frequencies(x, y, fmin=None, fmax=None, max_peaks=3,
     if fmin is None:
         fmin = df
     if fmax is None:
-        fmax = 2*ny
+        fmax = ny
 
     freq = np.arange(fmin, fmax, df / oversample)
     power = LombScargle(x, y).power(freq)

@@ -10,7 +10,6 @@ import theano.tensor as tt
 import pymc3 as pm
 from pymc3.model import Model
 import exoplanet as xo
-import corner
 from exoplanet.orbits import get_true_anomaly
 from astropy.stats import LombScargle
 
@@ -52,7 +51,7 @@ class BaseOrbitModel(Model):
 
         # Relative flux
         self.flux = flux - np.mean(flux)
-        self.freq = freq
+        self.freq = np.array(freq)
         
     def sample(self, tune=3000, draws=3000, start=None, target_accept=0.9, **kwargs):
         """
@@ -91,17 +90,21 @@ class BaseOrbitModel(Model):
         
     def evaluate(self, var, opt=None):
         """
-        Convenience function with wraps exoplanet.utils.eval_in_model()
+        Convenience function which wraps exoplanet.utils.eval_in_model()
         """
         with self:
             return xo.utils.eval_in_model(var, opt)
-    
 
     def corner_plot(self, trace, varnames=None):
         """
-
+        Makes a corner plot of the given `trace`. You must have 
+        `corner` installed for this to work.
         """
-        import corner
+        try:
+            import corner
+        except:
+            raise ImportError("You must `pip install corner` first.")
+
         if varnames is None:
             vvars = ["period", "t0","varpi", "eccen", "logs"]
             varnames=[self.name + i + "_" for i in vvars]
@@ -116,7 +119,7 @@ class BaseOrbitModel(Model):
         """ Convenience wrapper function for pm.model_to_trace """
         return pm.model_to_graphviz(self.model)
 
-    def get_period_estimate(self):
+    def get_period_estimate(self, **kwargs):
         """
         Estimates the period by a weighted average of the segmented time delay
 
@@ -126,7 +129,7 @@ class BaseOrbitModel(Model):
             Estimate of the period from extracted time delays.
         """
         # This should really use a weighted average periodogram
-        time_midpoint, time_delay = self.get_time_delay()
+        time_midpoint, time_delay = self.get_time_delay(**kwargs)
         ls_model = LombScargle(time_midpoint, time_delay[0])
         ls_frequencies = np.linspace(1e-3, 0.5/np.median(np.diff(time_midpoint)), 10000)
         power = ls_model.power(ls_frequencies, method="fast",
@@ -134,7 +137,7 @@ class BaseOrbitModel(Model):
         period = 1/ls_frequencies[np.argmax(power)]
         return period
 
-    def get_time_delay(self, segment_size=10):
+    def get_time_delay(self, segment_size=1):
         """ 
         Calculates the time delay signal, splitting the light curve into 
         chunks of width segment_size. A smaller segment size will increase
@@ -178,16 +181,18 @@ class BaseOrbitModel(Model):
         phase = np.array(phase).T
         # Phase wrapping patch
         for ph, f in zip(phase, self.freq):
-            mean_phase = np.mean(ph)
-            ph[np.where(ph - mean_phase > np.pi/2)] -= np.pi
-            ph[np.where(ph - mean_phase < -np.pi/2)] += np.pi
+            #mean_phase = np.mean(ph)
+            #ph[np.where(ph - mean_phase > np.pi/2)] -= np.pi
+            #ph[np.where(ph - mean_phase < -np.pi/2)] += np.pi
+            #ph -= np.mean(ph)
+            ph = np.unwrap(ph)
             ph -= np.mean(ph)
 
             td = ph / (2*np.pi*(f / uHz_conv * 1e-6))
             time_delays.append(td)
         return time_midpoints, time_delays
 
-    def first_look(self, segment_size=10, save_path=None, **kwargs):
+    def first_look(self, segment_size=1, save_path=None, **kwargs):
         """ 
         Shows the light curve, it's amplitude spectrum, and 
         any time delay signal for the current self.freq in the model.
@@ -246,22 +251,24 @@ class BaseOrbitModel(Model):
             plt.savefig(save_path, dpi=150)
             plt.close("all")
 
-    def plot_lc_model(self, opt):
+    def predict_lc(self, opt):
         pass
 
-    def plot_tau_model(self, opt):
+    def predict_tau(self, opt):
         pass
         #self.time_mid
 
     def _assign_test_value(self, opt):
         """
-        Some horrific code to update the test value of a model
-        with optimization results. This saves us having to
-        maintain an opt dict outside of the class.
+        Updates the test value of a model
+        with optimization results.
         """
         with self as model:
             for x in opt:
                 model[x].tag.test_value = opt[x]
+
+    def save_trace(self, trace):
+        pass
 
 
 class Maelstrom(BaseOrbitModel):
@@ -347,7 +354,7 @@ class Maelstrom(BaseOrbitModel):
                    (1 + eccen*tt.cos(f)))
             
             # tau in d
-            self.tau = (lighttime / 86400.)[None, :] * psi[:, None]
+            self.tau = - (lighttime / 86400.)[None, :] * psi[:, None]
             
             # Sample in the weights parameters
             factor = 2. * np.pi * self.freq[None, :]
@@ -373,10 +380,8 @@ class Maelstrom(BaseOrbitModel):
         Parameters
         ----------
         opt : `dict`
-            Segment size in which to separate the light curve, in units of
-            the light curve time. For example, the default segment size of 10 
-            will separate a 1000 d long light curve in 100 segments of 10 d
-            each.
+            Results of the `optimize` function for the model. If none is supplied,
+            Maelstrom will optimize first.
         
         Returns
         -------
@@ -427,12 +432,8 @@ class Maelstrom(BaseOrbitModel):
             return new_model
 
     def optimize(self, vars=None, verbose=False, **kwargs):
-        # Let's be a little more clever about the optimization:
         with self as model:
             if vars is None:
-                self.optimization_path = [
-                    
-                ]
                 map_soln = xo.optimize(start=model.test_point, vars=[model.mean_flux, model.W_hat_cos, model.W_hat_sin], verbose=False)
                 map_soln = xo.optimize(start=map_soln, vars=[model.logs, model.mean_flux, model.W_hat_cos, model.W_hat_sin], verbose=False)
                 map_soln = xo.optimize(start=map_soln, vars=[model.lighttime, model.t0], verbose=False)
@@ -470,6 +471,17 @@ class PB1Model(BaseOrbitModel):
         super(PB1Model, self).__init__(time, flux, freq=freq, name=name, model=model)
 
     def init_params(self, period=None, eccen=None):
+        """
+        Initialises the parameters for the binary model.
+
+        Parameters
+        ----------
+        period : `float` (default None)
+            Initial estimate of the period. If none is supplied, the model will
+            automatically pick a best guess.
+        eccen : `float` (default None)
+            Initial estimate of the eccentricity.
+        """
         with self:
             
             if period is None:
@@ -482,10 +494,13 @@ class PB1Model(BaseOrbitModel):
             varpi = xo.distributions.Angle("varpi")
             eccen = pm.Uniform("eccen", lower=1e-5, upper=1.0 - 1e-5, testval=eccen)
             logs = pm.Normal('logs', mu=np.log(np.std(self.flux)), sd=100)
-            lighttime_a = pm.Normal('lighttime_a', mu=0.0, sd=100.0)
+            lighttime_a = pm.Normal('lighttime_a', mu=100., sd=100.0)
             gammav = pm.Normal('gammav', mu=0., sd=100.)
             
     def init_orbit(self):
+        """
+        Initialises the orbit model equations.
+        """
         with self:
             # Better parameterization for the reference time
             sinw = tt.sin(self.varpi)
@@ -502,7 +517,7 @@ class PB1Model(BaseOrbitModel):
             psi = - (1 - tt.square(self.eccen)) * tt.sin(f+self.varpi) / (1 + self.eccen*tt.cos(f))
             
             # tau in d
-            self.tau = (self.lighttime_a / 86400) * psi[:,None]
+            self.tau = - (self.lighttime_a / 86400) * psi[:,None]
 
             # Sampling in the weights parameter is faster than solving the matrix.
             factor = 2. * np.pi * self.freq[None, :]
@@ -519,6 +534,8 @@ class PB1Model(BaseOrbitModel):
 
     def add_radial_velocity(self, time, rv, err=None, lighttime='a'):
         
+        time -= self.time_mid
+        # TODO NOTE NEED TO SUBTRACT THE MID TIME HERE 
         # Input validation for lighttime type
         if lighttime not in ('a', 'b'):
             raise ValueError("You must assign the lighttime to either star a or b")
@@ -527,7 +544,7 @@ class PB1Model(BaseOrbitModel):
             # Account for uncertainties in RV data
             #logs_rv = pm.Normal('logs_RV_'+lighttime, mu=np.log(np.std(rv)), sd=100)
             if err is None:
-                logs_rv = pm.Normal('logs_RV_'+lighttime, mu=np.log(np.median(rv)), sd=10)
+                logs_rv = pm.Normal('logs_RV_'+lighttime, mu=0., sd=10)
             else:
                 logs_rv = pm.Normal('logs_RV_'+lighttime, mu=np.log(np.median(err)), sd=10)
             
@@ -537,18 +554,21 @@ class PB1Model(BaseOrbitModel):
                                             tt.zeros_like(rv_mean_anom))
 
             if lighttime=='a':
-                rv_vrad = ((self.lighttime_a / 86400) * (-2.0 * np.pi * (1 / self.period) * (1/tt.sqrt(1.0 - tt.square(self.eccen))) * (tt.cos(rv_true_anom + self.varpi) + self.eccen*tt.cos(self.varpi))))
+                self.rv_vrad_a = ((self.lighttime_a / 86400) * (-2.0 * np.pi * (1 / self.period) * (1/tt.sqrt(1.0 - tt.square(self.eccen))) * (tt.cos(rv_true_anom + self.varpi) + self.eccen*tt.cos(self.varpi))))
+                self.rv_vrad_a *= 299792.458  # c in km/s
+                self.rv_vrad_a += self.gammav
+
+                pm.Normal("obs_radial_velocity_"+lighttime, mu=self.rv_vrad_a, sd=tt.exp(logs_rv), observed=rv)
             elif lighttime=='b':
                 # There's no second pulsating star in the PB1 model
                 # In this case, we make a new lighttime solely used
                 # by the radial velocity data.
-                lighttime_RV = pm.Normal('lighttime_b', mu=0.0, sd=100.0)
-                rv_vrad = ((lighttime_RV / 86400) * (-2.0 * np.pi * (1 / self.period) * (1/tt.sqrt(1.0 - tt.square(self.eccen))) * (tt.cos(rv_true_anom + self.varpi) + self.eccen*tt.cos(self.varpi))))
+                lighttime_RV = pm.Normal('lighttime_b', mu=-100., sd=100.0)
+                self.rv_vrad_b = ((lighttime_RV / 86400) * (-2.0 * np.pi * (1 / self.period) * (1/tt.sqrt(1.0 - tt.square(self.eccen))) * (tt.cos(rv_true_anom + self.varpi) + self.eccen*tt.cos(self.varpi))))
+                self.rv_vrad_b *= 299792.458  # c in km/s
+                self.rv_vrad_b += self.gammav
 
-            rv_vrad *= 299792.458  # c in km/s
-            rv_vrad += self.gammav
-
-            pm.Normal("obs_radial_velocity_"+lighttime, mu=rv_vrad, sd=tt.exp(logs_rv), observed=rv)
+                pm.Normal("obs_radial_velocity_"+lighttime, mu=self.rv_vrad_b, sd=tt.exp(logs_rv), observed=rv)
     
     def optimize(self, vars=None):
         """
@@ -580,7 +600,7 @@ class PB1Model(BaseOrbitModel):
         return pm.summary(trace, varnames=varnames)
 
 class PB2Model(BaseOrbitModel):
-
+    #TODO: FIX THIS MODEL
     def __init__(self, time, flux, freq_a, freq_b,
                  name='PB2', model=None, eccen=None):
 

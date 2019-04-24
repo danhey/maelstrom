@@ -91,5 +91,5 @@ def dft_phase(x, y, freq):
         expo = 2.0 * np.pi * f * x
         ft_real = np.sum(y * np.cos(expo))
         ft_imag = np.sum(y * np.sin(expo))
-        phase.append(np.arctan(ft_imag/ft_real))
+        phase.append(np.arctan2(ft_imag,ft_real))
     return phase
