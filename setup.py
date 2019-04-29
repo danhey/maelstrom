@@ -10,7 +10,7 @@ exec(open('maelstrom/version.py').read())
 with open('requirements.txt') as f:
     install_requires = f.read().splitlines()
 
-setup(name='lightkurve',
+setup(name='maelstrom',
       version=__version__,
       description="A package to model the orbits of pulsating stars in binaries",
       long_description=open('README.rst').read(),
