@@ -31,3 +31,16 @@ class Eddy(BaseOrbitModel):
 
     def init_orbit(self):
         pass
+
+
+    def test_func(self,bla,bla):
+        """oiuasidu
+        
+        Arguments:
+            bla {string} -- aosdiand
+            bla {apsodinadoi} -- spoaidnoapsdin
+
+        Returns:
+        
+        """
+        

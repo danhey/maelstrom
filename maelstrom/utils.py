@@ -4,8 +4,16 @@ from __future__ import division, print_function
 import seaborn as sns
 import numpy as np
 from astropy.stats import LombScargle
+from astropy.convolution import convolve, Box1DKernel
+from astropy import constants as const
+import astropy.units as u
 
-__all__ = ["unique_colors", "amplitude_spectrum", "dft_phase"]
+__all__ = ["unique_colors", "amplitude_spectrum", "dft_phase", "mass_function"]
+
+
+def mass_function(period, asini):
+    si = (4*np.pi**2 * (1*const.c**3)) / (1*const.G) * 1 / (period.to(u.s)**2) * (asini**3)
+    return si.to(u.M_sun)
 
 def unique_colors(n, cmap="hls"):
     """ 
@@ -93,3 +101,36 @@ def dft_phase(x, y, freq):
         ft_imag = np.sum(y * np.sin(expo))
         phase.append(np.arctan2(ft_imag,ft_real))
     return phase
+
+def smooth(freq, power, method='boxkernel', filter_width=2.):
+    fs = np.mean(np.diff(freq))
+    box_kernel = Box1DKernel(np.ceil((filter_width/fs)))
+    smooth_power = convolve(power, box_kernel)
+    return smooth_power
+
+def phase_error(x, y, freq):
+    """Calculates the phase uncertainty on the given frequency
+    
+    Args:
+        x (np.array): Time values
+        y (np.array): flux values
+        freq (Array-like or list): Frequency values
+    
+    Returns:
+        np.array: Array of uncertainties for each phase calculated
+    """
+    error = []
+    freq = np.asarray(freq)
+    x = np.array(x)
+    y = np.array(y)
+    freqs, amps = amplitude_spectrum(x, y)
+    smoothed = smooth(freqs, amps)
+    sig_a = np.sqrt(2 / np.sqrt(np.pi)) * np.std(smoothed)
+    for f in freq:
+        model = LombScargle(x, y)
+        sc = model.power(f, method="fast", normalization="psd")
+        fct = np.sqrt(4./len(x))
+        amp = np.sqrt(sc) * fct
+        err = sig_a / amp
+        error.append(err)
+    return error

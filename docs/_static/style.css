@@ -1,0 +1,9 @@
+@import url("theme.css");
+
+div.document {
+    width: 90%;
+}
+
+.wy-nav-content {
+    max-width: none;
+}

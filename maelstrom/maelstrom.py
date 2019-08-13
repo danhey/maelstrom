@@ -2,33 +2,54 @@
 from __future__ import division, print_function
 
 from .estimator import estimate_frequencies
-from .utils import unique_colors, amplitude_spectrum, dft_phase
+from .utils import unique_colors, amplitude_spectrum, dft_phase, phase_error, mass_function
 
 import numpy as np
 import matplotlib.pyplot as plt
 import theano.tensor as tt
+import theano
 import pymc3 as pm
 from pymc3.model import Model
+import seaborn as sns
 import exoplanet as xo
 from exoplanet.orbits import get_true_anomaly
 from astropy.stats import LombScargle
+import tqdm
 
-__all__ = ["Maelstrom", "PB1Model", "PB2Model", "BaseOrbitModel"]
+__all__ = ["Maelstrom", "PB1Model", "BaseOrbitModel"]
 
 
 class BaseOrbitModel(Model):
     
-    def __init__(self, time, flux, freq=None, is_flux=True, name='', model=None, **kwargs):
-        """
-        A base model from which all Maelstrom models inherit. This class should
-        not be instantiated by itself unless you know what you're doing.
+    orange = [0.84627451, 0.28069204, 0.00410611]
 
-        The BaseOrbitModel can be used as a model on the context stack for PyMC3;
-        custom_model = BaseOrbitModel(time, flux)
-        with custom_model as model:
-            your model code here.
+    def __init__(self, time, flux, freq=None, is_flux=True, name='', 
+                model=None, **kwargs):
+        """A base orbit model from which all other orbit models inherit.
+        
+        Parameters
+        ----------
+        time : Array-like
+            Time values
+        flux : Array-like
+            Flux values
+        freq : Array-like, optional
+            Frequencies of the model, by default None
+        is_flux : bool, optional
+            [description], by default True
+        name : str, optional
+            [description], by default ''
+        model : [type], optional
+            [description], by default None
+        
+        Raises
+        ------
+        ValueError
+            [description]
+        ValueError
+            [description]
         """
-
+        
         super(BaseOrbitModel, self).__init__(name, model)
         
         # Input validation
@@ -46,13 +67,29 @@ class BaseOrbitModel(Model):
 
         # Subtract and record time mid-point.
         self.time_mid = (time[0] + time[-1]) / 2.
-        time -= self.time_mid
-        self.time = time
+        self._time = theano.shared(time - self.time_mid)
 
-        # Relative flux
-        self.flux = flux - np.mean(flux)
+        # Relative flux in ppt
+        self._flux = theano.shared((flux - np.mean(flux)) * 1e3)
         self.freq = np.array(freq)
-        
+
+    @property
+    def time(self):
+        return self._time.get_value()
+
+    @property
+    def flux(self):
+        return self._flux.get_value()
+
+    @flux.setter
+    def flux(self, value):
+        pass
+
+    def uncertainty(self, map_soln):
+        # This is broken for celerite models
+        with self:
+            return np.sqrt(np.diag(np.linalg.solve(pm.find_hessian(map_soln))))
+
     def sample(self, tune=3000, draws=3000, start=None, target_accept=0.9, **kwargs):
         """
         Samples the model using the exoplanet PyMC3 sampler. By default,
@@ -64,12 +101,13 @@ class BaseOrbitModel(Model):
             Number of tuning steps for the sampler (default 3000)
         draws : float, optional
             Number of samples from which to populate the trace (default 3000)
-        optimize : bool, optional
-            If set to True, the sampler will optimize the model before
-            attempting to sample. If False (default), the sampler will
-            initialise at the testpoints of your priors.
+        start : dict, optional
+            Starting location of the sampler. If none is supplied, the sampler
+            will first optimize the model.
         target_accept : float, optional
             The target acceptance ratio of the NUTS sampler (default 0.9).
+        **kwargs : 
+            Keyword arguments to pass to sample.tune and sample.sample
 
         Returns
         -------
@@ -81,12 +119,11 @@ class BaseOrbitModel(Model):
             start = self.optimize()
 
         sampler = xo.PyMC3Sampler(start=50, window=50, finish=300)
-
-        with self as model:
-            burnin = sampler.tune(tune=tune, start=start, **kwargs,
+        with self:
+            sampler.tune(tune=tune, start=start, **kwargs,
                                   step_kwargs=dict(target_accept=target_accept))
-            self.trace = sampler.sample(draws=draws, **kwargs)
-        return self.trace
+            trace = sampler.sample(draws=draws, **kwargs)
+        return trace
         
     def evaluate(self, var, opt=None):
         """
@@ -95,33 +132,9 @@ class BaseOrbitModel(Model):
         with self:
             return xo.utils.eval_in_model(var, opt)
 
-    def corner_plot(self, trace, varnames=None):
-        """
-        Makes a corner plot of the given `trace`. You must have 
-        `corner` installed for this to work.
-        """
-        try:
-            import corner
-        except:
-            raise ImportError("You must `pip install corner` first.")
-
-        if varnames is None:
-            vvars = ["period", "t0","varpi", "eccen", "logs"]
-            varnames=[self.name + i + "_" for i in vvars]
-        samples = pm.trace_to_dataframe(trace, varnames=varnames)
-        for k in samples.columns:
-            if "_" in k:
-                samples[k.replace(self.name+"_", "")] = samples[k]
-                del samples[k]
-        corner.corner(samples)
-    
-    def print_model(self):
-        """ Convenience wrapper function for pm.model_to_trace """
-        return pm.model_to_graphviz(self.model)
-
     def get_period_estimate(self, **kwargs):
         """
-        Estimates the period by a weighted average of the segmented time delay
+        Estimates the period from the segmented time delay
 
         Returns
         ----------
@@ -129,15 +142,255 @@ class BaseOrbitModel(Model):
             Estimate of the period from extracted time delays.
         """
         # This should really use a weighted average periodogram
-        time_midpoint, time_delay = self.get_time_delay(**kwargs)
-        ls_model = LombScargle(time_midpoint, time_delay[0])
-        ls_frequencies = np.linspace(1e-3, 0.5/np.median(np.diff(time_midpoint)), 10000)
+        t0s, time_delay = self.get_time_delay(**kwargs)
+        ls_model = LombScargle(t0s, time_delay.T[0])
+        ls_frequencies = np.linspace(1e-3, 0.5/np.median(np.diff(t0s)), 10000)
         power = ls_model.power(ls_frequencies, method="fast",
                                normalization="psd")
         period = 1/ls_frequencies[np.argmax(power)]
         return period
 
-    def get_time_delay(self, segment_size=1):
+    def _estimate_segment(self):
+        """Don't even ask.
+        """
+        return 510.753 * np.median(np.diff(self.time)) - 0.215054
+
+    def plot_time_delay(self, ax=None, show_weighted=True, **kwargs):
+        """Plots the time delay. **kwargs go into `get_time_delay`.
+        """
+        t0s, time_delay = self.get_time_delay(**kwargs)
+        if ax is None:
+            fig, ax = plt.subplots()
+
+        colors = np.array(sns.color_palette('Blues', 
+                    n_colors=len(self.freq)))[::-1]
+        for td, color in zip(time_delay.T, colors):
+            ax.plot(t0s, td, c=color)
+
+        if show_weighted:
+            ax.plot(t0s, np.average(time_delay, axis=1, 
+                    weights=self.get_weights()), c=self.orange)
+        ax.set_xlabel('Time [day]')
+        ax.set_ylabel('Time delay [s]')
+        ax.set_xlim(t0s[0], t0s[-1])
+        return ax
+
+    def plot_periodogram(self, ax=None):
+        """Plots the periodogram of the light curve with 
+        the model frequencies overlain.
+        
+        Parameters
+        ----------
+        ax : matplotlib axis, optional
+            do you want an axis or not, by default None
+        
+        Returns
+        -------
+        ax
+            yes, this is also an axis.
+        """
+        if ax is None:
+            fig, ax = plt.subplots()
+        colors = np.array(sns.color_palette('Blues', 
+                    n_colors=len(self.freq)))[::-1]
+
+        nyq = 0.5 / np.median(np.diff(self.time))
+        if np.any(self.freq > nyq):
+            fmax = np.max(self.freq) + 10.
+        else:
+            fmax = None
+        freq, amp = amplitude_spectrum(self.time, self.flux, fmax=fmax)
+        ax.plot(freq, amp, linewidth=0.7, c='black')
+        weights = self.get_weights(norm=False)
+
+        for f, weight, color in zip(self.freq, weights, colors):
+            ax.scatter(f, weight, color=color, marker='v')
+
+        ax.set_xlim(freq[0], freq[-1])
+        ax.set_ylim(0, None)
+        ax.set_xlabel(r'Frequency [day$^{-1}$]')
+        ax.set_ylabel('Amplitude [ppt]')
+        return ax
+
+    def plot_time_delay_periodogram_period(self, min_period=None, max_period=None,
+                                    ax=None, annotate=True, return_res=False, **kwargs):
+        """ Plots the time delay periodogram
+        """
+        t0s, time_delay = self.get_time_delay(**kwargs)
+        nyq = 0.5 / np.median(np.diff(t0s))
+        if min_period is None:
+            min_period = 1 / nyq
+        if max_period is None:
+            max_period = self.time[-1] - self.time[0]
+
+        if ax is None:
+            fig, ax = plt.subplots()
+        full = np.average(time_delay, axis=1, weights=self.get_weights())
+        m = np.isfinite(full)
+
+        colors = np.array(sns.color_palette('Blues', 
+                    n_colors=len(self.freq)))[::-1]
+
+        for td, color in zip(time_delay.T, colors):
+            res = xo.estimators.lomb_scargle_estimator(t0s[m], td[m], min_period=min_period, max_period=max_period)
+            f, p = res["periodogram"]
+            ax.plot(1 / f, p / np.max(p), c=color)
+
+        res = xo.estimators.lomb_scargle_estimator(t0s[m], full[m], min_period=min_period, max_period=max_period)
+        f, p = res["periodogram"]
+        ax.plot(1 / f, p / np.max(p), c=self.orange)
+        ax.set_xlabel("Period [day]")
+        ax.set_ylabel("Power")
+        ax.set_yticks([]);
+        """
+        if annotate:
+            period_guess = res["peaks"][0]["period"]
+            arg = 2*np.pi*t0s[:-1][m]/period_guess
+            D = np.concatenate((np.sin(arg)[:, None],
+                                np.cos(arg)[:, None],
+                                np.ones((len(phases[m]), 1))), axis=-1)
+            w = np.linalg.solve(np.dot(D.T, D), np.dot(D.T, full[m]))
+            a_guess = np.sqrt(np.sum(w[:2]**2)) * 86400
+            a = mass_function(period_guess*u.day, a_guess*u.s)
+
+            ax.annotate('Period: ' + str(np.round(period_guess, 2)) + ' d \n' +
+                        '$asini$: ' + str(np.round(a_guess, 2)) + ' s \n' +
+                        '$f(M)$: ' + '{:.2e}'.format(a.value) + ' $M_\odot$', (0.75,0.75), xycoords='axes fraction')"""
+
+        ax.set_xlim((1 / f)[-1], (1 / f)[0])
+        ax.set_ylim(0, None)
+
+        if return_res:
+            return res
+        return
+
+    def plot_time_delay_periodogram(self, ax=None, **kwargs):
+        """ Plots the time delay periodogram
+        """
+        t0s, time_delay = self.get_time_delay(**kwargs)
+        
+        if ax is None:
+            fig, ax = plt.subplots()
+        full = np.average(time_delay, axis=1, weights=self.get_weights())
+        m = np.isfinite(full)
+
+        colors = np.array(sns.color_palette('Blues', 
+                    n_colors=len(self.freq)))[::-1]
+
+        for td, color in zip(time_delay.T, colors):
+            f, p = amplitude_spectrum(t0s[m], td[m])
+            ax.plot(f, p / np.max(p), c=color)
+
+        f, p = amplitude_spectrum(t0s[m], full[m])
+        ax.plot(f, p / np.max(p), c=self.orange)
+        ax.set_xlabel(r"Frequency [day$^{-1}$]")
+        ax.set_ylabel("Power")
+        ax.set_yticks([]);
+        ax.set_xlim(f[0], f[-1])
+        ax.set_ylim(0, None)
+        return
+
+    def get_phase(self, nu, t, y):
+        """Some black magic to calculate the phase for a given
+        segment of data for set frequencies
+        
+        Parameters
+        ----------
+        nu : array-like
+            Frequencies for which the phase will be calculated
+        t : array-like
+            Time-stamps
+        y : array-like
+            Flux values corresponding to `t`
+        
+        Returns
+        -------
+        phases
+            Given phases for each frequency.
+        """
+        arg = 2*np.pi*nu[None, :]*t[:, None]
+        D = np.concatenate((np.sin(arg), np.cos(arg),
+                            np.ones((len(t), 1))), axis=1)
+        DT = D.T
+        DTD = np.dot(DT, D)
+        w = np.linalg.solve(DTD, np.dot(D.T, y))
+        return np.arctan(w[:len(nu)] / w[len(nu):2*len(nu)])
+
+    def first_look(self, segment_size=None, save_path=None, **kwargs):
+        """ 
+        Shows the light curve, it's amplitude spectrum, and 
+        any time delay signal for the current self.freq in the model.
+        This is useful if you want to check whether a star
+        may be a PM binary. However, sometimes only the strongest
+        peak in the star will show a TD signal, and can be drowned
+        out by the others.
+        
+        Parameters
+        ----------
+        segment_size : `float`
+            Segment size in which to separate the light curve, in units of
+            the light curve time. For example, the default segment size of 10 
+            will separate a 1000 d long light curve in 100 segments of 10 d
+            each. If none is specified, Maelstrom will do its best
+        save_path : `string`
+            If `save_path` is not `None`, will save a copy of the first_look
+            plots into the given path.
+        
+        Returns
+        -------
+        """
+        if segment_size is None:
+            segment_size = self._estimate_segment()
+
+        # TODO: THIS ABSOLUTELY NEEDS TO BE FIXED TO 
+        # NOT CALCULATE TD TWICE!!! DO IT DANIEL YOU NERD
+
+        fig, axes = plt.subplots(2, 2, figsize=[12,7])
+        axes = axes.flatten()
+
+        # Light curve
+        ax = axes[0]
+        ax.plot(self.time, self.flux, '.k')
+        ax.set_xlim(self.time[0], self.time[-1])
+        
+        # Plot the light curve periodogram
+        ax = axes[1]
+        self.plot_periodogram(ax=ax)
+
+        ax = axes[2]
+        self.plot_time_delay(ax=ax, segment_size=segment_size)
+
+        ax = axes[3]
+        self.plot_time_delay_periodogram(ax=ax, segment_size=segment_size)
+
+        if save_path is not None:
+            plt.savefig(save_path, dpi=150)
+            plt.close("all")
+
+        return axes
+
+    def _assign_test_value(self, opt):
+        """
+        Updates the test value of a model
+        with optimization results.
+        """
+        with self as model:
+            for x in opt:
+                model[x].tag.test_value = opt[x]
+
+    def period_search(self, periods=None):
+        """Optimizes a model over a grid of periods
+        
+        Parameters
+        ----------
+        periods : Array-like, optional
+            Grid of periods over which to optimize, by default None
+        """
+        from .periodogram import Periodogram
+        pg = Periodogram(self.time, self.flux, self.freq)
+        return pg
+
+    def get_time_delay(self, segment_size=None):
         """ 
         Calculates the time delay signal, splitting the light curve into 
         chunks of width segment_size. A smaller segment size will increase
@@ -158,6 +411,9 @@ class BaseOrbitModel(Model):
         time_delay: `numpy.ndarray`
             Values of the extracted time delay in each segment.
         """
+        if segment_size is None:
+            segment_size = self._estimate_segment()
+
         uHz_conv = 1e-6 * 24 * 60 * 60
         time_0 = self.time[0]
         time_slice, mag_slice, phase = [], [], []
@@ -190,86 +446,47 @@ class BaseOrbitModel(Model):
 
             td = ph / (2*np.pi*(f / uHz_conv * 1e-6))
             time_delays.append(td)
-        return time_midpoints, time_delays
+        time_delays = np.array(time_delays).T
+        return np.array(time_midpoints), time_delays
 
-    def first_look(self, segment_size=1, save_path=None, **kwargs):
-        """ 
-        Shows the light curve, it's amplitude spectrum, and 
-        any time delay signal for the current self.freq in the model.
-        This is useful if you want to check whether a star
-        may be a PM binary. However, sometimes only the strongest
-        peak in the star will show a TD signal, and can be drowned
-        out by the others.
-        
-        Parameters
-        ----------
-        segment_size : `float`
-            Segment size in which to separate the light curve, in units of
-            the light curve time. For example, the default segment size of 10 
-            will separate a 1000 d long light curve in 100 segments of 10 d
-            each.
-        save_path : `string`
-            If `save_path` is not `None`, will save a copy of the first_look
-            plots into the given path.
+    def get_weights(self, norm=True):
+        """Calculates the amplitudes of each frequency, returning
+        an array of amplitudes. This is useful for 
+        calculating the weighted average time delay.
         
         Returns
         -------
+        weights
+            (potentially) normalised amplitudes of each frequency
         """
-        fig, axes = plt.subplots(3,1,figsize=[10,10])
-        t, y = self.time, self.flux
+        weights = np.zeros(len(self.freq))
+        for i, f in enumerate(self.freq):
+            model = LombScargle(self.time, self.flux)
+            sc = model.power(f, method="fast", normalization="psd")
+            fct = np.sqrt(4./len(self.time))
+            weights[i] = np.sqrt(sc) * fct
+        if norm:
+            weights /= np.max(weights)
+        return weights
 
-        # Lightcurve
-        ax = axes[0]
-        ax.plot(t, y, "k", linewidth=0.5)
-        ax.set_xlabel('Time (BJD)')
-        ax.set_ylabel("Amplitude (rel. flux)")
-        ax.set_xlim([t.min(), t.max()])
-        ax.invert_yaxis()
 
-        # Time delays
-        ax = axes[2]
-        time_midpoints, time_delays = self.get_time_delay(segment_size, **kwargs)
-        colors = unique_colors(len(time_delays))
-        for delay, color in zip(time_delays, colors):
-            ax.scatter(time_midpoints, delay, alpha=1, s=8,color=color)
-            ax.set_xlabel('Time (BJD)')
-            ax.set_ylabel(r'$\tau [s]$')
-        ax.set_xlim([t.min(), t.max()])
-
-        # Periodogram
-        ax = axes[1]
-        periodogram_freq, periodogram_amp = amplitude_spectrum(self.time, self.flux)
-        ax.plot(periodogram_freq, periodogram_amp, "k", linewidth=0.5)
-        ax.set_xlabel("Frequency ($d^{-1}$)")
-        ax.set_ylabel("Amplitude (rel. flux)")
-        for freq, color in zip(self.freq, colors):
-                ax.scatter(freq, np.max(periodogram_amp), color=color, marker='v')
-        ax.set_xlim([periodogram_freq[0], periodogram_freq[-1]])
-        ax.set_ylim([0,None])
-
-        if save_path is not None:
-            plt.savefig(save_path, dpi=150)
-            plt.close("all")
-
-    def predict_lc(self, opt):
-        pass
-
-    def predict_tau(self, opt):
-        pass
-        #self.time_mid
-
-    def _assign_test_value(self, opt):
-        """
-        Updates the test value of a model
-        with optimization results.
+    def profile(self):
+        """Profiles the current model, returning the runtime of each
+        node in your Theano graph
+        
+        Returns
+        -------
+        [type]
+            [description]
         """
         with self as model:
-            for x in opt:
-                model[x].tag.test_value = opt[x]
-
-    def save_trace(self, trace):
-        pass
-
+            func = xo.utils.get_theano_function_for_var(model.logpt, profile=True)
+            #     func = xo.utils.get_theano_function_for_var(theano.grad(model.logpt, model.vars), profile=True)
+            #args = xo.utils.get_args_for_theano_function(model.test_point)
+            #print(func(*args))
+            
+            #%timeit func(*args)
+        return func.profile.summary()
 
 class Maelstrom(BaseOrbitModel):
     def __init__(self, time, flux, freq=None, name='', model=None, **kwargs):
@@ -290,7 +507,6 @@ class Maelstrom(BaseOrbitModel):
             Frequencies on which to model the time delay.
             If none are supplied, Maelstrom will attempt to find
             the most optimal frequencies.
-
         **kwargs : 
             Arguments for the `maelstrom.utils.estimate_frequencies function`
 
@@ -302,7 +518,7 @@ class Maelstrom(BaseOrbitModel):
         """
         Generates an unpinned orbit model for the system. Each
         frequency in the model will be assigned a lighttime (asini).
-        Optimizing this model will reveal which frequencies are associated
+        Optimizing this model will reveal which frequencies, if any, are associated
         with which stars. In general, this model should not be sampled.
 
         Parameters
@@ -324,16 +540,13 @@ class Maelstrom(BaseOrbitModel):
             logperiod = pm.Normal("logperiod", mu=np.log(period),
                                        sd=100)
             period = pm.Deterministic("period", tt.exp(logperiod))
-            t0 = pm.Normal("t0", mu=0.0, sd=100.0)
+            t0 = pm.Normal("t0", mu=0, sd=100.0)
             varpi = xo.distributions.Angle("varpi")
             eccen = pm.Uniform("eccen", lower=1e-5, upper=1.0 - 1e-5,
-                                    testval=0.5)
+                                    testval=eccen)
             logs = pm.Normal('logs', mu=np.log(np.std(self.flux)), sd=100)
             lighttime = pm.Normal('lighttime', mu=0.0, sd=100.0,
                                        shape=len(self.freq))
-            
-            # This parameter is only used if radial velocities are supplied
-            gammav = pm.Normal('gammav', mu=0., sd=100.)
             
             # Better parameterization for the reference time
             sinw = tt.sin(varpi)
@@ -372,6 +585,7 @@ class Maelstrom(BaseOrbitModel):
             pm.Normal("obs", mu=self.lc_model, sd=tt.exp(logs), observed=self.flux)
 
     def pin_orbit_model(self, opt=None):
+        
         """ 
         Pins the orbit model to attribute the frequencies
         to the correct stars. In doing so, the lighttimes are collapsed 
@@ -417,7 +631,8 @@ class Maelstrom(BaseOrbitModel):
         
         if len(pinned_lt)>1:
             # PB2 system:
-            return PB2Model(self.time, self.flux, nu_arr_positive, nu_arr_negative)
+            #return PB2Model(self.time, self.flux, nu_arr_positive, nu_arr_negative)
+            raise ValueError('PB2 systems have not been implemented yet.')
         else:
             # PB1 system, all frequencies belong to one star
             new_model = PB1Model(self.time, self.flux, freq=self.freq)
@@ -432,10 +647,10 @@ class Maelstrom(BaseOrbitModel):
             return new_model
 
     def optimize(self, vars=None, verbose=False, **kwargs):
-        with self as model:
+        with self:
             if vars is None:
-                map_soln = xo.optimize(start=model.test_point, vars=[model.mean_flux, model.W_hat_cos, model.W_hat_sin], verbose=False)
-                map_soln = xo.optimize(start=map_soln, vars=[model.logs, model.mean_flux, model.W_hat_cos, model.W_hat_sin], verbose=False)
+                map_soln = xo.optimize(start=model.test_point, vars=[self.mean_flux, self.W_hat_cos, self.W_hat_sin], verbose=False)
+                map_soln = xo.optimize(start=map_soln, vars=[self.logs, self.mean_flux, model.W_hat_cos, model.W_hat_sin], verbose=False)
                 map_soln = xo.optimize(start=map_soln, vars=[model.lighttime, model.t0], verbose=False)
                 map_soln = xo.optimize(start=map_soln, vars=[model.logs, model.mean_flux, model.W_hat_cos, model.W_hat_sin], verbose=False)
                 map_soln = xo.optimize(start=map_soln, vars=[model.logperiod, model.t0], verbose=False)
@@ -459,90 +674,177 @@ class Maelstrom(BaseOrbitModel):
 
 
 class PB1Model(BaseOrbitModel):
-
+    
     def __init__(self, time, flux, freq=None,
                  name='PB1', model=None):
+            
         """
         A PyMC3 custom model object for a binary system in which 
         only one star is pulsating. This model inherits from the
-        BaseOrbitModel class. If you want to define custom
-        priors on your data, use that class instead.
+        BaseOrbitModel class.
         """
         super(PB1Model, self).__init__(time, flux, freq=freq, name=name, model=model)
 
-    def init_params(self, period=None, eccen=None):
-        """
-        Initialises the parameters for the binary model.
+    def init_orbit(self, period=None, with_eccen=True, eccen=None, asini=None, with_gp=True):
+    
+        self.with_eccen = with_eccen
+        self.with_gp = with_gp
+        
+        if period is None:
+            period = self.get_period_estimate()
+        
+        if eccen is None:
+            eccen = 0.5
 
-        Parameters
-        ----------
-        period : `float` (default None)
-            Initial estimate of the period. If none is supplied, the model will
-            automatically pick a best guess.
-        eccen : `float` (default None)
-            Initial estimate of the eccentricity.
-        """
+        if asini is None:
+            asini = 100
+
         with self:
             
-            if period is None:
-                period = self.get_period_estimate()
-
-            # Parameters to sample
-            logperiod = pm.Normal("logperiod", mu=np.log(period), sd=100)
-            period = pm.Deterministic("period", tt.exp(logperiod))
-            t0 = pm.Normal("t0", mu=0.0, sd=100.0)
-            varpi = xo.distributions.Angle("varpi")
-            eccen = pm.Uniform("eccen", lower=1e-5, upper=1.0 - 1e-5, testval=eccen)
-            logs = pm.Normal('logs', mu=np.log(np.std(self.flux)), sd=100)
-            lighttime_a = pm.Normal('lighttime_a', mu=100., sd=100.0)
-            gammav = pm.Normal('gammav', mu=0., sd=100.)
+            # Orbital period
+            logP = pm.Bound(pm.Normal,
+                        lower=np.log(10),
+                        upper=np.log(1000))("logP", mu=np.log(period), sd=1.0,
+                                        testval=np.log(period))
+            self.period = pm.Deterministic("period", pm.math.exp(logP))
             
-    def init_orbit(self):
-        """
-        Initialises the orbit model equations.
-        """
-        with self:
-            # Better parameterization for the reference time
-            sinw = tt.sin(self.varpi)
-            cosw = tt.cos(self.varpi)
-            opsw = 1 + sinw
-            E0 = 2 * tt.arctan2(tt.sqrt(1-self.eccen)*cosw, tt.sqrt(1+self.eccen)*opsw)
-            M0 = E0 - self.eccen * tt.sin(E0)
-            tref = pm.Deterministic("tref", self.t0 - M0 * self.period / (2*np.pi))
+            # The time of conjunction
+            self.phi = xo.distributions.Angle("phi")
+            self.logs_lc = pm.Normal('logs_lc', mu=np.log(np.std(self.flux)), sd=10, testval=0.)
+            logasini = pm.Bound(pm.Normal,
+                                lower=np.log(10),
+                                upper=np.log(1000))('logasini', mu=np.log(184), sd=1,
+                                                    testval=np.log(184))
+            self.asini = pm.Deterministic("asini", tt.exp(logasini))
+            
+            # The baseline flux
+            mean = pm.Normal("mean", mu=0.0, sd=10.0, testval=np.mean(self.flux))
+            
+            # Sampling in the weights parameter is faster than solving the matrix.
+            lognu = pm.Normal("lognu", mu=np.log(self.freq), sd=0.1, shape=len(self.freq))
+            nu = pm.Deterministic("nu", tt.exp(lognu))
 
             # Mean anom
-            M = 2.0 * np.pi * (self.time - tref) / self.period
-            # True anom
-            f = get_true_anomaly(M, self.eccen + tt.zeros_like(M))
-            psi = - (1 - tt.square(self.eccen)) * tt.sin(f+self.varpi) / (1 + self.eccen*tt.cos(f))
+            M = 2.0 * np.pi * self.time / self.period - self.phi
+
+            if with_eccen:
+                # Periastron sampled from uniform angle
+                self.omega = xo.distributions.Angle("omega")
+                # Eccentricity
+                self.eccen = pm.Uniform("eccen", lower=0, upper=1-1e-3, testval=eccen)
+
+                kepler_op = xo.theano_ops.kepler.KeplerOp()
+                sinf, cosf = kepler_op(M, self.eccen + np.zeros(len(self.time)))
+                
+                factor = 1.0 - tt.square(self.eccen)
+                factor /= 1.0 + self.eccen * cosf
+                psi = factor * (sinf*tt.cos(self.omega)+cosf*tt.sin(self.omega))
+            else:
+                psi = -tt.sin(M)
             
-            # tau in d
-            self.tau = - (self.lighttime_a / 86400) * psi[:,None]
+            
+            factor = 2. * np.pi * nu
+            
+            arg = ((factor)[None, :] * self.time[:, None]
+                - (factor * self.asini / 86400)[None, :] * psi[:, None])
 
-            # Sampling in the weights parameter is faster than solving the matrix.
-            factor = 2. * np.pi * self.freq[None, :]
-            arg = factor * self.time[:, None] - factor * self.tau
-            mean_flux = pm.Normal("mean_flux", mu=0.0, sd=100.0)
-            W_hat_cos = pm.Normal("W_hat_cos", mu=0.0, sd=100.0, shape=len(self.freq))
-            W_hat_sin = pm.Normal("W_hat_sin", mu=0.0, sd=100.0, shape=len(self.freq))
-            model_tensor = tt.dot(tt.cos(arg), W_hat_cos[:, None])
-            model_tensor += tt.dot(tt.sin(arg), W_hat_sin[:, None])
-            self.lc_model = tt.squeeze(model_tensor) + mean_flux
+            phase = xo.distributions.Angle("phase", shape=len(self.freq))
+            log_min_amp = np.log(0.1 * np.std(self.flux))  # np.log(np.median(np.abs(np.diff(mag))))
+            log_max_amp = np.log(np.std(self.flux))
+            log_mean_amp = 0.5*(log_min_amp + log_max_amp)
+            logamp = pm.Bound(pm.Normal,
+                            lower=log_min_amp,
+                            upper=log_max_amp)("logamp", mu=log_mean_amp, sd=10.0, shape=len(self.freq),
+                                                testval=log_mean_amp)
+            lc_model = tt.sum(tt.exp(logamp)[None, :] * tt.sin(arg - phase[None, :]), axis=1) + mean
+            if with_gp:
+                logw0 = pm.Bound(pm.Normal,
+                                lower=np.log(2*np.pi/100.0),
+                                upper=np.log(2*np.pi/0.05))("logw0", mu=np.log(2*np.pi/10), sd=10,
+                                                            testval=np.log(2*np.pi/10))
+                logpower = pm.Normal("logpower", mu=np.log(np.var(self.flux)), sd=10)
+                logS0 = pm.Deterministic("logS0", logpower - 4 * logw0)
+                kernel = xo.gp.terms.SHOTerm(log_S0=logS0, log_w0=logw0, Q=1/np.sqrt(2))
+                self.gp = xo.gp.GP(kernel, self.time, tt.exp(2*self.logs_lc) + tt.zeros(len(self.time)), J=2)
 
-            # Condition on the observations
-            pm.Normal("obs_photometry", mu=self.lc_model, sd=tt.exp(self.logs), observed=self.flux)
+                pm.Potential("obs", self.gp.log_likelihood(self.flux - lc_model))
+            
+            else:
+                pm.Normal("obs", mu=lc_model, sd=tt.exp(self.logs_lc), observed=self.flux)
+                
+    def optimize(self, vars=None):
+        """Optimises the model.
+        
+        Parameters
+        ----------
+        vars : array of model parameters, optional
+            parameters of the model to be optimized, by default None
+        
+        Returns
+        -------
+        dict
+            optimisation results
+        """
+        
+        with self as model:
+            if vars is None:
+                all_but = [v for v in model.vars if v.name not in ["logP_interval__", 
+                                                                    "logasini_interval__"]]
+
+                map_params = xo.optimize(start=None, vars=[self.mean])
+                map_params = xo.optimize(start=map_params, vars=[self.logs_lc])
+                
+                if self.with_gp:
+                    map_params = xo.optimize(start=map_params, vars=[self.logpower, self.logw0])
+                    map_params = xo.optimize(start=map_params, vars=[self.phase, self.logamp])
+                    
+                if self.with_eccen:
+                    map_params = xo.optimize(start=map_params, vars=[self.eccen, self.omega])
+                    
+                map_params = xo.optimize(start=map_params, vars=[self.phi])
+                map_params = xo.optimize(start=map_params, vars=[self.lognu])
+                map_params = xo.optimize(start=map_params, vars=all_but)
+
+                map_params = xo.optimize(start=map_params, vars=[self.logasini])
+                map_params = xo.optimize(start=map_params, vars=all_but)
+
+                map_params = xo.optimize(start=map_params, vars=[self.logP])
+                self.map_params = xo.optimize(start=map_params, vars=all_but)
+            else:
+                self.map_params = xo.optimize(start=None, vars=vars)
+            
+        self._assign_test_value(self.map_soln)
+        return self.map_params
 
     def add_radial_velocity(self, time, rv, err=None, lighttime='a'):
+        """[summary]
         
+        Parameters
+        ----------
+        time : [type]
+            [description]
+        rv : [type]
+            [description]
+        err : [type], optional
+            [description], by default None
+        lighttime : str, optional
+            [description], by default 'a'
+        
+        Raises
+        ------
+        ValueError
+            [description]
+        """
+        
+        # Subtract mid time
         time -= self.time_mid
-        # TODO NOTE NEED TO SUBTRACT THE MID TIME HERE 
+        
         # Input validation for lighttime type
         if lighttime not in ('a', 'b'):
-            raise ValueError("You must assign the lighttime to either star a or b")
+            raise ValueError("The lighttime must be assigned to either star a or b")
             
         with self:
             # Account for uncertainties in RV data
-            #logs_rv = pm.Normal('logs_RV_'+lighttime, mu=np.log(np.std(rv)), sd=100)
             if err is None:
                 logs_rv = pm.Normal('logs_RV_'+lighttime, mu=0., sd=10)
             else:
@@ -563,154 +865,9 @@ class PB1Model(BaseOrbitModel):
                 # There's no second pulsating star in the PB1 model
                 # In this case, we make a new lighttime solely used
                 # by the radial velocity data.
-                lighttime_RV = pm.Normal('lighttime_b', mu=-100., sd=100.0)
+                lighttime_RV = pm.Normal('lighttime_b', mu=100., sd=100.0)
                 self.rv_vrad_b = ((lighttime_RV / 86400) * (-2.0 * np.pi * (1 / self.period) * (1/tt.sqrt(1.0 - tt.square(self.eccen))) * (tt.cos(rv_true_anom + self.varpi) + self.eccen*tt.cos(self.varpi))))
                 self.rv_vrad_b *= 299792.458  # c in km/s
                 self.rv_vrad_b += self.gammav
 
                 pm.Normal("obs_radial_velocity_"+lighttime, mu=self.rv_vrad_b, sd=tt.exp(logs_rv), observed=rv)
-    
-    def optimize(self, vars=None):
-        """
-        Wrapper function for xo.optimize, if no vars are supplied will 
-        try and optimize the model completely.
-        """
-        with self as model:
-            if vars is None:
-                map_soln = xo.optimize(start=model.test_point, vars=[model.mean_flux, model.W_hat_cos, model.W_hat_sin])
-                map_soln = xo.optimize(start=map_soln, vars=[model.logs, model.mean_flux, model.W_hat_cos, model.W_hat_sin])
-                map_soln = xo.optimize(start=map_soln, vars=[model.lighttime_a, model.t0])
-                map_soln = xo.optimize(start=map_soln, vars=[model.logs, model.mean_flux, model.W_hat_cos, model.W_hat_sin])
-                map_soln = xo.optimize(start=map_soln, vars=[model.logperiod, model.t0])
-                map_soln = xo.optimize(start=map_soln, vars=[model.eccen, model.varpi])
-                map_soln = xo.optimize(start=map_soln, vars=[model.logperiod, model.t0])
-                map_soln = xo.optimize(start=map_soln, vars=[model.lighttime_a])
-                map_soln = xo.optimize(start=map_soln, vars=[model.eccen, model.varpi])
-                map_soln = xo.optimize(start=map_soln, vars=[model.logs, model.mean_flux, model.W_hat_cos, model.W_hat_sin])
-                map_soln = xo.optimize(start=map_soln)
-            else:
-                map_soln = xo.optimize(vars=vars)  
-        self._assign_test_value(map_soln)  
-        return map_soln
-
-    def summary(self, trace, varnames=["period", "lighttime", "t0", "varpi", "eccen",
-                                "logspr", "mean_flux", "W_hat_cos", "W_hat_sin"]
-                      ):
-        """ Convenience wrapper function for pm.summary """
-        return pm.summary(trace, varnames=varnames)
-
-class PB2Model(BaseOrbitModel):
-    #TODO: FIX THIS MODEL
-    def __init__(self, time, flux, freq_a, freq_b,
-                 name='PB2', model=None, eccen=None):
-
-        """
-        Parameters:
-
-        freq_ind (array):
-        """
-
-        freq = np.concatenate(freq_a, freq_b)
-
-        super(PB2Model, self).__init__(time, flux, freq=freq, name=name, model=model)
-
-        self.freq_a = freq_a
-        self.freq_b = freq_b
-
-        # Parameters to sample
-        logperiod = pm.Normal("logperiod", mu=np.log(period), sd=100)
-        period = pm.Deterministic("period", tt.exp(logperiod))
-        t0 = pm.Normal("t0", mu=0.0, sd=100.0)
-        varpi = xo.distributions.Angle("varpi")
-        eccen = pm.Uniform("eccen", lower=1e-5, upper=1.0 - 1e-5, testval=0.5)
-        logs = pm.Normal('logs', mu=np.log(np.std(self.flux)), sd=100)
-        mean_flux = pm.Normal("mean_flux", mu=0.0, sd=100.0)
-        lighttime_a = pm.Normal('lighttime_a', mu=0.0, sd=100.0, testval=0.)
-        lighttime_b = pm.Normal('lighttime_b', mu=0.0, sd=100.0, testval=0.)
-
-        # Better parameterization for the reference time
-        sinw = tt.sin(varpi)
-        cosw = tt.cos(varpi)
-        opsw = 1 + sinw
-        E0 = 2 * tt.arctan2(tt.sqrt(1-eccen)*cosw, tt.sqrt(1+eccen)*opsw)
-        M0 = E0 - eccen * tt.sin(E0)
-        tref = pm.Deterministic("tref", t0 - M0 * period / (2*np.pi))
-        M = 2.0 * np.pi * (self.time - tref) / period
-        f = get_true_anomaly(M, eccen + tt.zeros_like(M))
-        psi = - (1 - tt.square(eccen)) * tt.sin(f+varpi) / (1 + eccen*tt.cos(f))
-
-        # tau in d
-        self.tau_a = (lighttime_a / 86400) * psi[:,None]
-        self.tau_b = (lighttime_b / 86400) * psi[:,None]
-
-        # Just sample in the weights parameters too. This seems to be faster
-        factor_a = 2. * np.pi * self.freq_a[None, :]
-        factor_b = 2. * np.pi * self.freq_b[None, :]
-
-        arg_a = factor_a * self.time[:, None] - (factor_a * self.tau_a)
-        arg_b = factor_b * self.time[:, None] - (factor_b * self.tau_b)
-
-        W_hat_cos_a = pm.Normal("W_hat_cos_a", mu=0.0, sd=100.0, shape=len(self.freq_a))
-        W_hat_sin_a = pm.Normal("W_hat_sin_a", mu=0.0, sd=100.0, shape=len(self.freq_a))
-        W_hat_cos_b = pm.Normal("W_hat_cos_b", mu=0.0, sd=100.0, shape=len(self.freq_b))
-        W_hat_sin_b = pm.Normal("W_hat_sin_b", mu=0.0, sd=100.0, shape=len(self.freq_b))
-
-        model_tensor_a = tt.dot(tt.cos(arg_a), W_hat_cos_a[:, None]) + tt.dot(tt.sin(arg_a), W_hat_sin_a[:, None])
-        self.lc_model_a = tt.squeeze(model_tensor_a) + mean_flux
-
-        model_tensor_b = tt.dot(tt.cos(arg_b), W_hat_cos_b[:, None]) + tt.dot(tt.sin(arg_b), W_hat_sin_b[:, None])
-        self.lc_model_b = tt.squeeze(model_tensor_b) + mean_flux
-
-        # Condition on the observations
-        pm.Normal("obs_photometry_a", mu=self.lc_model_a, sd=tt.exp(logs), observed=self.flux)
-        pm.Normal("obs_photometry_b", mu=self.lc_model_b, sd=tt.exp(logs), observed=self.flux)
-        
-    def add_radial_velocity(self, time, rv, lighttime='a'):
-        """
-        Adds radial velocity measurements to constrain the orbital model. 
-
-        Parameters
-        ----------
-        time : array-like
-            Time measurements
-        rv : array-like
-            Radial velocity measurements (in km/s) for each time
-        lighttime : `a` or `b`
-            String denoting to which star the radial velocity model should
-            be assigned. `a` corresponds to star a (lighttime_a), vice-versa
-            for `b`. If `b` is chosen in a PB1Model object, the radial velocity
-            is modelled independently of the time delay.
-
-        """
-        # Input validation for lighttime type
-        if lighttime not in ('a', 'b'):
-            raise ValueError("You must assign the radial velocity to either star a or b")
-            
-        with self:
-            logs_rv = pm.Normal('logs_RV_'+lighttime, mu=np.log(np.std(rv)), sd=100)
-
-            # Solve Kepler's equation for the RVs
-            rv_mean_anom = (2.0 * np.pi * (time - self.tref) / self.period)
-            rv_true_anom = get_true_anomaly(rv_mean_anom, self.eccen +
-                                            tt.zeros_like(rv_mean_anom))
-
-            if lighttime=='a':
-                rv_vrad = ((self.lighttime_a / 86400) * (-2.0 * np.pi * (1 / self.period) * (1/tt.sqrt(1.0 - tt.square(self.eccen))) * (tt.cos(rv_true_anom + self.varpi) + self.eccen*tt.cos(self.varpi))))
-            elif lighttime=='b':
-                rv_vrad = ((self.lighttime_b / 86400) * (-2.0 * np.pi * (1 / self.period) * (1/tt.sqrt(1.0 - tt.square(self.eccen))) * (tt.cos(rv_true_anom + self.varpi) + self.eccen*tt.cos(self.varpi))))
-
-            rv_vrad *= 299792.458  # c in km/s
-            rv_vrad += self.gammav
-            pm.Normal("obs_radial_velocity_"+lighttime, mu=rv_vrad, sd=tt.exp(logs_rv), observed=rv)
-     
-    def optimize(self, vars=None):
-        """
-        Wrapper function for xo.optimize, if no vars are supplied will 
-        try and optimize the model completely.
-        """
-        with self as model:
-            if vars is None:
-                map_soln = xo.optimize()
-            else:
-                map_soln = xo.optimize(vars=vars)    
-        return map_soln
