@@ -43,7 +43,7 @@ class SyntheticBinary(object):
             
     def add_noise(self, snr=5):
         # Add noise
-        np.random.seed(42)
+        #np.random.seed(42)
         s_rms = self.amplitude / (np.sqrt(np.pi / len(self.time)) * snr)
         #print(s_rms, self.amplitude)
         #print(np.random.normal(loc=0.0, scale=s_rms, size=len(self.time)))
@@ -51,6 +51,6 @@ class SyntheticBinary(object):
 
     def add_noise_randomly(self, noise=0.05):
         # Add noise
-        np.random.seed(42)
+        #np.random.seed(42)
         self.flux_err = noise * np.std(self.flux_true)
         self.flux = self.flux_true + self.flux_err * np.random.randn(len(self.flux_true))

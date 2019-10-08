@@ -35,7 +35,7 @@ def unique_colors(n, cmap="hls"):
                     n_colors=n))
     return colors
 
-def amplitude_spectrum(t, y, fmin=None, fmax=None, nyq_mult=1., oversample_factor=5.):
+def amplitude_spectrum(t, y, fmin=None, fmax=None, oversample_factor=10.):
     """ 
     Calculates the amplitude spectrum of a given signal
     
@@ -46,15 +46,11 @@ def amplitude_spectrum(t, y, fmin=None, fmax=None, nyq_mult=1., oversample_facto
         y : `array`
             Flux or magnitude measurements
         fmin : float (default None)
-            Minimum frequency to calculate spectrum (default None)
+            Minimum frequency to calculate spectrum. Defaults to df
         fmax : float
-            Maximum frequency to calculate spectrum
-        nyq_mult : float  
-    
-    Returns:
-    ----------
-        phase : `list`
-            A list of phases for the given frequencies
+            Maximum frequency to calculate spectrum. Defaults to Nyquist.
+        oversample_factor : float
+            Amount by which to oversample the spectrum. Defaults to 10.
     """
     tmax = t.max()
     tmin = t.min()
@@ -63,7 +59,7 @@ def amplitude_spectrum(t, y, fmin=None, fmax=None, nyq_mult=1., oversample_facto
     if fmin is None:
         fmin = df
     if fmax is None:
-        fmax = (0.5 / np.median(np.diff(t)))*nyq_mult
+        fmax = (0.5 / np.median(np.diff(t)))#*nyq_mult
 
     freq = np.arange(fmin, fmax, df / oversample_factor)
     model = LombScargle(t, y)

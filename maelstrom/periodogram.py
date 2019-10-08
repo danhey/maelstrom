@@ -75,7 +75,7 @@ class Periodogram:
 
     def diagnose(self):
         results = self.results
-        fig, axes = plt.subplots(1, 2)
+        fig, axes = plt.subplots(1, 2, figsize=[10,7])
 
         ax = axes[0]
         ys = np.array([[r[0] for r in row] for row in results])

@@ -264,7 +264,7 @@ class BaseOrbitModel(Model):
             return res
         return
 
-    def plot_time_delay_periodogram(self, ax=None, **kwargs):
+    def plot_time_delay_periodogram(self, ax=None, period=False, **kwargs):
         """ Plots the time delay periodogram
         """
         t0s, time_delay = self.get_time_delay(**kwargs)
@@ -316,9 +316,9 @@ class BaseOrbitModel(Model):
         w = np.linalg.solve(DTD, np.dot(D.T, y))
         return np.arctan(w[:len(nu)] / w[len(nu):2*len(nu)])
 
-    def first_look(self, segment_size=None, save_path=None, **kwargs):
+    def first_look(self, segment_size=None, save_path=None, period=False, **kwargs):
         """ 
-        Shows the light curve, it's amplitude spectrum, and 
+        Shows the light curve, its amplitude spectrum, and 
         any time delay signal for the current self.freq in the model.
         This is useful if you want to check whether a star
         may be a PM binary. However, sometimes only the strongest
@@ -361,7 +361,7 @@ class BaseOrbitModel(Model):
         self.plot_time_delay(ax=ax, segment_size=segment_size)
 
         ax = axes[3]
-        self.plot_time_delay_periodogram(ax=ax, segment_size=segment_size)
+        self.plot_time_delay_periodogram(ax=ax, segment_size=segment_size, period=period)
 
         if save_path is not None:
             plt.savefig(save_path, dpi=150)
@@ -567,7 +567,7 @@ class Maelstrom(BaseOrbitModel):
                    (1 + eccen*tt.cos(f)))
             
             # tau in d
-            self.tau = - (lighttime / 86400.)[None, :] * psi[:, None]
+            self.tau = (lighttime / 86400.)[None, :] * psi[:, None]
             
             # Sample in the weights parameters
             factor = 2. * np.pi * self.freq[None, :]
@@ -647,7 +647,7 @@ class Maelstrom(BaseOrbitModel):
             return new_model
 
     def optimize(self, vars=None, verbose=False, **kwargs):
-        with self:
+        with self as model:
             if vars is None:
                 map_soln = xo.optimize(start=model.test_point, vars=[self.mean_flux, self.W_hat_cos, self.W_hat_sin], verbose=False)
                 map_soln = xo.optimize(start=map_soln, vars=[self.logs, self.mean_flux, model.W_hat_cos, model.W_hat_sin], verbose=False)
@@ -664,14 +664,6 @@ class Maelstrom(BaseOrbitModel):
                 map_soln = xo.optimize(vars=vars, verbose=verbose, **kwargs)
         self._assign_test_value(map_soln)
         return map_soln
-
-    def to_eddy(self):
-        """
-        Passes the Maelstrom information to the Eddy class, where
-        basic modelling can be performed
-        """
-        pass
-
 
 class PB1Model(BaseOrbitModel):
     
