@@ -66,7 +66,7 @@ class BaseOrbitModel(Model):
             freq = estimate_frequencies(time, flux, **kwargs)
 
         # Subtract and record time mid-point.
-        self.time_mid = (time[0] + time[-1]) / 2.
+        self.time_mid = 0#(time[0] + time[-1]) / 2.
         self._time = theano.shared(time - self.time_mid)
 
         # Relative flux in ppt
@@ -807,59 +807,3 @@ class PB1Model(BaseOrbitModel):
             
         self._assign_test_value(self.map_soln)
         return self.map_params
-
-    def add_radial_velocity(self, time, rv, err=None, lighttime='a'):
-        """[summary]
-        
-        Parameters
-        ----------
-        time : [type]
-            [description]
-        rv : [type]
-            [description]
-        err : [type], optional
-            [description], by default None
-        lighttime : str, optional
-            [description], by default 'a'
-        
-        Raises
-        ------
-        ValueError
-            [description]
-        """
-        
-        # Subtract mid time
-        time -= self.time_mid
-        
-        # Input validation for lighttime type
-        if lighttime not in ('a', 'b'):
-            raise ValueError("The lighttime must be assigned to either star a or b")
-            
-        with self:
-            # Account for uncertainties in RV data
-            if err is None:
-                logs_rv = pm.Normal('logs_RV_'+lighttime, mu=0., sd=10)
-            else:
-                logs_rv = pm.Normal('logs_RV_'+lighttime, mu=np.log(np.median(err)), sd=10)
-            
-            # Solve Kepler's equation for the RVs
-            rv_mean_anom = (2.0 * np.pi * (time - self.tref) / self.period)
-            rv_true_anom = get_true_anomaly(rv_mean_anom, self.eccen +
-                                            tt.zeros_like(rv_mean_anom))
-
-            if lighttime=='a':
-                self.rv_vrad_a = ((self.lighttime_a / 86400) * (-2.0 * np.pi * (1 / self.period) * (1/tt.sqrt(1.0 - tt.square(self.eccen))) * (tt.cos(rv_true_anom + self.varpi) + self.eccen*tt.cos(self.varpi))))
-                self.rv_vrad_a *= 299792.458  # c in km/s
-                self.rv_vrad_a += self.gammav
-
-                pm.Normal("obs_radial_velocity_"+lighttime, mu=self.rv_vrad_a, sd=tt.exp(logs_rv), observed=rv)
-            elif lighttime=='b':
-                # There's no second pulsating star in the PB1 model
-                # In this case, we make a new lighttime solely used
-                # by the radial velocity data.
-                lighttime_RV = pm.Normal('lighttime_b', mu=100., sd=100.0)
-                self.rv_vrad_b = ((lighttime_RV / 86400) * (-2.0 * np.pi * (1 / self.period) * (1/tt.sqrt(1.0 - tt.square(self.eccen))) * (tt.cos(rv_true_anom + self.varpi) + self.eccen*tt.cos(self.varpi))))
-                self.rv_vrad_b *= 299792.458  # c in km/s
-                self.rv_vrad_b += self.gammav
-
-                pm.Normal("obs_radial_velocity_"+lighttime, mu=self.rv_vrad_b, sd=tt.exp(logs_rv), observed=rv)

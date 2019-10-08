@@ -23,13 +23,13 @@ sys.setrecursionlimit(1500)
 # -- Project information -----------------------------------------------------
 
 project = 'maelstrom'
-copyright = '2019, Daniel'
-author = 'Daniel'
+copyright = '2019, Daniel Hey'
+author = 'Daniel Hey'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.0.1'
+release = '0.1'
 
 
 # -- General configuration ---------------------------------------------------

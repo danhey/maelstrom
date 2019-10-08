@@ -12,39 +12,39 @@ __all__ = ["Orbit"]
 
 class Orbit:
     def __init__(self, 
-                period=None, 
-                lighttime=None,
+                period, 
+                lighttime, 
+                phi, 
+                freq,
                 eccen=None,
-                omega=None, 
-                phi=None, 
-                freq=None,
+                omega=None,
                 with_rv=False,
                 gammav=None):
-        """This class defines an orbit model which will solve equation 10 of 
+        """This class defines an orbit model which solves equation 10 of 
         Hey+2019 for given input values, defined within Theano.
         
         Parameters
         ----------
-        period : pymc3.model.FreeRV, optional
-            The orbital period prior, in days, by default None
-        lighttime : pymc3.model.FreeRV, optional
-            The convolved semi-major axis (asini) prior, given in seconds, by default None
+        period : pymc3.model.FreeRV
+            The orbital period prior
+        lighttime : pymc3.model.FreeRV
+            The convolved semi-major axis (asini) prior, given in seconds
+        phi : pymc3.model.FreeRV
+            The phase of periapsis
+        freq : pymc3.model.FreeRV
+            Frequency prior
         eccen : pymc3.model.FreeRV, optional
             The eccentricity prior, must be constrained between 0 and 1, by default None
         omega : pymc3.model.FreeRV, optional
             The argument of periapsis prior, given in angular coordinates, by default None
-        phi : pymc3.model.FreeRV, optional
-            The phase of periapsis, by default None
-        freq : pymc3.model.FreeRV, optional
-            Frequency prior, by default None
         with_rv : bool, optional
             Whether to include radial velocity calculations. If True, a prior
-            on the systemic velocity (gammav) must be provided., by default False
+            on the systemic velocity (gammav) must be provided, by default False
         gammav : pymc3.model.FreeRV, optional
             The systemic velocity prior. Must be included if with_rv is True.
             by default None
-        
         """
+        
         self.period = period
         self.lighttime = lighttime
         self.omega = omega
@@ -114,7 +114,8 @@ class Orbit:
 
     def get_radial_velocity(self, time):
         """Calculates the radial velocity within the framework of the Orbit for
-        given input times.
+        given input times. Note this implies that the eccentricity must be
+        non-zero.
         
         Parameters
         ----------
