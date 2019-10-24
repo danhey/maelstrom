@@ -14,6 +14,7 @@ from astropy.convolution import convolve, Box1DKernel
 import math
 import matplotlib
 from lightkurve import search_lightcurvefile
+import lightkurve as lk
 
 red = '#e41a1c'
 blue = '#377eb8'
@@ -29,17 +30,14 @@ matplotlib.rcParams['xtick.labelsize'] = 7
 matplotlib.rcParams['ytick.labelsize'] = 7
 
 def mnras_size(fig_width_pt, square=False):
-    #Paper width = 597.5  for 2 columns or 504?
-    #Col width = 240.0    #for single column
     inches_per_pt = 1.0/72.00              # Convert pt to inches
-    golden_mean = (np.sqrt(5)-1.0)/2.0         # Most aesthetic ratio
-    fig_width = fig_width_pt*inches_per_pt  # Figure width in inches
+    golden_mean = (np.sqrt(5)-1.0)/2.0     # Most aesthetic ratio
+    fig_width = fig_width_pt*inches_per_pt # Figure width in inches
     if square:
         fig_height = fig_width
     else:
         fig_height = fig_width*golden_mean
-    fig_size = [fig_width,fig_height]
-    return fig_size
+    return [fig_width,fig_height]
 
 def smooth(freq, power, method='boxkernel', filter_width=0.1):
 
