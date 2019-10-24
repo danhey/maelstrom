@@ -1,6 +1,19 @@
 Installation
 ============
 
+Dependencies
+-----------
+
+.. code-block:: bash
+
+    conda install numpy pymc3 astropy exoplanet
+    
+or 
+
+.. code-block:: bash
+
+    pip install numpy pymc3 astropy exoplanet
+    
 From Source
 -----------
 
