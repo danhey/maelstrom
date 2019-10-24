@@ -11,6 +11,8 @@ import theano
 import pymc3 as pm
 from pymc3.model import Model
 import seaborn as sns
+from maelstrom.orbit import Orbit
+
 import exoplanet as xo
 from exoplanet.orbits import get_true_anomaly
 from astropy.stats import LombScargle
@@ -81,9 +83,13 @@ class BaseOrbitModel(Model):
     def flux(self):
         return self._flux.get_value()
 
+    @time.setter
+    def time(self, value):
+        self._time.set_value(value)
+        
     @flux.setter
     def flux(self, value):
-        pass
+        self._flux.set_value(value)
 
     def uncertainty(self, map_soln):
         # This is broken for celerite models
@@ -177,7 +183,7 @@ class BaseOrbitModel(Model):
 
     def plot_periodogram(self, ax=None):
         """Plots the periodogram of the light curve with 
-        the model frequencies overlain.
+        the model frequencies overlaid.
         
         Parameters
         ----------
@@ -187,7 +193,7 @@ class BaseOrbitModel(Model):
         Returns
         -------
         ax
-            yes, this is also an axis.
+            this is also an axis.
         """
         if ax is None:
             fig, ax = plt.subplots()
@@ -342,9 +348,6 @@ class BaseOrbitModel(Model):
         if segment_size is None:
             segment_size = self._estimate_segment()
 
-        # TODO: THIS ABSOLUTELY NEEDS TO BE FIXED TO 
-        # NOT CALCULATE TD TWICE!!! DO IT DANIEL YOU NERD
-
         fig, axes = plt.subplots(2, 2, figsize=[12,7])
         axes = axes.flatten()
 
@@ -437,12 +440,12 @@ class BaseOrbitModel(Model):
         phase = np.array(phase).T
         # Phase wrapping patch
         for ph, f in zip(phase, self.freq):
-            #mean_phase = np.mean(ph)
-            #ph[np.where(ph - mean_phase > np.pi/2)] -= np.pi
-            #ph[np.where(ph - mean_phase < -np.pi/2)] += np.pi
-            #ph -= np.mean(ph)
-            ph = np.unwrap(ph)
+            mean_phase = np.mean(ph)
+            ph[np.where(ph - mean_phase > np.pi/2)] -= np.pi
+            ph[np.where(ph - mean_phase < -np.pi/2)] += np.pi
             ph -= np.mean(ph)
+            # ph = np.unwrap(ph)
+            # ph -= np.mean(ph)
 
             td = ph / (2*np.pi*(f / uHz_conv * 1e-6))
             time_delays.append(td)
@@ -563,7 +566,7 @@ class Maelstrom(BaseOrbitModel):
 
             # True anom
             f = get_true_anomaly(M, eccen + tt.zeros_like(M))
-            psi = (- (1 - tt.square(eccen)) * tt.sin(f+varpi) /
+            psi = - ( (1 - tt.square(eccen)) * tt.sin(f+varpi) /
                    (1 + eccen*tt.cos(f)))
             
             # tau in d
@@ -624,26 +627,19 @@ class Maelstrom(BaseOrbitModel):
             inds = np.zeros(len(lt), dtype=np.int32)
             lt = np.array([np.sum(lt_ivar*lt) / np.sum(lt_ivar)])
         pinned_lt = lt
-
-        # Get frequencies for each star
-        nu_arr_negative = self.freq[np.where(inds==1)]
-        nu_arr_positive = self.freq[np.where(inds==0)]
         
         if len(pinned_lt)>1:
+
+            # Get frequencies for each star
+            nu_arr_negative = self.freq[np.where(inds==1)]
+            nu_arr_positive = self.freq[np.where(inds==0)]
             # PB2 system:
             #return PB2Model(self.time, self.flux, nu_arr_positive, nu_arr_negative)
             raise ValueError('PB2 systems have not been implemented yet.')
         else:
             # PB1 system, all frequencies belong to one star
-            new_model = PB1Model(self.time, self.flux, freq=self.freq)
-            new_model.init_params(period=opt['period'])
-            new_model.init_orbit()
-            # Ugly hack to pass optimized params into new model
-            for x in opt:
-                if x == 'lighttime':
-                    new_model[new_model.name + '_' + x+'_a'].tag.test_value = pinned_lt[0]
-                else:
-                    new_model[new_model.name + '_' + x].tag.test_value = opt[x]
+            new_model = PB1Model(self.time, self.flux / 1e3, freq=self.freq)
+            new_model.init_orbit(opt['period'], np.abs(pinned_lt[0]))
             return new_model
 
     def optimize(self, vars=None, verbose=False, **kwargs):
@@ -665,6 +661,7 @@ class Maelstrom(BaseOrbitModel):
         self._assign_test_value(map_soln)
         return map_soln
 
+
 class PB1Model(BaseOrbitModel):
     
     def __init__(self, time, flux, freq=None,
@@ -677,93 +674,105 @@ class PB1Model(BaseOrbitModel):
         """
         super(PB1Model, self).__init__(time, flux, freq=freq, name=name, model=model)
 
-    def init_orbit(self, period=None, with_eccen=True, eccen=None, asini=None, with_gp=True):
-    
-        self.with_eccen = with_eccen
+    def init_orbit(self, period, asini, with_eccen=True, with_gp=True):
+        
         self.with_gp = with_gp
+        self.with_eccen = with_eccen
         
-        if period is None:
-            period = self.get_period_estimate()
-        
-        if eccen is None:
-            eccen = 0.5
-
-        if asini is None:
-            asini = 100
-
         with self:
             
             # Orbital period
             logP = pm.Bound(pm.Normal,
-                        lower=np.log(10),
-                        upper=np.log(1000))("logP", mu=np.log(period), sd=1.0,
-                                        testval=np.log(period))
+                        lower=np.log(1),
+                        upper=np.log(self.time[-1]))("logP", mu=np.log(period), sd=5,
+                                                    testval=np.log(period))
             self.period = pm.Deterministic("period", pm.math.exp(logP))
             
             # The time of conjunction
             self.phi = xo.distributions.Angle("phi")
             self.logs_lc = pm.Normal('logs_lc', mu=np.log(np.std(self.flux)), sd=10, testval=0.)
             logasini = pm.Bound(pm.Normal,
-                                lower=np.log(10),
-                                upper=np.log(1000))('logasini', mu=np.log(184), sd=1,
-                                                    testval=np.log(184))
+                                lower=np.log(1),
+                                upper=np.log(1000))('logasini', mu=np.log(asini), sd=5,
+                                                    testval=np.log(asini))
             self.asini = pm.Deterministic("asini", tt.exp(logasini))
             
             # The baseline flux
-            mean = pm.Normal("mean", mu=0.0, sd=10.0, testval=np.mean(self.flux))
-            
-            # Sampling in the weights parameter is faster than solving the matrix.
+            self.mean = pm.Normal("mean", mu=np.mean(self.flux), sd=1, testval=np.mean(self.flux))
             lognu = pm.Normal("lognu", mu=np.log(self.freq), sd=0.1, shape=len(self.freq))
-            nu = pm.Deterministic("nu", tt.exp(lognu))
-
-            # Mean anom
-            M = 2.0 * np.pi * self.time / self.period - self.phi
-
-            if with_eccen:
-                # Periastron sampled from uniform angle
-                self.omega = xo.distributions.Angle("omega")
+            self.nu = pm.Deterministic("nu", tt.exp(lognu))
+            
+            if self.with_eccen:
                 # Eccentricity
-                self.eccen = pm.Uniform("eccen", lower=0, upper=1-1e-3, testval=eccen)
-
-                kepler_op = xo.theano_ops.kepler.KeplerOp()
-                sinf, cosf = kepler_op(M, self.eccen + np.zeros(len(self.time)))
-                
-                factor = 1.0 - tt.square(self.eccen)
-                factor /= 1.0 + self.eccen * cosf
-                psi = factor * (sinf*tt.cos(self.omega)+cosf*tt.sin(self.omega))
+                self.omega = xo.distributions.Angle("omega", testval=0.)
+                self.eccen = pm.Uniform("eccen", lower=0, upper=0.9, testval=0.1)
             else:
-                psi = -tt.sin(M)
+                self.eccen = None
+                
+            # Here, we generate an Orbit instance and pass in our priors. 
+            self.orbit = Orbit(period=self.period, 
+                          lighttime=self.asini, 
+                          omega=self.omega, 
+                          eccen=self.eccen, 
+                          phi=self.phi, 
+                          freq=self.nu)
             
+            self.lc = self.orbit.get_lightcurve_model(self.time, self.flux) + self.mean
             
-            factor = 2. * np.pi * nu
-            
-            arg = ((factor)[None, :] * self.time[:, None]
-                - (factor * self.asini / 86400)[None, :] * psi[:, None])
-
-            phase = xo.distributions.Angle("phase", shape=len(self.freq))
-            log_min_amp = np.log(0.1 * np.std(self.flux))  # np.log(np.median(np.abs(np.diff(mag))))
-            log_max_amp = np.log(np.std(self.flux))
-            log_mean_amp = 0.5*(log_min_amp + log_max_amp)
-            logamp = pm.Bound(pm.Normal,
-                            lower=log_min_amp,
-                            upper=log_max_amp)("logamp", mu=log_mean_amp, sd=10.0, shape=len(self.freq),
-                                                testval=log_mean_amp)
-            lc_model = tt.sum(tt.exp(logamp)[None, :] * tt.sin(arg - phase[None, :]), axis=1) + mean
-            if with_gp:
+            if self.with_gp:
                 logw0 = pm.Bound(pm.Normal,
                                 lower=np.log(2*np.pi/100.0),
-                                upper=np.log(2*np.pi/0.05))("logw0", mu=np.log(2*np.pi/10), sd=10,
+                                upper=np.log(2*np.pi/2))("logw0", mu=np.log(2*np.pi/10), sd=10,
                                                             testval=np.log(2*np.pi/10))
                 logpower = pm.Normal("logpower", mu=np.log(np.var(self.flux)), sd=10)
                 logS0 = pm.Deterministic("logS0", logpower - 4 * logw0)
                 kernel = xo.gp.terms.SHOTerm(log_S0=logS0, log_w0=logw0, Q=1/np.sqrt(2))
                 self.gp = xo.gp.GP(kernel, self.time, tt.exp(2*self.logs_lc) + tt.zeros(len(self.time)), J=2)
 
-                pm.Potential("obs", self.gp.log_likelihood(self.flux - lc_model))
+                pm.Potential("obs", self.gp.log_likelihood(self.flux - self.lc))
             
             else:
-                pm.Normal("obs", mu=lc_model, sd=tt.exp(self.logs_lc), observed=self.flux)
+                pm.Normal("obs", mu=self.lc, sd=tt.exp(self.logs_lc), observed=self.flux)
                 
+
+    def add_radial_velocity(self, time, rv, lighttime='a'):
+        """
+        Adds radial velocity measurements to constrain the orbital model. 
+
+        Parameters
+        ----------
+        time : array-like
+            Time measurements
+        rv : array-like
+            Radial velocity measurements (in km/s) for each time
+        lighttime : `a` or `b`
+            String denoting to which star the radial velocity model should
+            be assigned. `a` corresponds to star a (lighttime_a), vice-versa
+            for `b`. If `b` is chosen in a PB1Model object, the radial velocity
+            is modelled independently of the time delay.
+
+        """
+        # Input validation for lighttime type
+        if lighttime not in ('a', 'b'):
+            raise ValueError("You must assign the radial velocity to either star a or b")
+            
+        with self:
+            logs_rv = pm.Normal('logs_RV_'+lighttime, mu=np.log(np.std(rv)), sd=100)
+
+            # Solve Kepler's equation for the RVs
+            rv_mean_anom = (2.0 * np.pi * (time - self.tref) / self.period)
+            rv_true_anom = get_true_anomaly(rv_mean_anom, self.eccen +
+                                            tt.zeros_like(rv_mean_anom))
+
+            if lighttime=='a':
+                rv_vrad = ((self.lighttime_a / 86400) * (-2.0 * np.pi * (1 / self.period) * (1/tt.sqrt(1.0 - tt.square(self.eccen))) * (tt.cos(rv_true_anom + self.varpi) + self.eccen*tt.cos(self.varpi))))
+            elif lighttime=='b':
+                rv_vrad = ((self.lighttime_b / 86400) * (-2.0 * np.pi * (1 / self.period) * (1/tt.sqrt(1.0 - tt.square(self.eccen))) * (tt.cos(rv_true_anom + self.varpi) + self.eccen*tt.cos(self.varpi))))
+
+            rv_vrad *= 299792.458  # c in km/s
+            rv_vrad += self.gammav
+            pm.Normal("obs_radial_velocity_"+lighttime, mu=rv_vrad, sd=tt.exp(logs_rv), observed=rv)
+
     def optimize(self, vars=None):
         """Optimises the model.
         
@@ -788,7 +797,6 @@ class PB1Model(BaseOrbitModel):
                 
                 if self.with_gp:
                     map_params = xo.optimize(start=map_params, vars=[self.logpower, self.logw0])
-                    map_params = xo.optimize(start=map_params, vars=[self.phase, self.logamp])
                     
                 if self.with_eccen:
                     map_params = xo.optimize(start=map_params, vars=[self.eccen, self.omega])
@@ -805,5 +813,5 @@ class PB1Model(BaseOrbitModel):
             else:
                 self.map_params = xo.optimize(start=None, vars=vars)
             
-        self._assign_test_value(self.map_soln)
+        self._assign_test_value(self.map_params)
         return self.map_params

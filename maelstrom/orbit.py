@@ -17,9 +17,7 @@ class Orbit:
                 phi, 
                 freq,
                 eccen=None,
-                omega=None,
-                with_rv=False,
-                gammav=None):
+                omega=None):
         """This class defines an orbit model which solves equation 10 of 
         Hey+2019 for given input values, defined within Theano.
         
@@ -53,11 +51,6 @@ class Orbit:
 
         self.freq = freq
 
-        if with_rv:
-            if gammav is None:
-                raise ValueError("The systemic velocity prior must be provided")
-            else:
-                self.gammav = gammav
 
     def get_time_delay(self, time):
         """Calculates the time delay under the given values
@@ -81,7 +74,7 @@ class Orbit:
             psi = -tt.sin(M)
         else:
             f = get_true_anomaly(M, self.eccen + tt.zeros_like(M))
-            psi = -(1 - tt.square(self.eccen)) * tt.sin(f+self.omega) / (1 + self.eccen*tt.cos(f))
+            psi = -1*(1 - tt.square(self.eccen)) * tt.sin(f+self.omega) / (1 + self.eccen*tt.cos(f))
 
         tau = (self.lighttime / 86400) * psi[:, None]
         return tau
@@ -129,10 +122,9 @@ class Orbit:
         """
         M = 2.0 * np.pi * time / self.period - self.phi
         f = get_true_anomaly(M, self.eccen + tt.zeros_like(M))
-        rv = ((self.lighttime / 86400) * (2.0 * np.pi * (1 / self.period) \
+        rv = -1*((self.lighttime / 86400) * (2.0 * np.pi * (1 / self.period) \
             * (1/tt.sqrt(1.0 - tt.square(self.eccen))) \
                 * (tt.cos(f + self.omega) + self.eccen*tt.cos(self.omega))))
         rv *= 299792.458  # c in km/s
-        rv += self.gammav # km/s
 
         return rv
