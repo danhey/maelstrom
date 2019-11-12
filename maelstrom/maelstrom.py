@@ -440,12 +440,12 @@ class BaseOrbitModel(Model):
         phase = np.array(phase).T
         # Phase wrapping patch
         for ph, f in zip(phase, self.freq):
-            mean_phase = np.mean(ph)
-            ph[np.where(ph - mean_phase > np.pi/2)] -= np.pi
-            ph[np.where(ph - mean_phase < -np.pi/2)] += np.pi
-            ph -= np.mean(ph)
-            # ph = np.unwrap(ph)
+            # mean_phase = np.mean(ph)
+            # ph[np.where(ph - mean_phase > np.pi/2)] -= np.pi
+            # ph[np.where(ph - mean_phase < -np.pi/2)] += np.pi
             # ph -= np.mean(ph)
+            ph = np.unwrap(ph)
+            ph -= np.mean(ph)
 
             td = ph / (2*np.pi*(f / uHz_conv * 1e-6))
             time_delays.append(td)
@@ -588,7 +588,6 @@ class Maelstrom(BaseOrbitModel):
             pm.Normal("obs", mu=self.lc_model, sd=tt.exp(logs), observed=self.flux)
 
     def pin_orbit_model(self, opt=None):
-        
         """ 
         Pins the orbit model to attribute the frequencies
         to the correct stars. In doing so, the lighttimes are collapsed 
