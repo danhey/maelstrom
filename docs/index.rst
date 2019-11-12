@@ -16,9 +16,9 @@ Tutorials
 .. toctree::
     :maxdepth: 2
 
-    notebooks/getting_started.ipynb
-    notebooks/custom_priors.ipynb
-    notebooks/estimate_frequencies_tutorial.ipynb
+    notebooks/Getting started.ipynb
+    notebooks/Estimating frequencies.ipynb
+    notebooks/Custom priors.ipynb
 
 API
 ----------
@@ -27,6 +27,14 @@ API
    :maxdepth: 2
 
    api/api
+
+Examples from paper
+----------
+
+.. toctree::
+    :maxdepth: 2
+
+    ../paper/notebooks/(4.1) KIC 9651065.ipynb
     
 
 License & attribution
