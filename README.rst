@@ -13,6 +13,6 @@ an orbital companion.
 
 To install the current version::
 
-    git clone https://github.com/danielhey/maelstrom.git
+    git clone https://github.com/danhey/maelstrom.git
     cd maelstrom
     pip install -e .
