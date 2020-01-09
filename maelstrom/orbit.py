@@ -12,12 +12,13 @@ __all__ = ["Orbit"]
 
 class Orbit:
     def __init__(self, 
-                period, 
-                lighttime, 
-                phi, 
-                freq,
+                period=None, 
+                lighttime=None, 
+                freq=None,
                 eccen=None,
-                omega=None):
+                omega=None,
+                tref=None,
+                phi=None):
         """This class defines an orbit model which solves equation 10 of 
         Hey+2019 for given input values, defined within Theano.
         
@@ -122,7 +123,7 @@ class Orbit:
         """
         M = 2.0 * np.pi * time / self.period - self.phi
         f = get_true_anomaly(M, self.eccen + tt.zeros_like(M))
-        rv = -1*((self.lighttime / 86400) * (2.0 * np.pi * (1 / self.period) \
+        rv = -1*((self.lighttime[:,None] / 86400) * (2.0 * np.pi * (1 / self.period) \
             * (1/tt.sqrt(1.0 - tt.square(self.eccen))) \
                 * (tt.cos(f + self.omega) + self.eccen*tt.cos(self.omega))))
         rv *= 299792.458  # c in km/s

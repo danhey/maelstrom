@@ -355,6 +355,8 @@ class BaseOrbitModel(Model):
         ax = axes[0]
         ax.plot(self.time, self.flux, '.k')
         ax.set_xlim(self.time[0], self.time[-1])
+        ax.set_xlabel('Time [day]')
+        ax.set_ylabel('Flux')
         
         # Plot the light curve periodogram
         ax = axes[1]
@@ -450,7 +452,7 @@ class BaseOrbitModel(Model):
             td = ph / (2*np.pi*(f / uHz_conv * 1e-6))
             time_delays.append(td)
         time_delays = np.array(time_delays).T
-        return np.array(time_midpoints), time_delays
+        return np.array(time_midpoints), np.array(time_delays)
 
     def get_weights(self, norm=True):
         """Calculates the amplitudes of each frequency, returning
@@ -491,6 +493,10 @@ class BaseOrbitModel(Model):
             #%timeit func(*args)
         return func.profile.summary()
 
+    def to_eddy(self):
+        from .eddy import Eddy
+        p_guess = self.get_period_estimate()
+        
 class Maelstrom(BaseOrbitModel):
     def __init__(self, time, flux, freq=None, name='', model=None, **kwargs):
         """
@@ -673,7 +679,7 @@ class PB1Model(BaseOrbitModel):
         """
         super(PB1Model, self).__init__(time, flux, freq=freq, name=name, model=model)
 
-    def init_orbit(self, period, asini, with_eccen=True, with_gp=True):
+    def init_orbit(self, period, asini, with_eccen=True, with_gp=False):
         
         self.with_gp = with_gp
         self.with_eccen = with_eccen
