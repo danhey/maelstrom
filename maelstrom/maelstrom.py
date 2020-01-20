@@ -640,7 +640,7 @@ class Maelstrom(BaseOrbitModel):
             nu_arr_positive = self.freq[np.where(inds==0)]
             # PB2 system:
             #return PB2Model(self.time, self.flux, nu_arr_positive, nu_arr_negative)
-            raise ValueError('PB2 systems have not been implemented yet.')
+            raise ValueError('PB2 systems have not been implemented.')
         else:
             # PB1 system, all frequencies belong to one star
             new_model = PB1Model(self.time, self.flux / 1e3, freq=self.freq)
