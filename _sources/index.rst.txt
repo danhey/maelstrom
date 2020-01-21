@@ -1,41 +1,29 @@
 .. include:: ../README.rst
 
-User guide
-----------
-
 .. toctree::
    :maxdepth: 2
+   :caption: User Guide
 
    user/install
    user/citation
-   
-
-Tutorials
-----------
-
-.. toctree::
-    :maxdepth: 2
-
-    notebooks/Getting started.ipynb
-    notebooks/Estimating frequencies.ipynb
-    notebooks/Custom priors.ipynb
-
-API
-----------
+   api/api
 
 .. toctree::
    :maxdepth: 2
+   :caption: Tutorials
 
-   api/api
-
-Examples from paper
-----------
+   notebooks/Getting started.ipynb
+   notebooks/Estimating frequencies.ipynb
+   notebooks/Custom priors.ipynb
 
 .. toctree::
-    :maxdepth: 2
+   :maxdepth: 2
+   :caption: Case studies
 
-    ../paper/notebooks/(4.1) KIC 9651065.ipynb
-    
+   case_studies/9651065.ipynb
+   case_studies/6780873.ipynb
+   case_studies/10080943.ipynb
+
 
 License & attribution
 ---------------------

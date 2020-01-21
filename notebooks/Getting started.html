@@ -1,26 +1,18 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Getting started &mdash; maelstrom 0.1 documentation</title>
-  
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
-  
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Getting started</title>
     
+      <link rel="stylesheet" href="../_static/pygments.css">
+      <link rel="stylesheet" href="../_static/theme.css">
+      <link rel="stylesheet" href="../_static/romnnn_sphinx_press_theme.css">
+          <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+      
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
@@ -28,142 +20,221 @@
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Choosing the correct frequencies" href="Estimating frequencies.html" />
-    <link rel="prev" title="Citing" href="../user/citation.html" />
-    <link href="../_static/style.css" rel="stylesheet" type="text/css">
-
-</head>
-
-<body class="wy-body-for-nav">
-
-   
-  <div class="wy-grid-for-nav">
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../index.html" class="icon icon-home"> maelstrom
-          
-
-          
-          </a>
-
-          
-            
-            
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/citation.html">Citing</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Estimating frequencies.html">Choosing the correct frequencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Custom priors.html">Custom priors</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../api/api.html">Maelstrom</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/api.html#module-maelstrom.orbit">Orbit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/api.html#periodogram">Periodogram</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/api.html#module-maelstrom.utils">Utilities</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api/api.html#synthetic-light-curves">Synthetic light curves</a></li>
-</ul>
-
-            
-          
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">maelstrom</a>
-        
-      </nav>
-
-
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
+      <script src="../_static/theme-vendors.js"></script>
+      <script src="../_static/theme.js" defer></script>
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-      <li>Getting started</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="../_sources/notebooks/Getting started.ipynb.txt" rel="nofollow"> View page source</a>
-          
-        
-      </li>
-    
-  </ul>
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="Choosing the correct frequencies" href="Estimating frequencies.html" />
+  <link rel="prev" title="API" href="../api/api.html" />
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <div class="home-link-container">
+      <router-link to="../index.html" class="home-link">
+      
+        <span class="site-name">maelstrom</span>
+    </router-link>
+  </div>
+
+  <div class="links">
+    <navlinks class="can-hide">
 
   
-  <hr/>
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link ">
+         User Guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link  router-link-active">
+         Tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link ">
+         Case studies
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link ">
+         User Guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link  router-link-active">
+         Tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link ">
+         Case studies
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Search</span>
+    <div class="searchformwrapper">
+      <form autocomplete="off" class="search" action="../search.html" method="get">
+        <input type="text" name="q" autocomplete="off" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#maelstrom">User Guide</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../user/citation.html" class="reference internal ">Citing</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../api/api.html" class="reference internal ">API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#maelstrom">Tutorials</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 current"><a href="#" class="reference internal current">Getting started</a>
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#Getting-started" class="reference internal">Getting started</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="Estimating frequencies.html" class="reference internal ">Choosing the correct frequencies</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="Custom priors.html" class="reference internal ">Custom priors</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#maelstrom">Case studies</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../case_studies/9651065.html" class="reference internal ">KIC 9651065</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../case_studies/6780873.html" class="reference internal ">KIC 6780873</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../case_studies/10080943.html" class="reference internal ">KIC 10080943</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Getting started</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="../api/api.html"
+       title="previous chapter">← API</a>
+  </li>
+  <li class="next">
+    <a href="Estimating frequencies.html"
+       title="next chapter">Choosing the correct frequencies →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
             
   
 <style>
@@ -231,7 +302,7 @@ div.nboutput div.prompt pre {
 /* all prompts */
 div.nbinput div.prompt,
 div.nboutput div.prompt {
-    min-width: 5ex;
+    min-width: 7ex;
     padding-top: 0.4em;
     padding-right: 0.4em;
     text-align: right;
@@ -364,43 +435,15 @@ div.rendered_html tbody tr:nth-child(odd) {
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
-
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
 </style>
 <div class="section" id="Getting-started">
 <h1>Getting started<a class="headerlink" href="#Getting-started" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">config</span> IPython.matplotlib.backend = &quot;retina&quot;
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">rcParams</span>
-<span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
-<span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;savefig.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
-
-<span class="c1"># import maelstrom as ms</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">corner</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -410,32 +453,35 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>Let’s download a nice star that has good time-delays – KIC 9651065.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">lc</span> <span class="o">=</span> <span class="n">lk</span><span class="o">.</span><span class="n">search_lightcurvefile</span><span class="p">(</span><span class="s1">&#39;KIC 9651065&#39;</span><span class="p">,</span> <span class="n">mission</span><span class="o">=</span><span class="s1">&#39;Kepler&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">download_all</span><span class="p">()</span><span class="o">.</span><span class="n">stitch</span><span class="p">()</span><span class="o">.</span><span class="n">remove_nans</span><span class="p">()</span>
+<span></span><span class="o">%</span><span class="k">config</span> IPython.matplotlib.backend = &quot;retina&quot;
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;savefig.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s download a nice star that has good time-delays – KIC 9651065.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">lc</span> <span class="o">=</span> <span class="n">lk</span><span class="o">.</span><span class="n">search_lightcurvefile</span><span class="p">(</span><span class="s1">&#39;KIC 9651065&#39;</span><span class="p">,</span> <span class="n">mission</span><span class="o">=</span><span class="s1">&#39;Kepler&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">download_all</span><span class="p">()</span><span class="o">.</span><span class="n">PDCSAP_FLUX</span><span class="o">.</span><span class="n">stitch</span><span class="p">()</span><span class="o">.</span><span class="n">remove_nans</span><span class="p">()</span>
 <span class="n">lc</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/Users/danielhey/anaconda3/lib/python3.7/site-packages/lightkurve/collections.py:212: LightkurveWarning: Stitching a `LightCurveFileCollection` which contains both SAP and PDCSAP_FLUX. Plotting PDCSAP_FLUX. You can remove this warning by using `LightCurveFileCollection.PDCSAP_FLUX.stitch()`.
-  LightkurveWarning)
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x113e3f160&gt;
+<span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1118c1f28&gt;
 </pre></div>
 </div>
 </div>
@@ -443,18 +489,18 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_3_2.png" src="../_images/notebooks_Getting_started_3_2.png" />
+<img alt="../_images/notebooks_Getting_started_4_1.png" src="../_images/notebooks_Getting_started_4_1.png" />
 </div>
 </div>
 <p>Here, we pass the time and flux data into Maelstrom. Note that lightkurve automatically subtracts the Kepler zero time (2454844 days). If you want to include additional data, you must work within the same reference time. If the <code class="docutils literal notranslate"><span class="pre">freq</span></code> argument is not specified, Maelstrom will automatically try and detect some good peaks. Be warned however, this does not always work and you should always check which frequencies you use! I have set the upper limit on the peak search to 40 cpd, since there are
 some Nyquist aliases. We can tell they are aliases as their time delays will match the Kepler orbital period. Neat!</p>
 <p>First look will subdivide the lightcurve using the old method, and have a quick look at the orbital signal. The frequencies are colored by their amplitude, and the orange line is the weighted average value. We see a nice peak around 272 d, which is the orbital period.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">maelstrom</span> <span class="k">import</span> <span class="n">Maelstrom</span>
+<span></span><span class="kn">from</span> <span class="nn">maelstrom</span> <span class="kn">import</span> <span class="n">Maelstrom</span>
 
 <span class="n">ms</span> <span class="o">=</span> <span class="n">Maelstrom</span><span class="p">(</span><span class="n">lc</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">lc</span><span class="o">.</span><span class="n">flux</span><span class="p">,</span> <span class="n">max_peaks</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
 <span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">()</span>
@@ -462,22 +508,14 @@ some Nyquist aliases. We can tell they are aliases as their time delays will mat
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has been deprecated and will no longer be supported in future. Please import this class from the astropy.timeseries module instead [astropy.stats.lombscargle]
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1db287f0&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1d73aba8&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1d775198&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1d7a1748&gt;],
+<span></span>array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1a7f4518&gt;,
+       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c21fb4da0&gt;,
+       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1b3cc390&gt;,
+       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1b3f6940&gt;],
       dtype=object)
 </pre></div>
 </div>
@@ -486,22 +524,42 @@ WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_5_2.png" src="../_images/notebooks_Getting_started_5_2.png" />
+<img alt="../_images/notebooks_Getting_started_6_1.png" src="../_images/notebooks_Getting_started_6_1.png" />
 </div>
 </div>
-<p>Let’s now perform an initial optimisation.. We first need to call <code class="docutils literal notranslate"><span class="pre">setup_orbit_model</span></code>, but an orbital period estimate is not required (unless the time delay signal is very weak..!). We then optimize the model</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<p>To read off this period, we can calculate the peak in the power spectrum of the time delays (the bottom left panel above)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ms</span><span class="o">.</span><span class="n">setup_orbit_model</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="mf">272.</span><span class="p">)</span>
+<span></span><span class="n">period_guess</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">get_period_estimate</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">period_guess</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+269.95909667504344
+</pre></div></div>
+</div>
+<p>Let’s now perform an initial optimisation.. We first need to call <code class="docutils literal notranslate"><span class="pre">setup_orbit_model</span></code>, but an orbital period estimate is not required (unless the time delay signal is very weak..!). We can also pass along an initial guess for the eccentricity, but let’s leave it at 0 and see what happens.</p>
+<p>We then optimize the model</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ms</span><span class="o">.</span><span class="n">setup_orbit_model</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="n">period_guess</span><span class="p">)</span>
 <span class="n">opt</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -510,34 +568,54 @@ WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
-<span></span>{&#39;logperiod&#39;: array(5.60521921),
- &#39;t0&#39;: array(15.39716148),
- &#39;varpi_angle__&#39;: array([ 3.64011013, -2.59799886]),
- &#39;eccen_interval__&#39;: array(-0.19682943),
+<span></span>{&#39;logperiod&#39;: array(5.60521922),
+ &#39;t0&#39;: array(15.39716591),
+ &#39;varpi_angle__&#39;: array([ 3.64010862, -2.59799919]),
+ &#39;eccen_interval__&#39;: array(-0.19682975),
  &#39;logs&#39;: array(0.21291598),
- &#39;lighttime&#39;: array([178.34565494, 191.3003582 , 193.97127067]),
+ &#39;lighttime&#39;: array([178.34565426, 191.30015751, 193.97131511]),
  &#39;mean_flux&#39;: array(0.00075224),
- &#39;W_hat_cos&#39;: array([ 1.7414353 ,  0.46678729, -0.59316665]),
- &#39;W_hat_sin&#39;: array([ 0.29408812,  0.62832871, -0.28794188]),
- &#39;period&#39;: array(271.84151029),
- &#39;varpi&#39;: array(2.19066738),
- &#39;eccen&#39;: array(0.45095187),
- &#39;tref&#39;: array(24.82833308)}
+ &#39;W_hat_cos&#39;: array([ 1.7414353 ,  0.46678714, -0.59316665]),
+ &#39;W_hat_sin&#39;: array([ 0.2940882 ,  0.62832883, -0.28794189]),
+ &#39;period&#39;: array(271.84151162),
+ &#39;varpi&#39;: array(2.19066763),
+ &#39;eccen&#39;: array(0.4509518),
+ &#39;tref&#39;: array(24.82834397)}
 </pre></div>
 </div>
 </div>
-<p>Let’s see what the theoretical time delays look like</p>
+<p>Let’s see what the theoretical time delays look like in the optimised model vs the actual extracted values.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">td_time</span><span class="p">,</span> <span class="n">td_td</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">get_time_delay</span><span class="p">()</span>
+<span class="n">td_average</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">td_td</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">get_weights</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has been deprecated and will no longer be supported in future. Please import this class from the astropy.timeseries module instead [astropy.stats.lombscargle]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="k">with</span> <span class="n">ms</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">)</span>
+    <span class="n">model_td</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span> <span class="o">*</span> <span class="mi">86400</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">model_td</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">model_td</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">td_time</span><span class="p">,</span> <span class="n">td_average</span><span class="p">,</span> <span class="s1">&#39;.k&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [day]&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Time delay [s]&#39;</span><span class="p">)</span>
@@ -545,7 +623,7 @@ WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="output_area highlight-none notranslate"><div class="highlight"><pre>
@@ -557,13 +635,47 @@ WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_10_1.png" src="../_images/notebooks_Getting_started_10_1.png" />
+<img alt="../_images/notebooks_Getting_started_14_1.png" src="../_images/notebooks_Getting_started_14_1.png" />
 </div>
 </div>
 <p>Cool! Each frequency in the light curve has its own independent <code class="docutils literal notranslate"><span class="pre">asini</span></code> in the Maelstrom model. This is useful for when there are multiple stars pulsating in the same binary system, as they would be (mostly) equal and opposite in sign.</p>
+<p>However, Maelstrom isn’t actually fitting these parameters. What we’re doing is forward modelling the input light curve by fitting the phase variations (<span class="math notranslate nohighlight">\(\tau\)</span>) in each point;</p>
+<p><span class="math notranslate nohighlight">\(y(t) = \sum_{j=1}^{J} \Big[A_j \cos(\omega_j (t - \tau)) + B_j \sin(\omega_j (t-\tau))\Big]\)</span></p>
+<p>Although it is not as useful as looking at the time-delays, we can still inspect the actual light curve that is generated from the time delay signal:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">ms</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">lc_model</span><span class="p">,</span> <span class="n">opt</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Maelstrom&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">ms</span><span class="o">.</span><span class="n">flux</span><span class="p">,</span> <span class="s1">&#39;.k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">205</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [day]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux [ppt]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.legend.Legend at 0x1c43c6ac18&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Getting_started_19_1.png" src="../_images/notebooks_Getting_started_19_1.png" />
+</div>
+</div>
 <p>Maelstrom has decided that all these frequencies belong to one star, as their lighttimes are all positive (or negative). This means the system is PB1. We can get a ready-made model from the get go by asking nicely, and passing in the optimisation results. The PB1 model is for binaries with only one pulsating component. All the frequencies now use the same <code class="docutils literal notranslate"><span class="pre">asini</span></code> parameter, unlike our first model</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -573,7 +685,7 @@ WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -586,7 +698,7 @@ $$
 </div>
 <p>As we can see, pb1_model inherits from the PyMC3 Models object. It is, by definition, a custom model which has access to all of the properties of the default Model class. This means we can do cool things like this:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -595,19 +707,22 @@ $$
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_15_0.svg" src="../_images/notebooks_Getting_started_15_0.svg" /></div>
+<img alt="../_images/notebooks_Getting_started_23_0.svg" src="../_images/notebooks_Getting_started_23_0.svg" /></div>
 </div>
-<p>Finally, if we are happy with the default priors in Maelstrom we can sample the model. Otherwise, see the tutorial on setting up custom priors!</p>
+<p>Finally, if we are happy with the default priors in Maelstrom we can sample the model. There are strong covariances between some of the parameters. This means that sampling will slow down significantly unless we use a custom NUTS step (see <a class="reference external" href="https://exoplanet.dfm.io/en/stable/tutorials/pymc3-extras/#dense-mass-matrices">https://exoplanet.dfm.io/en/stable/tutorials/pymc3-extras/#dense-mass-matrices</a>)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">pb1_model</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">draws</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span></span><span class="k">with</span> <span class="n">pb1_model</span><span class="p">:</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
+        <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">draws</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">xo</span><span class="o">.</span><span class="n">get_dense_nuts_step</span><span class="p">(</span><span class="n">target_accept</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -616,52 +731,9 @@ $$
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-optimizing logp for variables: [PB1_mean]
-5it [00:00, 19.64it/s, logp=-1.124302e+05]
-message: Optimization terminated successfully.
-logp: -112430.23569362523 -&gt; -112430.23430331374
-optimizing logp for variables: [PB1_logs_lc]
-9it [00:00, 22.53it/s, logp=-1.090380e+05]
-message: Optimization terminated successfully.
-logp: -112430.23430331374 -&gt; -109037.96061965273
-optimizing logp for variables: [PB1_logw0, PB1_logpower]
-126it [00:05, 21.60it/s, logp=-1.072571e+05]
-message: Desired error not necessarily achieved due to precision loss.
-logp: -109037.96061965273 -&gt; -107257.13376770144
-optimizing logp for variables: [PB1_omega, PB1_eccen]
-138it [00:07, 18.96it/s, logp=-1.039395e+05]
-message: Desired error not necessarily achieved due to precision loss.
-logp: -107257.13376770144 -&gt; -103939.50240136718
-optimizing logp for variables: [PB1_phi]
-21it [00:01, 12.63it/s, logp=-1.039178e+05]
-message: Optimization terminated successfully.
-logp: -103939.50240136718 -&gt; -103917.84577691373
-optimizing logp for variables: [PB1_lognu]
-82it [00:07, 11.55it/s, logp=-1.039153e+05]
-message: Desired error not necessarily achieved due to precision loss.
-logp: -103917.84577691373 -&gt; -103915.30544660776
-optimizing logp for variables: [PB1_logpower, PB1_logw0, PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
-252it [00:27,  9.27it/s, logp=-1.036818e+05]
-message: Desired error not necessarily achieved due to precision loss.
-logp: -103915.30544660776 -&gt; -103681.78180621586
-optimizing logp for variables: [PB1_logasini]
-3it [00:00,  8.35it/s, logp=-1.036818e+05]
-message: Optimization terminated successfully.
-logp: -103681.78180621586 -&gt; -103681.78180621586
-optimizing logp for variables: [PB1_logpower, PB1_logw0, PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
-60it [00:08,  7.00it/s, logp=-1.036818e+05]
-message: Desired error not necessarily achieved due to precision loss.
-logp: -103681.78180621586 -&gt; -103681.78180621554
-optimizing logp for variables: [PB1_logP]
-3it [00:00,  7.83it/s, logp=-1.036818e+05]
-message: Optimization terminated successfully.
-logp: -103681.78180621554 -&gt; -103681.78180621554
-optimizing logp for variables: [PB1_logpower, PB1_logw0, PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
-59it [00:05, 10.07it/s, logp=-1.062195e+05]
-message: Desired error not necessarily achieved due to precision loss.
-logp: -103681.78180621554 -&gt; -103681.78180621554
-Sampling 2 chains: 100%|██████████| 104/104 [17:50&lt;00:00, 10.29s/draws]
-Sampling 2 chains:  21%|██        | 22/104 [01:48&lt;06:45,  4.95s/draws]
+Multiprocess sampling (2 chains in 2 jobs)
+NUTS: [PB1_logpower, PB1_logw0, PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
+Sampling 2 chains:   1%|          | 22/4000 [01:39&lt;5:00:49,  4.54s/draws]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -701,36 +773,11 @@ Sampling 2 chains:  21%|██        | 22/104 [01:48&lt;06:45,  4.95s/draws]
 During handling of the above exception, another exception occurred:
 
 <span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-17-e3cd2a89910d&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>trace <span class="ansi-blue-fg">=</span> pb1_model<span class="ansi-blue-fg">.</span>sample<span class="ansi-blue-fg">(</span>tune<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1000</span><span class="ansi-blue-fg">,</span> draws<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1000</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/Dropbox (Sydney Uni)/maelstrom/maelstrom/maelstrom.py</span> in <span class="ansi-cyan-fg">sample</span><span class="ansi-blue-fg">(self, tune, draws, start, target_accept, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    128</span>         <span class="ansi-green-fg">with</span> self<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    129</span>             sampler.tune(tune=tune, start=start, **kwargs,
-<span class="ansi-green-fg">--&gt; 130</span><span class="ansi-red-fg">                                   step_kwargs=dict(target_accept=target_accept))
-</span><span class="ansi-green-intense-fg ansi-bold">    131</span>             trace <span class="ansi-blue-fg">=</span> sampler<span class="ansi-blue-fg">.</span>sample<span class="ansi-blue-fg">(</span>draws<span class="ansi-blue-fg">=</span>draws<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    132</span>         <span class="ansi-green-fg">return</span> trace
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/exoplanet/sampling.py</span> in <span class="ansi-cyan-fg">tune</span><span class="ansi-blue-fg">(self, tune, start, step_kwargs, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    214</span>                 steps<span class="ansi-blue-fg">=</span>steps<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    215</span>                 trace<span class="ansi-blue-fg">=</span>trace<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-fg">--&gt; 216</span><span class="ansi-red-fg">                 </span><span class="ansi-blue-fg">**</span>kwargs
-<span class="ansi-green-intense-fg ansi-bold">    217</span>             )
-<span class="ansi-green-intense-fg ansi-bold">    218</span>             steps <span class="ansi-blue-fg">*=</span> <span class="ansi-cyan-fg">2</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/exoplanet/sampling.py</span> in <span class="ansi-cyan-fg">extend_tune</span><span class="ansi-blue-fg">(self, steps, start, step_kwargs, trace, step, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    181</span>             start<span class="ansi-blue-fg">=</span>start<span class="ansi-blue-fg">,</span> step_kwargs<span class="ansi-blue-fg">=</span>step_kwargs<span class="ansi-blue-fg">,</span> trace<span class="ansi-blue-fg">=</span>trace<span class="ansi-blue-fg">,</span> step<span class="ansi-blue-fg">=</span>step
-<span class="ansi-green-intense-fg ansi-bold">    182</span>         )
-<span class="ansi-green-fg">--&gt; 183</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_extend<span class="ansi-blue-fg">(</span>steps<span class="ansi-blue-fg">,</span> start<span class="ansi-blue-fg">=</span>start<span class="ansi-blue-fg">,</span> step<span class="ansi-blue-fg">=</span>step<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    184</span>         self<span class="ansi-blue-fg">.</span>_current_step <span class="ansi-blue-fg">=</span> step
-<span class="ansi-green-intense-fg ansi-bold">    185</span>         <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_current_trace
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/exoplanet/sampling.py</span> in <span class="ansi-cyan-fg">_extend</span><span class="ansi-blue-fg">(self, steps, start, step, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    126</span>
-<span class="ansi-green-intense-fg ansi-bold">    127</span>         self._current_trace = pm.sample(
-<span class="ansi-green-fg">--&gt; 128</span><span class="ansi-red-fg">             </span>start<span class="ansi-blue-fg">=</span>start<span class="ansi-blue-fg">,</span> tune<span class="ansi-blue-fg">=</span>steps<span class="ansi-blue-fg">,</span> step<span class="ansi-blue-fg">=</span>step<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs
-<span class="ansi-green-intense-fg ansi-bold">    129</span>         )
-<span class="ansi-green-intense-fg ansi-bold">    130</span>         self<span class="ansi-blue-fg">.</span>count <span class="ansi-blue-fg">+=</span> steps
+<span class="ansi-green-fg">&lt;ipython-input-25-9e096008b28d&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">with</span> pb1_model<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span>     trace = pm.sample(
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg">         </span>tune<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1000</span><span class="ansi-blue-fg">,</span> draws<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1000</span><span class="ansi-blue-fg">,</span> step<span class="ansi-blue-fg">=</span>xo<span class="ansi-blue-fg">.</span>get_dense_nuts_step<span class="ansi-blue-fg">(</span>target_accept<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.95</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span>     )
 
 <span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/pymc3/sampling.py</span> in <span class="ansi-cyan-fg">sample</span><span class="ansi-blue-fg">(draws, step, init, n_init, start, trace, chain_idx, chains, cores, tune, progressbar, model, random_seed, discard_tuned_samples, compute_convergence_checks, **kwargs)</span>
 <span class="ansi-green-intense-fg ansi-bold">    435</span>             _print_step_hierarchy<span class="ansi-blue-fg">(</span>step<span class="ansi-blue-fg">)</span>
@@ -768,52 +815,27 @@ During handling of the above exception, another exception occurred:
 </div>
 
 
-           </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Estimating frequencies.html" class="btn btn-neutral float-right" title="Choosing the correct frequencies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../user/citation.html" class="btn btn-neutral float-left" title="Citing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="../api/api.html"
+       title="previous chapter">← API</a>
+  </li>
+  <li class="next">
+    <a href="Estimating frequencies.html"
+       title="next chapter">Choosing the correct frequencies →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2019, Daniel Hey.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1 with <a href="https://github.com/romnnn/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
     </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        &copy; Copyright 2019, Daniel Hey
-
-    </p>
-  </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
-
-</footer>
-
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-  
-
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
     
-   
-
-</body>
+    
+  </body>
 </html>

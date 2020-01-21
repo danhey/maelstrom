@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>KIC 9651065</title>
+    
+      <link rel="stylesheet" href="../_static/pygments.css">
+      <link rel="stylesheet" href="../_static/theme.css">
+      <link rel="stylesheet" href="../_static/romnnn_sphinx_press_theme.css">
+          <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+
+      
+      <script src="../_static/theme-vendors.js"></script>
+      <script src="../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="KIC 6780873" href="6780873.html" />
+  <link rel="prev" title="Custom priors" href="../notebooks/Custom priors.html" />
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <div class="home-link-container">
+      <router-link to="../index.html" class="home-link">
+      
+        <span class="site-name">maelstrom</span>
+    </router-link>
+  </div>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link ">
+         User Guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link ">
+         Tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link  router-link-active">
+         Case studies
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link ">
+         User Guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link ">
+         Tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#maelstrom"
+         class="nav-link  router-link-active">
+         Case studies
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Search</span>
+    <div class="searchformwrapper">
+      <form autocomplete="off" class="search" action="../search.html" method="get">
+        <input type="text" name="q" autocomplete="off" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#maelstrom">User Guide</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../user/citation.html" class="reference internal ">Citing</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../api/api.html" class="reference internal ">API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#maelstrom">Tutorials</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../notebooks/Getting started.html" class="reference internal ">Getting started</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../notebooks/Estimating frequencies.html" class="reference internal ">Choosing the correct frequencies</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../notebooks/Custom priors.html" class="reference internal ">Custom priors</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#maelstrom">Case studies</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 current"><a href="#" class="reference internal current">KIC 9651065</a>
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#Maelstrom" class="reference internal">Maelstrom</a></li>
+                
+                  <li class="toctree-l2"><a href="#Subdividing" class="reference internal">Subdividing</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="6780873.html" class="reference internal ">KIC 6780873</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="10080943.html" class="reference internal ">KIC 10080943</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>KIC 9651065</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="../notebooks/Custom priors.html"
+       title="previous chapter">← Custom priors</a>
+  </li>
+  <li class="next">
+    <a href="6780873.html"
+       title="next chapter">KIC 6780873 →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 7ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="KIC-9651065">
+<h1>KIC 9651065<a class="headerlink" href="#KIC-9651065" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">run</span> setup.py
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;../data/9651065_lc.txt&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ms</span> <span class="o">=</span> <span class="n">Maelstrom</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_peaks</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
+<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has been deprecated and will no longer be supported in future. Please import this class from the astropy.timeseries module instead [astropy.stats.lombscargle]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x10ff450b8&gt;,
+       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x12e73f4e0&gt;,
+       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x12e7835f8&gt;,
+       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f2dd710&gt;],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/case_studies_9651065_3_2.png" src="../_images/case_studies_9651065_3_2.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">period_guess</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">a_guess</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="n">time</span><span class="p">,</span> <span class="n">flux</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">ms</span><span class="o">.</span><span class="n">flux</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">freq</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">get_weights</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pg</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">period_search</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">periods</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">periods</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 300/300 [08:44&lt;00:00,  1.71s/it]
+100%|██████████| 300/300 [13:08&lt;00:00,  2.55s/it]
+100%|██████████| 300/300 [08:56&lt;00:00,  1.68s/it]
+100%|██████████| 300/300 [08:50&lt;00:00,  1.85s/it]
+100%|██████████| 300/300 [10:05&lt;00:00,  1.83s/it]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="p">])</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">period_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">periods</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">sm</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/case_studies_9651065_7_0.png" src="../_images/case_studies_9651065_7_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">maelstrom.utils</span> <span class="kn">import</span> <span class="n">unique_colors</span>
+
+<span class="n">hh</span> <span class="o">=</span> <span class="n">unique_colors</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">freq</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">mnras_size</span><span class="p">(</span><span class="mf">240.</span><span class="p">))</span>
+
+<span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;logasini&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">hh</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">periods</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Period (d)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;a$\sin</span><span class="si">{i}</span><span class="s1">$ (s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">184.</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">272.</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">overleaf_path</span> <span class="o">+</span> <span class="s1">&#39;9651065_period_search.pdf&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/case_studies_9651065_9_0.png" src="../_images/case_studies_9651065_9_0.png" />
+</div>
+</div>
+<div class="section" id="Maelstrom">
+<h2>Maelstrom<a class="headerlink" href="#Maelstrom" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ms</span><span class="o">.</span><span class="n">setup_orbit_model</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="n">period_guess</span><span class="p">)</span>
+<span class="c1"># opt = ms.optimize()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pb1</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">pin_orbit_model</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt</span> <span class="o">=</span> <span class="n">pb1</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+optimizing logp for variables: [PB1_mean]
+5it [00:00, 16.85it/s, logp=-1.065613e+05]
+message: Optimization terminated successfully.
+logp: -106561.27624942982 -&gt; -106561.26306231941
+optimizing logp for variables: [PB1_logs_lc]
+9it [00:00, 20.45it/s, logp=-1.042264e+05]
+message: Optimization terminated successfully.
+logp: -106561.26306231941 -&gt; -104226.39963321917
+optimizing logp for variables: [PB1_omega, PB1_eccen]
+181it [00:11, 15.14it/s, logp=-1.002360e+05]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -104226.39963321917 -&gt; -100236.02734631239
+optimizing logp for variables: [PB1_phi]
+21it [00:01, 15.82it/s, logp=-1.002145e+05]
+message: Optimization terminated successfully.
+logp: -100236.02734631239 -&gt; -100214.47184126679
+optimizing logp for variables: [PB1_lognu]
+292it [00:17, 15.12it/s, logp=-1.002111e+05]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -100214.47184126679 -&gt; -100211.13341350148
+optimizing logp for variables: [PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
+118it [00:08, 14.33it/s, logp=-9.991085e+04]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -100211.13341350148 -&gt; -99910.85482848075
+optimizing logp for variables: [PB1_logasini]
+48it [00:02, 14.55it/s, logp=-9.991085e+04]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -99910.85482848075 -&gt; -99910.85482848075
+optimizing logp for variables: [PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
+67it [00:04, 14.09it/s, logp=-1.571649e+05]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -99910.85482848075 -&gt; -99910.85482848075
+optimizing logp for variables: [PB1_logP]
+63it [00:04, 14.40it/s, logp=-9.991085e+04]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -99910.85482848075 -&gt; -99910.85482848075
+optimizing logp for variables: [PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
+67it [00:04, 14.16it/s, logp=-1.571649e+05]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -99910.85482848075 -&gt; -99910.85482848075
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>{&#39;PB1_logP_interval__&#39;: array(1.15567803),
+ &#39;PB1_phi_angle__&#39;: array([2.23436892, 3.87396393]),
+ &#39;PB1_logs_lc&#39;: array(0.11245058),
+ &#39;PB1_logasini_interval__&#39;: array(1.13126127),
+ &#39;PB1_mean&#39;: array(0.00050174),
+ &#39;PB1_lognu&#39;: array([2.96926915, 3.07787135, 3.42757632, 2.87353169, 3.12211358]),
+ &#39;PB1_omega_angle__&#39;: array([ 3.73297298, -2.46269836]),
+ &#39;PB1_eccen_interval__&#39;: array(-0.00997314),
+ &#39;PB1_logP&#39;: array(5.6068392),
+ &#39;PB1_period&#39;: array(272.28224574),
+ &#39;PB1_phi&#39;: array(0.52316012),
+ &#39;PB1_logasini&#39;: array(5.22275749),
+ &#39;PB1_asini&#39;: array(185.44484209),
+ &#39;PB1_nu&#39;: array([19.47767905, 21.71213556, 30.80189831, 17.69941683, 22.69429519]),
+ &#39;PB1_omega&#39;: array(2.1539708),
+ &#39;PB1_eccen&#39;: array(0.44775606)}
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># with pb1:</span>
+<span class="c1">#     trace = pm.load_trace(&#39;traces/9651065_FINAL_VERSION2/&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">pb1</span><span class="p">:</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
+        <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+        <span class="n">draws</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+        <span class="n">start</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span>
+        <span class="n">chains</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">=</span><span class="n">xo</span><span class="o">.</span><span class="n">get_dense_nuts_step</span><span class="p">(</span><span class="n">target_accept</span><span class="o">=</span><span class="mf">0.9</span><span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Multiprocess sampling (2 chains in 4 jobs)
+NUTS: [PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
+Sampling 2 chains: 100%|██████████| 6000/6000 [2:20:19&lt;00:00,  2.26draws/s]
+There was 1 divergence after tuning. Increase `target_accept` or reparameterize.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pm</span><span class="o">.</span><span class="n">save_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="s1">&#39;traces/NEW/9651065&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&#39;traces/NEW/9651065&#39;
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">pb1</span><span class="p">:</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">load_trace</span><span class="p">(</span><span class="s1">&#39;traces/NEW/9651065&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pm</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>mc_error</th>
+      <th>hpd_2.5</th>
+      <th>hpd_97.5</th>
+      <th>n_eff</th>
+      <th>Rhat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>PB1_logs_lc</th>
+      <td>0.112488</td>
+      <td>2.788613e-03</td>
+      <td>4.318353e-05</td>
+      <td>0.107175</td>
+      <td>0.118011</td>
+      <td>4872.309174</td>
+      <td>0.999766</td>
+    </tr>
+    <tr>
+      <th>PB1_mean</th>
+      <td>0.000453</td>
+      <td>4.311418e-03</td>
+      <td>5.258491e-05</td>
+      <td>-0.008308</td>
+      <td>0.008533</td>
+      <td>4733.853954</td>
+      <td>0.999893</td>
+    </tr>
+    <tr>
+      <th>PB1_lognu__0</th>
+      <td>2.969269</td>
+      <td>6.947471e-08</td>
+      <td>1.007572e-09</td>
+      <td>2.969269</td>
+      <td>2.969269</td>
+      <td>4877.899058</td>
+      <td>0.999750</td>
+    </tr>
+    <tr>
+      <th>PB1_lognu__1</th>
+      <td>3.077871</td>
+      <td>1.401069e-07</td>
+      <td>1.790561e-09</td>
+      <td>3.077871</td>
+      <td>3.077872</td>
+      <td>4987.425769</td>
+      <td>0.999809</td>
+    </tr>
+    <tr>
+      <th>PB1_lognu__2</th>
+      <td>3.427576</td>
+      <td>1.153276e-07</td>
+      <td>1.482061e-09</td>
+      <td>3.427576</td>
+      <td>3.427577</td>
+      <td>5116.923872</td>
+      <td>0.999820</td>
+    </tr>
+    <tr>
+      <th>PB1_lognu__3</th>
+      <td>2.873532</td>
+      <td>2.410755e-07</td>
+      <td>3.310421e-09</td>
+      <td>2.873531</td>
+      <td>2.873532</td>
+      <td>5273.564497</td>
+      <td>0.999758</td>
+    </tr>
+    <tr>
+      <th>PB1_lognu__4</th>
+      <td>3.122114</td>
+      <td>2.028430e-07</td>
+      <td>3.086057e-09</td>
+      <td>3.122113</td>
+      <td>3.122114</td>
+      <td>5007.746307</td>
+      <td>1.000491</td>
+    </tr>
+    <tr>
+      <th>PB1_logP</th>
+      <td>5.606821</td>
+      <td>1.533627e-03</td>
+      <td>2.720497e-05</td>
+      <td>5.603934</td>
+      <td>5.609909</td>
+      <td>3794.642416</td>
+      <td>1.000395</td>
+    </tr>
+    <tr>
+      <th>PB1_period</th>
+      <td>272.277620</td>
+      <td>4.175774e-01</td>
+      <td>7.407073e-03</td>
+      <td>271.492266</td>
+      <td>273.119474</td>
+      <td>3795.598300</td>
+      <td>1.000395</td>
+    </tr>
+    <tr>
+      <th>PB1_phi</th>
+      <td>0.522492</td>
+      <td>6.838594e-02</td>
+      <td>1.535542e-03</td>
+      <td>0.387833</td>
+      <td>0.655864</td>
+      <td>2230.647368</td>
+      <td>1.000448</td>
+    </tr>
+    <tr>
+      <th>PB1_logasini</th>
+      <td>5.221896</td>
+      <td>1.943783e-02</td>
+      <td>2.706993e-04</td>
+      <td>5.183252</td>
+      <td>5.259797</td>
+      <td>4904.909828</td>
+      <td>0.999750</td>
+    </tr>
+    <tr>
+      <th>PB1_asini</th>
+      <td>185.320254</td>
+      <td>3.604021e+00</td>
+      <td>5.023618e-02</td>
+      <td>178.238043</td>
+      <td>192.418010</td>
+      <td>4901.764291</td>
+      <td>0.999751</td>
+    </tr>
+    <tr>
+      <th>PB1_nu__0</th>
+      <td>19.477679</td>
+      <td>1.353206e-06</td>
+      <td>1.962515e-08</td>
+      <td>19.477676</td>
+      <td>19.477682</td>
+      <td>4877.899053</td>
+      <td>0.999750</td>
+    </tr>
+    <tr>
+      <th>PB1_nu__1</th>
+      <td>21.712135</td>
+      <td>3.042020e-06</td>
+      <td>3.887691e-08</td>
+      <td>21.712129</td>
+      <td>21.712141</td>
+      <td>4987.425756</td>
+      <td>0.999809</td>
+    </tr>
+    <tr>
+      <th>PB1_nu__2</th>
+      <td>30.801898</td>
+      <td>3.552308e-06</td>
+      <td>4.565028e-08</td>
+      <td>30.801891</td>
+      <td>30.801905</td>
+      <td>5116.923857</td>
+      <td>0.999820</td>
+    </tr>
+    <tr>
+      <th>PB1_nu__3</th>
+      <td>17.699417</td>
+      <td>4.266896e-06</td>
+      <td>5.859252e-08</td>
+      <td>17.699409</td>
+      <td>17.699425</td>
+      <td>5273.564233</td>
+      <td>0.999758</td>
+    </tr>
+    <tr>
+      <th>PB1_nu__4</th>
+      <td>22.694295</td>
+      <td>4.603379e-06</td>
+      <td>7.003588e-08</td>
+      <td>22.694286</td>
+      <td>22.694304</td>
+      <td>5007.746310</td>
+      <td>1.000491</td>
+    </tr>
+    <tr>
+      <th>PB1_omega</th>
+      <td>2.152293</td>
+      <td>6.991323e-02</td>
+      <td>1.443976e-03</td>
+      <td>2.009589</td>
+      <td>2.279623</td>
+      <td>2570.133760</td>
+      <td>0.999965</td>
+    </tr>
+    <tr>
+      <th>PB1_eccen</th>
+      <td>0.446589</td>
+      <td>3.034053e-02</td>
+      <td>3.954959e-04</td>
+      <td>0.387161</td>
+      <td>0.507217</td>
+      <td>4711.494926</td>
+      <td>0.999955</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="n">taus</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="n">pb1</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">samp</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">xo</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_samples_from_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="n">total</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+            <span class="n">taus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">pb1</span><span class="o">.</span><span class="n">orbit</span><span class="o">.</span><span class="n">get_time_delay</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">samp</span><span class="p">)</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 1000/1000 [03:09&lt;00:00,  5.29it/s]
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">med_td</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">taus</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sd_td</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">taus</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">taus</span><span class="p">)</span>
+<span class="n">mean</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>108.12878089572754
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">mnras_size</span><span class="p">(</span><span class="mi">240</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_rasterized</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">#ax.set_rasterization_zorder(1)</span>
+
+<span class="k">with</span> <span class="n">pb1</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">samp</span> <span class="ow">in</span> <span class="n">xo</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_samples_from_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">taumod</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">pb1</span><span class="o">.</span><span class="n">orbit</span><span class="o">.</span><span class="n">get_time_delay</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">samp</span><span class="p">)</span> <span class="o">*</span> <span class="mi">86400</span>
+        <span class="c1">#ttime = (ms.time_mid + time - samp[&#39;tref&#39;]) % samp[&#39;period&#39;] / samp[&#39;period&#39;]</span>
+        <span class="n">ttime</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">%</span> <span class="n">samp</span><span class="p">[</span><span class="s1">&#39;PB1_period&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">samp</span><span class="p">[</span><span class="s1">&#39;PB1_period&#39;</span><span class="p">]</span>
+        <span class="c1">#ttime = ((ms.time_mid + time) + (samp[&#39;phi&#39;] * samp[&#39;period&#39;] / (2*np.pi))) % samp[&#39;period&#39;] / samp[&#39;period&#39;]</span>
+        <span class="n">sort</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">ttime</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ttime</span><span class="p">[</span><span class="n">sort</span><span class="p">],</span> <span class="p">(</span><span class="n">taumod</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">taumod</span><span class="p">))[</span><span class="n">sort</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="c1">#                 rasterized=True,</span>
+                <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Orbital phase&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Time delay (s)&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">blue</span><span class="p">)</span>
+
+
+<span class="n">times</span> <span class="o">=</span> <span class="n">time</span><span class="c1"># + xo.eval_in_model(phi * period / (2*np.pi), samp)</span>
+<span class="n">fold</span> <span class="o">=</span> <span class="n">times</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;PB1_period&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;PB1_period&#39;</span><span class="p">])</span>
+<span class="n">sort</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">fold</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">fold</span><span class="p">[</span><span class="n">sort</span><span class="p">],</span> <span class="p">(</span><span class="n">med_td</span> <span class="o">-</span> <span class="n">sd_td</span> <span class="o">-</span> <span class="mf">108.12878089572754</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">sort</span><span class="p">],</span> <span class="p">(</span><span class="n">med_td</span><span class="o">+</span><span class="n">sd_td</span> <span class="o">-</span> <span class="mf">108.12878089572754</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">sort</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">blue</span><span class="p">)</span>
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">overleaf_path</span> <span class="o">+</span> <span class="s1">&#39;9651065.pdf&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1">#plt.savefig(&#39;rast.pdf&#39;, dpi=300, bbox_inches=&#39;tight&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/case_studies_9651065_23_0.png" src="../_images/case_studies_9651065_23_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">maelstrom.utils</span> <span class="kn">import</span> <span class="n">mass_function</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="n">rounding</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">trace_to_dataframe</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">varnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PB1_period&#39;</span><span class="p">,</span> <span class="s1">&#39;PB1_asini&#39;</span><span class="p">])</span>
+<span class="n">mfs</span> <span class="o">=</span> <span class="n">mass_function</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="s1">&#39;PB1_period&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">samples</span><span class="p">[</span><span class="s1">&#39;PB1_asini&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+<span class="c1">#mfs = np.array(mfs)</span>
+<span class="n">upper</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">mfs</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="p">[</span><span class="mf">84.13</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">15.86</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mass_func&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; + &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; - &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span> <span class="o">-</span> <span class="n">lower</span><span class="p">,</span><span class="n">rounding</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+mass_func :  0.092  +  0.006  -  0.005
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">varnames</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="s2">&quot;asini&quot;</span><span class="p">,</span> <span class="s2">&quot;eccen&quot;</span><span class="p">,</span> <span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="s2">&quot;phi&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">varnames</span><span class="p">:</span>
+    <span class="n">percentiles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;PB1_&#39;</span> <span class="o">+</span> <span class="n">var</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="p">[</span><span class="mf">15.87</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">84.13</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{var}</span><span class="s1">: </span><span class="si">{percentiles[0]:.2f}</span><span class="s1"> + {percentiles[1] - percentiles[0]:.2f} - {percentiles[2] - percentiles[1]:.2f}&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+period: 271.86 + 0.42 - 0.42
+asini: 181.74 + 3.48 - 3.70
+eccen: 0.42 + 0.03 - 0.03
+omega: 2.08 + 0.07 - 0.07
+phi: 0.45 + 0.07 - 0.07
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Subdividing">
+<h2>Subdividing<a class="headerlink" href="#Subdividing" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">td_time</span><span class="p">,</span> <span class="n">td_td</span><span class="p">,</span> <span class="n">td_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;../data/kic9651065_uncertainties-plus-time-delay_Q99_llc.txt&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+<span class="n">td_time</span> <span class="o">+=</span> <span class="mi">2400000</span>
+<span class="n">td_time</span> <span class="o">-=</span> <span class="mi">2454833</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">td_time</span><span class="p">,</span> <span class="n">td_td</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.collections.PathCollection at 0x1c1b8c7f98&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/case_studies_9651065_28_1.png" src="../_images/case_studies_9651065_28_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">theano.tensor</span> <span class="k">as</span> <span class="nn">tt</span>
+<span class="kn">from</span> <span class="nn">maelstrom.orbit</span> <span class="kn">import</span> <span class="n">Orbit</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">subdivide_model</span><span class="p">:</span>
+    <span class="n">logP</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;logP&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">272</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">272</span><span class="p">))</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logP</span><span class="p">))</span>
+
+    <span class="c1"># The time of conjunction</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="s2">&quot;phi&quot;</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.5691498</span><span class="p">)</span>
+    <span class="n">logs_lc</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;logs_lc&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">flux</span><span class="p">)),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+    <span class="n">logasini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;logasini&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">184</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">184</span><span class="p">))</span>
+    <span class="n">asini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;asini&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">184</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mi">184</span><span class="p">)</span>
+    <span class="n">drift</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;drift&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Periastron sampled from uniform angle</span>
+    <span class="n">omega</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">testval</span><span class="o">=-</span><span class="mf">0.94</span><span class="p">)</span>
+    <span class="c1"># Eccentricity</span>
+    <span class="n">eccen</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;eccen&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.45</span><span class="p">)</span>
+    <span class="c1"># The baseline flux</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.003</span><span class="p">)</span>
+
+    <span class="c1"># Here, we generate an Orbit instance and pass in our priors.</span>
+    <span class="n">orbit</span> <span class="o">=</span> <span class="n">Orbit</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="p">,</span>
+                  <span class="n">lighttime</span><span class="o">=</span><span class="n">asini</span><span class="p">,</span>
+                  <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">,</span>
+                  <span class="n">eccen</span><span class="o">=</span><span class="n">eccen</span><span class="p">,</span>
+                  <span class="n">phi</span><span class="o">=</span><span class="n">phi</span><span class="p">,</span>
+                  <span class="n">freq</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># psi is defined to be negative but the light curve model takes 2*pi*f * (time - tau), so</span>
+    <span class="c1"># we must flip tau here to phase it on the same values</span>
+    <span class="n">td</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">tt</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">orbit</span><span class="o">.</span><span class="n">get_time_delay</span><span class="p">(</span><span class="n">td_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">)</span> <span class="c1"># Convert to s</span>
+    <span class="n">td</span> <span class="o">+=</span> <span class="n">drift</span> <span class="o">*</span> <span class="n">td_time</span>
+    <span class="n">taumodel</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s1">&#39;taumodel&#39;</span><span class="p">,</span> <span class="n">td</span> <span class="o">-</span> <span class="n">tt</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">td</span><span class="p">))</span>
+
+    <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;obs&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">taumodel</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logs_lc</span><span class="p">),</span> <span class="n">observed</span><span class="o">=</span><span class="n">td_td</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">td_time</span><span class="p">,</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">taumodel</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">td_time</span><span class="p">,</span> <span class="n">td_td</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/case_studies_9651065_29_0.png" src="../_images/case_studies_9651065_29_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">subdivide_model</span><span class="p">:</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+optimizing logp for variables: [mean, eccen, omega, drift, asini, logasini, logs_lc, phi, logP]
+232it [00:00, 388.50it/s, logp=-6.434439e+02]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -48164.10895929657 -&gt; -643.4438767879074
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">opt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>{&#39;logP&#39;: array(5.60714099),
+ &#39;phi_angle__&#39;: array([2.10553359, 3.94546931]),
+ &#39;logs_lc&#39;: array(3.23034851),
+ &#39;logasini&#39;: array(5.21493576),
+ &#39;asini&#39;: array(184.58303002),
+ &#39;drift&#39;: array(-0.01031364),
+ &#39;omega_angle__&#39;: array([-3.79526569,  2.36557775]),
+ &#39;eccen_interval__&#39;: array(0.0158198),
+ &#39;mean&#39;: array(2.38628165e-07),
+ &#39;period&#39;: array(272.36443175),
+ &#39;phi&#39;: array(0.49021052),
+ &#39;omega&#39;: array(-1.01342257),
+ &#39;eccen&#39;: array(0.45355938),
+ &#39;taumodel&#39;: array([ 147.24755677,  144.46279379,  137.15584656,  125.61074901,
+         110.08619756,   90.85808226,   62.69573976,   35.92242968,
+           6.16179366,  -25.77210035,  -61.20875403,  -97.26770722,
+        -133.55915693, -167.94415079, -196.48908661, -212.07208628,
+        -204.22591848, -167.13862369, -111.34753077,  -53.28526181,
+          -1.56577971,   41.49527278,   75.96300517,  102.54463349,
+         122.02595761,  134.79244776,  142.52189448,  144.40171533,
+         141.41386885,  133.9053782 ,  122.17152656,  106.46937425,
+          87.03086449,   64.07648983,   37.83212893,    8.5522055 ,
+         -23.44470622,  -56.74672629,  -94.1095346 , -130.47892897,
+        -165.38531826, -195.27272446, -213.63731661, -210.33485485,
+        -177.76442939, -123.79942529,  -65.27885537,  -12.25517374,
+          32.25028096,   68.08145115,   95.89737386,  116.48778226,
+         130.57730867,  138.78373744,  141.62228714,  139.52131553,
+         132.83928074,  121.88014738,  106.9072041 ,   93.48648159,
+          38.86932568,    9.99699737,  -21.6422789 ,  -55.62855469,
+         -91.3309334 , -127.72471045, -157.73499242, -201.78592504,
+        -217.61085319, -210.10090373, -173.31551175, -117.63083725,
+         -59.52529427,   -7.71124515,   35.45054894,   70.01170032,
+          96.67673285,  116.23221037,  129.38740902,  136.74378113,
+         138.80229311,  135.97967069,  128.62521857,  117.03595615,
+         101.47025416,   82.16074252,   59.3282232 ,   33.19799679,
+           4.02286921,  -27.88169157,  -62.07929926,  -97.90871668,
+        -134.28830068, -169.33225322, -199.59372735, -218.45657152,
+        -215.90536246, -183.26008555, -129.26301782,  -70.74850342,
+         -17.74513527,   26.7377276 ,   62.54763125,   90.34424478,
+         110.91702108,  124.9902142 ,  133.18124953,  136.00502609,
+         133.88970013,  127.19358306,  116.220579  ,  101.2339773 ,
+          82.46944336,   60.14853638,   34.74478445,  -15.19078264,
+         -48.36442404,  -83.52209997, -119.55480671, -158.37870309,
+        -191.12755968, -215.79765013, -223.64201474, -204.42206369,
+        -158.06227076,  -99.77952969,  -55.63572262,    9.83990558,
+          48.53315287,   78.95689021,  101.8923374 ,  118.09469118,
+         127.77022901,  132.29913797,  127.0451233 ,  117.43287614,
+         103.72528095,   86.16545296,   64.97782528,   41.42409475,
+          11.24080315,  -19.54276931,  -52.82662522,  -73.31017402])}
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">subdivide_model</span><span class="p">:</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">opt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Auto-assigning NUTS sampler...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (2 chains in 2 jobs)
+NUTS: [mean, eccen, omega, drift, asini, logasini, logs_lc, phi, logP]
+Sampling 2 chains: 100%|██████████| 8000/8000 [00:44&lt;00:00, 181.50draws/s]
+There were 4 divergences after tuning. Increase `target_accept` or reparameterize.
+There were 2 divergences after tuning. Increase `target_accept` or reparameterize.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pm</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>mc_error</th>
+      <th>hpd_2.5</th>
+      <th>hpd_97.5</th>
+      <th>n_eff</th>
+      <th>Rhat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>logP</td>
+      <td>5.607095</td>
+      <td>0.001736</td>
+      <td>0.000027</td>
+      <td>5.603561</td>
+      <td>5.610316</td>
+      <td>3361.652808</td>
+      <td>1.000854</td>
+    </tr>
+    <tr>
+      <td>logs_lc</td>
+      <td>3.254204</td>
+      <td>0.059783</td>
+      <td>0.000971</td>
+      <td>3.142328</td>
+      <td>3.370083</td>
+      <td>3278.874473</td>
+      <td>1.000252</td>
+    </tr>
+    <tr>
+      <td>logasini</td>
+      <td>5.158147</td>
+      <td>10.329290</td>
+      <td>0.160456</td>
+      <td>-15.967711</td>
+      <td>24.618398</td>
+      <td>4166.228593</td>
+      <td>0.999801</td>
+    </tr>
+    <tr>
+      <td>asini</td>
+      <td>184.445995</td>
+      <td>3.870201</td>
+      <td>0.063553</td>
+      <td>176.857801</td>
+      <td>191.948600</td>
+      <td>3506.022622</td>
+      <td>0.999973</td>
+    </tr>
+    <tr>
+      <td>drift</td>
+      <td>-0.010248</td>
+      <td>0.005162</td>
+      <td>0.000092</td>
+      <td>-0.019934</td>
+      <td>0.000135</td>
+      <td>3809.751947</td>
+      <td>0.999920</td>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <td>taumodel__139</td>
+      <td>41.362412</td>
+      <td>5.391437</td>
+      <td>0.094788</td>
+      <td>30.918199</td>
+      <td>51.678708</td>
+      <td>3490.961696</td>
+      <td>1.000202</td>
+    </tr>
+    <tr>
+      <td>taumodel__140</td>
+      <td>11.103050</td>
+      <td>5.694254</td>
+      <td>0.098105</td>
+      <td>0.322530</td>
+      <td>22.302191</td>
+      <td>3488.877638</td>
+      <td>1.000171</td>
+    </tr>
+    <tr>
+      <td>taumodel__141</td>
+      <td>-19.752772</td>
+      <td>6.019379</td>
+      <td>0.100769</td>
+      <td>-32.273483</td>
+      <td>-8.936965</td>
+      <td>3567.415216</td>
+      <td>1.000086</td>
+    </tr>
+    <tr>
+      <td>taumodel__142</td>
+      <td>-53.100596</td>
+      <td>6.392202</td>
+      <td>0.103530</td>
+      <td>-66.166348</td>
+      <td>-41.560302</td>
+      <td>3850.340893</td>
+      <td>0.999968</td>
+    </tr>
+    <tr>
+      <td>taumodel__143</td>
+      <td>-73.611650</td>
+      <td>6.629763</td>
+      <td>0.105464</td>
+      <td>-87.166013</td>
+      <td>-61.474205</td>
+      <td>4059.883054</td>
+      <td>0.999896</td>
+    </tr>
+  </tbody>
+</table>
+<p>154 rows × 7 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">varnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="s1">&#39;eccen&#39;</span><span class="p">,</span> <span class="s1">&#39;asini&#39;</span><span class="p">,</span> <span class="s1">&#39;omega&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="s1">&#39;drift&#39;</span><span class="p">]</span>
+<span class="n">rounding</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">for</span> <span class="n">varname</span> <span class="ow">in</span> <span class="n">varnames</span><span class="p">:</span>
+    <span class="n">upper</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="n">varname</span><span class="p">],</span> <span class="p">[</span><span class="mf">84.13</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">15.86</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; + &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; - &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span> <span class="o">-</span> <span class="n">lower</span><span class="p">,</span><span class="n">rounding</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+period :  272.35  +  0.47  -  0.46
+phi :  0.49  +  0.08  -  0.08
+eccen :  0.45  +  0.03  -  0.03
+asini :  184.37  +  3.89  -  3.72
+omega :  -1.02  +  0.08  -  0.08
+phi :  0.49  +  0.08  -  0.08
+drift :  -0.01  +  0.01  -  0.0
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">maelstrom.utils</span> <span class="kn">import</span> <span class="n">mass_function</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="n">rounding</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">trace_to_dataframe</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">varnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="s1">&#39;asini&#39;</span><span class="p">])</span>
+<span class="n">mfs</span> <span class="o">=</span> <span class="n">mass_function</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">samples</span><span class="p">[</span><span class="s1">&#39;asini&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+<span class="c1">#mfs = np.array(mfs)</span>
+<span class="n">upper</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">mfs</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="p">[</span><span class="mf">84.13</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">15.86</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mass_func&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; + &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; - &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span> <span class="o">-</span> <span class="n">lower</span><span class="p">,</span><span class="n">rounding</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+mass_func :  0.091  +  0.006  -  0.005
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">td_time</span> <span class="o">%</span> <span class="mi">272</span> <span class="o">/</span> <span class="mi">272</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;taumodel&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.collections.PathCollection at 0x1c22c03390&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/case_studies_9651065_36_1.png" src="../_images/case_studies_9651065_36_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="../notebooks/Custom priors.html"
+       title="previous chapter">← Custom priors</a>
+  </li>
+  <li class="next">
+    <a href="6780873.html"
+       title="next chapter">KIC 6780873 →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2019, Daniel Hey.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1 with <a href="https://github.com/romnnn/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>

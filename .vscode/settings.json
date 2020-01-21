@@ -1,0 +1,5 @@
+{
+    "restructuredtext.linter.disabled": true,
+    "restructuredtext.confPath": "${workspaceFolder}/docs",
+    "python.pythonPath": "/Users/danielhey/anaconda3/bin/python"
+}
