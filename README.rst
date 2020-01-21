@@ -16,3 +16,6 @@ To install the current version::
     git clone https://github.com/danhey/maelstrom.git
     cd maelstrom
     pip install -e .
+
+Read the docs here::
+   https://danhey.github.io/maelstrom
