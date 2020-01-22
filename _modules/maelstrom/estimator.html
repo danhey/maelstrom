@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>maelstrom.estimator &#8212; maelstrom 0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href="../../_static/style.css" rel="stylesheet" type="text/css">
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">maelstrom 0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for maelstrom.estimator</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">astropy.stats</span> <span class="kn">import</span> <span class="n">LombScargle</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+<span class="kn">import</span> <span class="nn">exoplanet</span> <span class="k">as</span> <span class="nn">xo</span>
+<span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">import</span> <span class="nn">theano.tensor</span> <span class="k">as</span> <span class="nn">tt</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;estimate_frequencies&quot;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="estimate_frequencies"><a class="viewcode-back" href="../../api/estimator.html#maelstrom.estimator.estimate_frequencies">[docs]</a><span class="k">def</span> <span class="nf">estimate_frequencies</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_peaks</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                         <span class="n">oversample</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">optimize_freq</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attempts to pick out the best frequencies</span>
+<span class="sd">    for use with phase modulation. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float, optional</span>
+<span class="sd">        Number of tuning steps for the sampler (default 3000)</span>
+<span class="sd">    y : float, optional</span>
+<span class="sd">        Number of samples from which to populate the trace (default 3000)</span>
+<span class="sd">    fmin : bool, optional</span>
+<span class="sd">        If set to True, the sampler will optimize the model before</span>
+<span class="sd">        attempting to sample. If False (default), the sampler will</span>
+<span class="sd">        initialise at the testpoints of your priors.</span>
+<span class="sd">    fmax : float, optional</span>
+<span class="sd">        The target acceptance ratio of the NUTS sampler (default 0.9).</span>
+<span class="sd">    max_peaks : int</span>
+<span class="sd">        Maximum number of frequencies to return (default 3)</span>
+<span class="sd">    oversample : float</span>
+<span class="sd">        Oversample factor for the spectrum (default 4.)</span>
+<span class="sd">    optimize_freq : bool</span>
+<span class="sd">        Whether to optimize the frequencies according to the</span>
+<span class="sd">        Maelstrom model using Scipy.optimize (default True)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    peaks : `numpy.ndarray`</span>
+<span class="sd">        Array of frequencies of length `max_peaks`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tmax</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">tmin</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">tmax</span> <span class="o">-</span> <span class="n">tmin</span><span class="p">)</span>
+    <span class="n">ny</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">/</span> <span class="n">dt</span>
+
+    <span class="k">if</span> <span class="n">fmin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fmin</span> <span class="o">=</span> <span class="n">df</span>
+    <span class="k">if</span> <span class="n">fmax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fmax</span> <span class="o">=</span> <span class="n">ny</span>
+
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">fmin</span><span class="p">,</span> <span class="n">fmax</span><span class="p">,</span> <span class="n">df</span> <span class="o">/</span> <span class="n">oversample</span><span class="p">)</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="n">LombScargle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span>
+
+    <span class="c1"># Find peaks</span>
+    <span class="n">peak_inds</span> <span class="o">=</span> <span class="p">(</span><span class="n">power</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">power</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">power</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">power</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+    <span class="n">peak_inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">power</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)[</span><span class="n">peak_inds</span><span class="p">]</span>
+    <span class="n">peak_inds</span> <span class="o">=</span> <span class="n">peak_inds</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">power</span><span class="p">[</span><span class="n">peak_inds</span><span class="p">])][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">peaks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_peaks</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">peak_inds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">freq0</span> <span class="o">=</span> <span class="n">freq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">alias</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">ny</span> <span class="o">-</span> <span class="n">freq0</span>
+
+        <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">freq</span><span class="p">[</span><span class="n">peak_inds</span><span class="p">]</span> <span class="o">-</span> <span class="n">alias</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="o">*</span><span class="n">df</span>
+        <span class="n">m</span> <span class="o">&amp;=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">freq</span><span class="p">[</span><span class="n">peak_inds</span><span class="p">]</span> <span class="o">-</span> <span class="n">freq0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="o">*</span><span class="n">df</span>
+
+        <span class="n">peak_inds</span> <span class="o">=</span> <span class="n">peak_inds</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
+        <span class="n">peaks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">freq0</span><span class="p">)</span>
+    <span class="n">peaks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">peaks</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">optimize_freq</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">chi2</span><span class="p">(</span><span class="n">nu</span><span class="p">):</span>
+            <span class="n">arg</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">nu</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">1</span><span class="p">))],</span>
+                        <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># Solve for the amplitudes and phases of the oscillations</span>
+            <span class="n">DTD</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+            <span class="n">DTy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">])</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">DTD</span><span class="p">,</span> <span class="n">DTy</span><span class="p">)</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+
+            <span class="n">chi2_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">model</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">chi2_val</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="p">[</span><span class="n">peaks</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">peaks</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">maelstrom 0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, Daniel Hey.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.3.1.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>

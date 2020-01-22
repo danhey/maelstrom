@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Installation &#8212; maelstrom 0.2 documentation</title>
+    <title>Estimator &#8212; maelstrom 0.2 documentation</title>
     <link rel="stylesheet" href="../_static/solar.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/style.css" />
@@ -17,8 +17,8 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Citing" href="citation.html" />
-    <link rel="prev" title="Maelstrom" href="../index.html" />
+    <link rel="next" title="Eddy" href="eddy.html" />
+    <link rel="prev" title="Utilities" href="utils.html" />
     <link href="../_static/style.css" rel="stylesheet" type="text/css">
 
   </head><body>
@@ -32,35 +32,26 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="citation.html" title="Citing"
+          <a href="eddy.html" title="Eddy"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../index.html" title="Maelstrom"
+          <a href="utils.html" title="Utilities"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Installation</a><ul>
-<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li><a class="reference internal" href="#from-source">From Source</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../index.html"
-                        title="previous chapter">Maelstrom</a></p>
+  <p class="topless"><a href="utils.html"
+                        title="previous chapter">Utilities</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="citation.html"
-                        title="next chapter">Citing</a></p>
+  <p class="topless"><a href="eddy.html"
+                        title="next chapter">Eddy</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/user/install.rst.txt"
+      <li><a href="../_sources/api/estimator.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -82,26 +73,37 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install numpy pymc3 astropy exoplanet
-</pre></div>
-</div>
-<p>or</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install numpy pymc3 astropy exoplanet
-</pre></div>
-</div>
-</div>
-<div class="section" id="from-source">
-<h2>From Source<a class="headerlink" href="#from-source" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone --recursive https://github.com/danhey/maelstrom.git
-<span class="nb">cd</span> maelstrom
-python setup.py install
-</pre></div>
-</div>
-</div>
+  <div class="section" id="module-maelstrom.estimator">
+<span id="estimator"></span><h1>Estimator<a class="headerlink" href="#module-maelstrom.estimator" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="maelstrom.estimator.estimate_frequencies">
+<code class="sig-prename descclassname">maelstrom.estimator.</code><code class="sig-name descname">estimate_frequencies</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">fmin=None</em>, <em class="sig-param">fmax=None</em>, <em class="sig-param">max_peaks=3</em>, <em class="sig-param">oversample=4.0</em>, <em class="sig-param">optimize_freq=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/estimator.html#estimate_frequencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.estimator.estimate_frequencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to pick out the best frequencies
+for use with phase modulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em><em>, </em><em>optional</em>) – Number of tuning steps for the sampler (default 3000)</p></li>
+<li><p><strong>y</strong> (<em>float</em><em>, </em><em>optional</em>) – Number of samples from which to populate the trace (default 3000)</p></li>
+<li><p><strong>fmin</strong> (<em>bool</em><em>, </em><em>optional</em>) – If set to True, the sampler will optimize the model before
+attempting to sample. If False (default), the sampler will
+initialise at the testpoints of your priors.</p></li>
+<li><p><strong>fmax</strong> (<em>float</em><em>, </em><em>optional</em>) – The target acceptance ratio of the NUTS sampler (default 0.9).</p></li>
+<li><p><strong>max_peaks</strong> (<em>int</em>) – Maximum number of frequencies to return (default 3)</p></li>
+<li><p><strong>oversample</strong> (<em>float</em>) – Oversample factor for the spectrum (default 4.)</p></li>
+<li><p><strong>optimize_freq</strong> (<em>bool</em>) – Whether to optimize the frequencies according to the
+Maelstrom model using Scipy.optimize (default True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>peaks</strong> – Array of frequencies of length <cite>max_peaks</cite></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>numpy.ndarray</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -120,10 +122,10 @@ python setup.py install
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="citation.html" title="Citing"
+          <a href="eddy.html" title="Eddy"
              >next</a> |</li>
         <li class="right" >
-          <a href="../index.html" title="Maelstrom"
+          <a href="utils.html" title="Utilities"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
       </ul>

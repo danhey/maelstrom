@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Maelstrom &#8212; maelstrom 0.2 documentation</title>
+    <link rel="stylesheet" href="../_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Orbit" href="orbit.html" />
+    <link rel="prev" title="KIC 10080943" href="../case_studies/10080943.html" />
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="orbit.html" title="Orbit"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../case_studies/10080943.html" title="KIC 10080943"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../case_studies/10080943.html"
+                        title="previous chapter">KIC 10080943</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="orbit.html"
+                        title="next chapter">Orbit</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/maelstrom.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-maelstrom.maelstrom">
+<span id="maelstrom"></span><h1>Maelstrom<a class="headerlink" href="#module-maelstrom.maelstrom" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="maelstrom.maelstrom.Maelstrom">
+<em class="property">class </em><code class="sig-prename descclassname">maelstrom.maelstrom.</code><code class="sig-name descname">Maelstrom</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">flux</em>, <em class="sig-param">freq=None</em>, <em class="sig-param">name=''</em>, <em class="sig-param">model=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#Maelstrom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.Maelstrom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#maelstrom.maelstrom.BaseOrbitModel" title="maelstrom.maelstrom.BaseOrbitModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">maelstrom.maelstrom.BaseOrbitModel</span></code></a></p>
+<p>The real deal. This class provides an orbit model for an arbitrarily
+sized binary system, where each frequency <cite>freq</cite> is assigned a separate
+lighttime (asini). The time delays are forward-modelled directly onto
+the light curve <cite>time</cite> and <cite>flux</cite> data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>array</em>) – Time values of the light curve</p></li>
+<li><p><strong>flux</strong> (<em>array</em>) – Flux values of the light curve</p></li>
+<li><p><strong>freq</strong> (<em>array</em><em>, </em><em>optional</em>) – Frequencies on which to model the time</p></li>
+<li><p><strong>If none are supplied</strong><strong>, </strong><strong>Maelstrom will attempt to find the</strong> (<em>delay.</em>) – </p></li>
+<li><p><strong>optimal frequencies. Defaults to None.</strong> (<em>most</em>) – </p></li>
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Model name. Defaults to ‘’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="maelstrom.maelstrom.Maelstrom.optimize">
+<code class="sig-name descname">optimize</code><span class="sig-paren">(</span><em class="sig-param">vars=None</em>, <em class="sig-param">verbose=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#Maelstrom.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.Maelstrom.optimize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.Maelstrom.pin_orbit_model">
+<code class="sig-name descname">pin_orbit_model</code><span class="sig-paren">(</span><em class="sig-param">opt=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#Maelstrom.pin_orbit_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.Maelstrom.pin_orbit_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pins the orbit model to attribute the frequencies
+to the correct stars. In doing so, the lighttimes are collapsed
+into a single value for each star.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>opt</strong> (<cite>dict</cite>) – Results of the <cite>optimize</cite> function for the model. If none is supplied,
+Maelstrom will optimize first.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>PB2Model</cite> or <cite>PB1Model</cite>, both instances of a <cite>PyMC3.model.Model</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.Maelstrom.setup_orbit_model">
+<code class="sig-name descname">setup_orbit_model</code><span class="sig-paren">(</span><em class="sig-param">period=None</em>, <em class="sig-param">eccen=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#Maelstrom.setup_orbit_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.Maelstrom.setup_orbit_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an unpinned orbit model for the system. Each
+frequency in the model will be assigned a lighttime (asini).
+Optimizing this model will reveal which frequencies, if any, are associated
+with which stars. In general, this model should not be sampled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>period</strong> (<em>float</em>) – Initial period of the orbital system. If none is supplied (default),
+Maelstrom will attempt to find a suitable period by directly
+examining the time delays.</p></li>
+<li><p><strong>eccen</strong> (<em>float</em>) – Initial eccentricity of the system, defaults to 0.5 if None supplied.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="maelstrom.maelstrom.PB1Model">
+<em class="property">class </em><code class="sig-prename descclassname">maelstrom.maelstrom.</code><code class="sig-name descname">PB1Model</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">flux</em>, <em class="sig-param">freq=None</em>, <em class="sig-param">name='PB1'</em>, <em class="sig-param">model=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#PB1Model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.PB1Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#maelstrom.maelstrom.BaseOrbitModel" title="maelstrom.maelstrom.BaseOrbitModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">maelstrom.maelstrom.BaseOrbitModel</span></code></a></p>
+<dl class="method">
+<dt id="maelstrom.maelstrom.PB1Model.add_radial_velocity">
+<code class="sig-name descname">add_radial_velocity</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">rv</em>, <em class="sig-param">lighttime='a'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#PB1Model.add_radial_velocity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.PB1Model.add_radial_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds radial velocity measurements to constrain the orbital model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>array-like</em>) – Time measurements</p></li>
+<li><p><strong>rv</strong> (<em>array-like</em>) – Radial velocity measurements (in km/s) for each time</p></li>
+<li><p><strong>lighttime</strong> (<cite>a</cite> or <cite>b</cite>) – String denoting to which star the radial velocity model should
+be assigned. <cite>a</cite> corresponds to star a (lighttime_a), vice-versa
+for <cite>b</cite>. If <cite>b</cite> is chosen in a PB1Model object, the radial velocity
+is modelled independently of the time delay.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.PB1Model.init_orbit">
+<code class="sig-name descname">init_orbit</code><span class="sig-paren">(</span><em class="sig-param">period</em>, <em class="sig-param">asini</em>, <em class="sig-param">with_eccen=True</em>, <em class="sig-param">with_gp=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#PB1Model.init_orbit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.PB1Model.init_orbit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.PB1Model.optimize">
+<code class="sig-name descname">optimize</code><span class="sig-paren">(</span><em class="sig-param">vars=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#PB1Model.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.PB1Model.optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimises the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vars</strong> (<em>array of model parameters</em><em>, </em><em>optional</em>) – parameters of the model to be optimized, by default None</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>optimisation results</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="maelstrom.maelstrom.BaseOrbitModel">
+<em class="property">class </em><code class="sig-prename descclassname">maelstrom.maelstrom.</code><code class="sig-name descname">BaseOrbitModel</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">flux</em>, <em class="sig-param">freq=None</em>, <em class="sig-param">is_flux=True</em>, <em class="sig-param">name=''</em>, <em class="sig-param">model=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pymc3.model.Model</span></code></p>
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.evaluate">
+<code class="sig-name descname">evaluate</code><span class="sig-paren">(</span><em class="sig-param">var</em>, <em class="sig-param">opt=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function which wraps exoplanet.utils.eval_in_model()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.first_look">
+<code class="sig-name descname">first_look</code><span class="sig-paren">(</span><em class="sig-param">segment_size=None</em>, <em class="sig-param">save_path=None</em>, <em class="sig-param">period=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.first_look"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.first_look" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows the light curve, its amplitude spectrum, and
+any time delay signal for the current self.freq in the model.
+This is useful if you want to check whether a star
+may be a PM binary. However, sometimes only the strongest
+peak in the star will show a TD signal, and can be drowned
+out by the others.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>segment_size</strong> (<cite>float</cite>) – Segment size in which to separate the light curve, in units of
+the light curve time. For example, the default segment size of 10
+will separate a 1000 d long light curve in 100 segments of 10 d
+each. If none is specified, Maelstrom will do its best</p></li>
+<li><p><strong>save_path</strong> (<cite>string</cite>) – If <cite>save_path</cite> is not <cite>None</cite>, will save a copy of the first_look
+plots into the given path.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.flux">
+<em class="property">property </em><code class="sig-name descname">flux</code><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.flux" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.get_period_estimate">
+<code class="sig-name descname">get_period_estimate</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.get_period_estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.get_period_estimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimates the period from the segmented time delay</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>period</strong> – Estimate of the period from extracted time delays.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.get_phase">
+<code class="sig-name descname">get_phase</code><span class="sig-paren">(</span><em class="sig-param">nu</em>, <em class="sig-param">t</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.get_phase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.get_phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Some black magic to calculate the phase for a given
+segment of data for set frequencies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nu</strong> (<em>array-like</em>) – Frequencies for which the phase will be calculated</p></li>
+<li><p><strong>t</strong> (<em>array-like</em>) – Time-stamps</p></li>
+<li><p><strong>y</strong> (<em>array-like</em>) – Flux values corresponding to <cite>t</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Given phases for each frequency.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>phases</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.get_time_delay">
+<code class="sig-name descname">get_time_delay</code><span class="sig-paren">(</span><em class="sig-param">segment_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.get_time_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.get_time_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the time delay signal, splitting the light curve into
+chunks of width segment_size. A smaller segment size will increase
+the scatter of the time delay signal, especially for low frequencies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>segment_size</strong> (<cite>float</cite>) – Segment size in which to separate the light curve, in units of
+the light curve time. For example, the default segment size of 10
+will separate a 1000 d long light curve in 100 segments of 10 d
+each.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>time_midpoint</strong> (<cite>numpy.ndarray</cite>) – Midpoints of time for each segment in the light curve</p></li>
+<li><p><strong>time_delay</strong> (<cite>numpy.ndarray</cite>) – Values of the extracted time delay in each segment.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.get_weights">
+<code class="sig-name descname">get_weights</code><span class="sig-paren">(</span><em class="sig-param">norm=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.get_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.get_weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the amplitudes of each frequency, returning
+an array of amplitudes. This is useful for
+calculating the weighted average time delay.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(potentially) normalised amplitudes of each frequency</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>weights</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.orange">
+<code class="sig-name descname">orange</code><em class="property"> = [0.84627451, 0.28069204, 0.00410611]</em><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.orange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.period_search">
+<code class="sig-name descname">period_search</code><span class="sig-paren">(</span><em class="sig-param">periods=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.period_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.period_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizes a model over a grid of periods</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>periods</strong> (<em>Array-like</em><em>, </em><em>optional</em>) – Grid of periods over which to optimize, by default None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.plot_periodogram">
+<code class="sig-name descname">plot_periodogram</code><span class="sig-paren">(</span><em class="sig-param">ax=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.plot_periodogram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.plot_periodogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the periodogram of the light curve with
+the model frequencies overlaid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ax</strong> (<em>matplotlib axis</em><em>, </em><em>optional</em>) – do you want an axis or not, by default None</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>this is also an axis.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ax</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.plot_time_delay">
+<code class="sig-name descname">plot_time_delay</code><span class="sig-paren">(</span><em class="sig-param">ax=None</em>, <em class="sig-param">show_weighted=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.plot_time_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.plot_time_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the time delay. <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs go into <cite>get_time_delay</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.plot_time_delay_periodogram">
+<code class="sig-name descname">plot_time_delay_periodogram</code><span class="sig-paren">(</span><em class="sig-param">ax=None</em>, <em class="sig-param">period=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.plot_time_delay_periodogram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.plot_time_delay_periodogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the time delay periodogram</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.plot_time_delay_periodogram_period">
+<code class="sig-name descname">plot_time_delay_periodogram_period</code><span class="sig-paren">(</span><em class="sig-param">min_period=None</em>, <em class="sig-param">max_period=None</em>, <em class="sig-param">ax=None</em>, <em class="sig-param">annotate=True</em>, <em class="sig-param">return_res=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.plot_time_delay_periodogram_period"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.plot_time_delay_periodogram_period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the time delay periodogram</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.profile">
+<code class="sig-name descname">profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Profiles the current model, returning the runtime of each
+node in your Theano graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>[description]</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.sample">
+<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param">tune=3000</em>, <em class="sig-param">draws=3000</em>, <em class="sig-param">start=None</em>, <em class="sig-param">target_accept=0.9</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Samples the model using the exoplanet PyMC3 sampler. By default,
+this will sample from 2 chains over 2 cores simultaneously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tune</strong> (<em>float</em><em>, </em><em>optional</em>) – Number of tuning steps for the sampler (default 3000)</p></li>
+<li><p><strong>draws</strong> (<em>float</em><em>, </em><em>optional</em>) – Number of samples from which to populate the trace (default 3000)</p></li>
+<li><p><strong>start</strong> (<em>dict</em><em>, </em><em>optional</em>) – Starting location of the sampler. If none is supplied, the sampler
+will first optimize the model.</p></li>
+<li><p><strong>target_accept</strong> (<em>float</em><em>, </em><em>optional</em>) – The target acceptance ratio of the NUTS sampler (default 0.9).</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments to pass to sample.tune and sample.sample</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>trace</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>pm trace object?</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.time">
+<em class="property">property </em><code class="sig-name descname">time</code><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.to_eddy">
+<code class="sig-name descname">to_eddy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.to_eddy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.to_eddy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.maelstrom.BaseOrbitModel.uncertainty">
+<code class="sig-name descname">uncertainty</code><span class="sig-paren">(</span><em class="sig-param">map_soln</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/maelstrom.html#BaseOrbitModel.uncertainty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.maelstrom.BaseOrbitModel.uncertainty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="orbit.html" title="Orbit"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../case_studies/10080943.html" title="KIC 10080943"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, Daniel Hey.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.3.1.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>

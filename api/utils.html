@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Utilities &#8212; maelstrom 0.2 documentation</title>
+    <link rel="stylesheet" href="../_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Estimator" href="estimator.html" />
+    <link rel="prev" title="Periodogram" href="periodogram.html" />
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="estimator.html" title="Estimator"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="periodogram.html" title="Periodogram"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="periodogram.html"
+                        title="previous chapter">Periodogram</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="estimator.html"
+                        title="next chapter">Estimator</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/utils.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-maelstrom.utils">
+<span id="utilities"></span><h1>Utilities<a class="headerlink" href="#module-maelstrom.utils" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="maelstrom.utils.unique_colors">
+<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">unique_colors</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">cmap='hls'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#unique_colors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.unique_colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates n unique colours for plotting in a given colorspace</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<cite>int</cite>) – Number of colours required.</p></li>
+<li><p><strong>cmap</strong> (<cite>str</cite>) – Colormap (either “hls” or “colorblind”)</p></li>
+</ul>
+</dd>
+</dl>
+<blockquote>
+<div><dl>
+<dt>phase<span class="classifier"><cite>list</cite></span></dt><dd><p>A list of phases for the given frequencies</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="maelstrom.utils.amplitude_spectrum">
+<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">amplitude_spectrum</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">y</em>, <em class="sig-param">fmin=None</em>, <em class="sig-param">fmax=None</em>, <em class="sig-param">oversample_factor=10.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#amplitude_spectrum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.amplitude_spectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the amplitude spectrum of a given signal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<cite>array</cite>) – Time values</p></li>
+<li><p><strong>y</strong> (<cite>array</cite>) – Flux or magnitude measurements</p></li>
+<li><p><strong>fmin</strong> (<em>float</em><em> (</em><em>default None</em><em>)</em>) – Minimum frequency to calculate spectrum. Defaults to df</p></li>
+<li><p><strong>fmax</strong> (<em>float</em>) – Maximum frequency to calculate spectrum. Defaults to Nyquist.</p></li>
+<li><p><strong>oversample_factor</strong> (<em>float</em>) – Amount by which to oversample the spectrum. Defaults to 10.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="maelstrom.utils.dft_phase">
+<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">dft_phase</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">freq</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#dft_phase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.dft_phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discrete fourier transform to calculate the ASTC phase
+given x, y, and an array of frequencies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<cite>array</cite>) – Array in which to calculate</p></li>
+<li><p><strong>y</strong> (<cite>array</cite>) – </p></li>
+</ul>
+</dd>
+</dl>
+<blockquote>
+<div><dl>
+<dt>phase<span class="classifier"><cite>list</cite></span></dt><dd><p>A list of phases for the given frequencies</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="maelstrom.utils.mass_function">
+<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">mass_function</code><span class="sig-paren">(</span><em class="sig-param">period</em>, <em class="sig-param">asini</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#mass_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.mass_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the mass function for a given system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>period</strong> (<em>astropy.units.quantity.Quantity</em>) – Orbital period</p></li>
+<li><p><strong>asini</strong> (<em>astropy.units.quantity.Quantity</em>) – Convolved semi-major axis</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Mass function in M_sun</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>astropy.units.quantity.Quantity</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="maelstrom.utils.phase_error">
+<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">phase_error</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">freq</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#phase_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.phase_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the phase uncertainty on the given frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em>) – Time values</p></li>
+<li><p><strong>y</strong> (<em>rray</em>) – flux values</p></li>
+<li><p><strong>freq</strong> (<em>array</em>) – Frequency values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Array of uncertainties for each phase calculated</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="maelstrom.utils.smooth">
+<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">smooth</code><span class="sig-paren">(</span><em class="sig-param">freq</em>, <em class="sig-param">power</em>, <em class="sig-param">filter_width=2.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#smooth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.smooth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smooths the input power spectrum with a boxkernel filter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>freq</strong> (<em>array</em>) – Frequency values</p></li>
+<li><p><strong>power</strong> (<em>array</em>) – Power values</p></li>
+<li><p><strong>filter_width</strong> (<em>float</em><em>, </em><em>optional</em>) – Width of the boxkernel. Defaults to 2..</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Smoothed power values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="estimator.html" title="Estimator"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="periodogram.html" title="Periodogram"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, Daniel Hey.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.3.1.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>

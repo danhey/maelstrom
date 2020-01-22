@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Orbit &#8212; maelstrom 0.2 documentation</title>
+    <link rel="stylesheet" href="../_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Periodogram" href="periodogram.html" />
+    <link rel="prev" title="Maelstrom" href="maelstrom.html" />
+    <link href="../_static/style.css" rel="stylesheet" type="text/css">
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="periodogram.html" title="Periodogram"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="maelstrom.html" title="Maelstrom"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="maelstrom.html"
+                        title="previous chapter">Maelstrom</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="periodogram.html"
+                        title="next chapter">Periodogram</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/orbit.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-maelstrom.orbit">
+<span id="orbit"></span><h1>Orbit<a class="headerlink" href="#module-maelstrom.orbit" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="maelstrom.orbit.Orbit">
+<em class="property">class </em><code class="sig-prename descclassname">maelstrom.orbit.</code><code class="sig-name descname">Orbit</code><span class="sig-paren">(</span><em class="sig-param">period=None</em>, <em class="sig-param">lighttime=None</em>, <em class="sig-param">freq=None</em>, <em class="sig-param">eccen=None</em>, <em class="sig-param">omega=None</em>, <em class="sig-param">tref=None</em>, <em class="sig-param">phi=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class defines an orbit model which solves equation 10 of
+Hey+2020 for given input values, defined within Theano.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>period</strong> (<em>pymc3.model.FreeRV</em>) – The orbital period prior</p></li>
+<li><p><strong>lighttime</strong> (<em>pymc3.model.FreeRV</em>) – The convolved semi-major axis (asini) prior, given in seconds</p></li>
+<li><p><strong>phi</strong> (<em>pymc3.model.FreeRV</em>) – The phase of periapsis</p></li>
+<li><p><strong>freq</strong> (<em>pymc3.model.FreeRV</em>) – Frequency prior</p></li>
+<li><p><strong>eccen</strong> (<em>pymc3.model.FreeRV</em><em>, </em><em>optional</em>) – The eccentricity prior, must be constrained between 0 and 1, by default None</p></li>
+<li><p><strong>omega</strong> (<em>pymc3.model.FreeRV</em><em>, </em><em>optional</em>) – The argument of periapsis prior, given in angular coordinates, by default None</p></li>
+<li><p><strong>with_rv</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to include radial velocity calculations. If True, a prior
+on the systemic velocity (gammav) must be provided, by default False</p></li>
+<li><p><strong>gammav</strong> (<em>pymc3.model.FreeRV</em><em>, </em><em>optional</em>) – The systemic velocity prior. Must be included if with_rv is True.
+by default None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="maelstrom.orbit.Orbit.get_lightcurve_model">
+<code class="sig-name descname">get_lightcurve_model</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">flux</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit.get_lightcurve_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit.get_lightcurve_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the light curve from the input time and flux data, with
+phase offsets from the time delays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>array-like</em>) – Values of time at which to calculate the light curve</p></li>
+<li><p><strong>flux</strong> (<em>array-like</em>) – Values of flux corresponding to <cite>time</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Light curve</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.orbit.Orbit.get_radial_velocity">
+<code class="sig-name descname">get_radial_velocity</code><span class="sig-paren">(</span><em class="sig-param">time</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit.get_radial_velocity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit.get_radial_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the radial velocity within the framework of the Orbit for
+given input times.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>array-like</em>) – Time-values for each RV measurement</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.orbit.Orbit.get_time_delay">
+<code class="sig-name descname">get_time_delay</code><span class="sig-paren">(</span><em class="sig-param">time</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit.get_time_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit.get_time_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the time delay under the given values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>array-like</em>) – Values of time at which to calculate the time delay</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Values of the time-delay</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="periodogram.html" title="Periodogram"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="maelstrom.html" title="Maelstrom"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, Daniel Hey.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.3.1.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
+  </body>
+</html>

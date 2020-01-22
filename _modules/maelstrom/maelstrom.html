@@ -1,226 +1,57 @@
 <!DOCTYPE html>
-<html >
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>maelstrom.maelstrom</title>
-    
-      <link rel="stylesheet" href="../../_static/pygments.css">
-      <link rel="stylesheet" href="../../_static/theme.css">
-      <link rel="stylesheet" href="../../_static/romnnn_sphinx_press_theme.css">
-          <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-      
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-
-      <!-- sphinx script_files -->
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-
-      
-      <script src="../../_static/theme-vendors.js"></script>
-      <script src="../../_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="../../genindex.html" />
-  <link rel="search" title="Search" href="../../search.html" />
+    <meta charset="utf-8" />
+    <title>maelstrom.maelstrom &#8212; maelstrom 0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link href="../../_static/style.css" rel="stylesheet" type="text/css">
 
-  </head>
-
-  <body>
-    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <div class="home-link-container">
-      <router-link to="../../index.html" class="home-link">
-      
-        <span class="site-name">maelstrom</span>
-    </router-link>
-  </div>
-
-  <div class="links">
-    <navlinks class="can-hide">
-
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         User Guide
-      </a>
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">maelstrom 0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
     </div>
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         Tutorials
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         Case studies
-      </a>
-    </div>
-  
-
-
-
-    </navlinks>
-  </div>
-</navbar>
-
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
-      </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
-          
-          <navlinks>
-            
-
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         User Guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         Tutorials
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         Case studies
-      </a>
-    </div>
-  
-
-
-
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Search</span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
-      <form autocomplete="off" class="search" action="../../search.html" method="get">
-        <input type="text" name="q" autocomplete="off" />
-        <input type="submit" value="Go" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
     </div>
-  </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../../index.html#maelstrom">User Guide</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../../user/install.html" class="reference internal ">Installation</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../user/citation.html" class="reference internal ">Citing</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../api/api.html" class="reference internal ">API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../../index.html#maelstrom">Tutorials</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../../notebooks/Getting started.html" class="reference internal ">Getting started</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../notebooks/Estimating frequencies.html" class="reference internal ">Choosing the correct frequencies</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../notebooks/Custom priors.html" class="reference internal ">Custom priors</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../../index.html#maelstrom">Case studies</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../../case_studies/9651065.html" class="reference internal ">KIC 9651065</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../case_studies/6780873.html" class="reference internal ">KIC 6780873</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../case_studies/10080943.html" class="reference internal ">KIC 10080943</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
 </div>
-        </sidebar>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-    
-      <li><a href="../index.html">Module code</a> &raquo;</li>
-    
-    <li>maelstrom.maelstrom</li>
-  </ul>
-  
-
-  <ul class="page-nav">
-</ul>
-  
-</div>
-<hr>
-          <div class="content" role="main">
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
             
   <h1>Source code for maelstrom.maelstrom</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
@@ -246,7 +77,7 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Maelstrom&quot;</span><span class="p">,</span> <span class="s2">&quot;PB1Model&quot;</span><span class="p">,</span> <span class="s2">&quot;BaseOrbitModel&quot;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="BaseOrbitModel"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel">[docs]</a><span class="k">class</span> <span class="nc">BaseOrbitModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel">[docs]</a><span class="k">class</span> <span class="nc">BaseOrbitModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
     
     <span class="n">orange</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.84627451</span><span class="p">,</span> <span class="mf">0.28069204</span><span class="p">,</span> <span class="mf">0.00410611</span><span class="p">]</span>
 
@@ -316,12 +147,12 @@
     <span class="k">def</span> <span class="nf">flux</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_flux</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">uncertainty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">map_soln</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.uncertainty"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.uncertainty">[docs]</a>    <span class="k">def</span> <span class="nf">uncertainty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">map_soln</span><span class="p">):</span>
         <span class="c1"># This is broken for celerite models</span>
         <span class="k">with</span> <span class="bp">self</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">find_hessian</span><span class="p">(</span><span class="n">map_soln</span><span class="p">))))</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">find_hessian</span><span class="p">(</span><span class="n">map_soln</span><span class="p">))))</span></div>
 
-<div class="viewcode-block" id="BaseOrbitModel.sample"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">draws</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_accept</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.sample"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">draws</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_accept</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Samples the model using the exoplanet PyMC3 sampler. By default,</span>
 <span class="sd">        this will sample from 2 chains over 2 cores simultaneously.</span>
@@ -356,14 +187,14 @@
             <span class="n">trace</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="n">draws</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">trace</span></div>
         
-<div class="viewcode-block" id="BaseOrbitModel.evaluate"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.evaluate"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convenience function which wraps exoplanet.utils.eval_in_model()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">xo</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseOrbitModel.get_period_estimate"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.get_period_estimate">[docs]</a>    <span class="k">def</span> <span class="nf">get_period_estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.get_period_estimate"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.get_period_estimate">[docs]</a>    <span class="k">def</span> <span class="nf">get_period_estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Estimates the period from the segmented time delay</span>
 
@@ -386,7 +217,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mf">510.753</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.215054</span>
 
-<div class="viewcode-block" id="BaseOrbitModel.plot_time_delay"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.plot_time_delay">[docs]</a>    <span class="k">def</span> <span class="nf">plot_time_delay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_weighted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.plot_time_delay"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.plot_time_delay">[docs]</a>    <span class="k">def</span> <span class="nf">plot_time_delay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_weighted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plots the time delay. **kwargs go into `get_time_delay`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">t0s</span><span class="p">,</span> <span class="n">time_delay</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_time_delay</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -406,7 +237,7 @@
         <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">t0s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t0s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">ax</span></div>
 
-<div class="viewcode-block" id="BaseOrbitModel.plot_periodogram"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.plot_periodogram">[docs]</a>    <span class="k">def</span> <span class="nf">plot_periodogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.plot_periodogram"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.plot_periodogram">[docs]</a>    <span class="k">def</span> <span class="nf">plot_periodogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plots the periodogram of the light curve with </span>
 <span class="sd">        the model frequencies overlaid.</span>
 <span class="sd">        </span>
@@ -443,7 +274,7 @@
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude [ppt]&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ax</span></div>
 
-<div class="viewcode-block" id="BaseOrbitModel.plot_time_delay_periodogram_period"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.plot_time_delay_periodogram_period">[docs]</a>    <span class="k">def</span> <span class="nf">plot_time_delay_periodogram_period</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="BaseOrbitModel.plot_time_delay_periodogram_period"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.plot_time_delay_periodogram_period">[docs]</a>    <span class="k">def</span> <span class="nf">plot_time_delay_periodogram_period</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                     <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">annotate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_res</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Plots the time delay periodogram</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -495,7 +326,7 @@
             <span class="k">return</span> <span class="n">res</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="BaseOrbitModel.plot_time_delay_periodogram"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.plot_time_delay_periodogram">[docs]</a>    <span class="k">def</span> <span class="nf">plot_time_delay_periodogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.plot_time_delay_periodogram"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.plot_time_delay_periodogram">[docs]</a>    <span class="k">def</span> <span class="nf">plot_time_delay_periodogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Plots the time delay periodogram</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">t0s</span><span class="p">,</span> <span class="n">time_delay</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_time_delay</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -521,7 +352,7 @@
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">return</span></div>
 
-<div class="viewcode-block" id="BaseOrbitModel.get_phase"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.get_phase">[docs]</a>    <span class="k">def</span> <span class="nf">get_phase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.get_phase"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.get_phase">[docs]</a>    <span class="k">def</span> <span class="nf">get_phase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Some black magic to calculate the phase for a given</span>
 <span class="sd">        segment of data for set frequencies</span>
 <span class="sd">        </span>
@@ -547,7 +378,7 @@
         <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">DTD</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">w</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">nu</span><span class="p">)]</span> <span class="o">/</span> <span class="n">w</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">nu</span><span class="p">):</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">nu</span><span class="p">)])</span></div>
 
-<div class="viewcode-block" id="BaseOrbitModel.first_look"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.first_look">[docs]</a>    <span class="k">def</span> <span class="nf">first_look</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segment_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.first_look"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.first_look">[docs]</a>    <span class="k">def</span> <span class="nf">first_look</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segment_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        Shows the light curve, its amplitude spectrum, and </span>
 <span class="sd">        any time delay signal for the current self.freq in the model.</span>
@@ -608,7 +439,7 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">opt</span><span class="p">:</span>
                 <span class="n">model</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">test_value</span> <span class="o">=</span> <span class="n">opt</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
 
-<div class="viewcode-block" id="BaseOrbitModel.period_search"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.period_search">[docs]</a>    <span class="k">def</span> <span class="nf">period_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.period_search"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.period_search">[docs]</a>    <span class="k">def</span> <span class="nf">period_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Optimizes a model over a grid of periods</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -620,7 +451,7 @@
         <span class="n">pg</span> <span class="o">=</span> <span class="n">Periodogram</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pg</span></div>
 
-<div class="viewcode-block" id="BaseOrbitModel.get_time_delay"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.get_time_delay">[docs]</a>    <span class="k">def</span> <span class="nf">get_time_delay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segment_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.get_time_delay"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.get_time_delay">[docs]</a>    <span class="k">def</span> <span class="nf">get_time_delay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segment_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        Calculates the time delay signal, splitting the light curve into </span>
 <span class="sd">        chunks of width segment_size. A smaller segment size will increase</span>
@@ -679,7 +510,7 @@
         <span class="n">time_delays</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">time_delays</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">time_midpoints</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">time_delays</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseOrbitModel.get_weights"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.get_weights">[docs]</a>    <span class="k">def</span> <span class="nf">get_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.get_weights"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.get_weights">[docs]</a>    <span class="k">def</span> <span class="nf">get_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calculates the amplitudes of each frequency, returning</span>
 <span class="sd">        an array of amplitudes. This is useful for </span>
 <span class="sd">        calculating the weighted average time delay.</span>
@@ -700,7 +531,7 @@
         <span class="k">return</span> <span class="n">weights</span></div>
 
 
-<div class="viewcode-block" id="BaseOrbitModel.profile"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.BaseOrbitModel.profile">[docs]</a>    <span class="k">def</span> <span class="nf">profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.profile"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.profile">[docs]</a>    <span class="k">def</span> <span class="nf">profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Profiles the current model, returning the runtime of each</span>
 <span class="sd">        node in your Theano graph</span>
 <span class="sd">        </span>
@@ -718,37 +549,29 @@
             <span class="c1">#%timeit func(*args)</span>
         <span class="k">return</span> <span class="n">func</span><span class="o">.</span><span class="n">profile</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span></div>
 
-    <span class="k">def</span> <span class="nf">to_eddy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseOrbitModel.to_eddy"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel.to_eddy">[docs]</a>    <span class="k">def</span> <span class="nf">to_eddy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">.eddy</span> <span class="kn">import</span> <span class="n">Eddy</span>
-        <span class="n">p_guess</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_period_estimate</span><span class="p">()</span></div>
+        <span class="n">p_guess</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_period_estimate</span><span class="p">()</span></div></div>
         
-<div class="viewcode-block" id="Maelstrom"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.Maelstrom">[docs]</a><span class="k">class</span> <span class="nc">Maelstrom</span><span class="p">(</span><span class="n">BaseOrbitModel</span><span class="p">):</span>
+<div class="viewcode-block" id="Maelstrom"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.Maelstrom">[docs]</a><span class="k">class</span> <span class="nc">Maelstrom</span><span class="p">(</span><span class="n">BaseOrbitModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The real deal. This class provides an orbit model for an arbitrarily</span>
+<span class="sd">        sized binary system, where each frequency `freq` is assigned a separate</span>
+<span class="sd">        lighttime (asini). The time delays are forward-modelled directly onto</span>
+<span class="sd">        the light curve `time` and `flux` data.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            time (array): Time values of the light curve</span>
+<span class="sd">            flux (array): Flux values of the light curve</span>
+<span class="sd">            freq (array, optional): Frequencies on which to model the time</span>
+<span class="sd">            delay. If none are supplied, Maelstrom will attempt to find the</span>
+<span class="sd">            most optimal frequencies. Defaults to None.</span>
+<span class="sd">            name (str, optional): Model name. Defaults to &#39;&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        The real deal. This class provides an orbit model</span>
-<span class="sd">        for an arbitrarily sized binary system, where each</span>
-<span class="sd">        frequency `freq` is assigned a separate lighttime (asini).</span>
-<span class="sd">        The time delays are forward-modelled directly onto the</span>
-<span class="sd">        light curve `time` and `flux` data.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        time : array-like</span>
-<span class="sd">            Time values of light curve</span>
-<span class="sd">        flux : array-like</span>
-<span class="sd">            Flux values for for every time point.</span>
-<span class="sd">        freq : array-like</span>
-<span class="sd">            Frequencies on which to model the time delay.</span>
-<span class="sd">            If none are supplied, Maelstrom will attempt to find</span>
-<span class="sd">            the most optimal frequencies.</span>
-<span class="sd">        **kwargs : </span>
-<span class="sd">            Arguments for the `maelstrom.utils.estimate_frequencies function`</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="nb">super</span><span class="p">(</span><span class="n">Maelstrom</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
             
-<div class="viewcode-block" id="Maelstrom.setup_orbit_model"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.Maelstrom.setup_orbit_model">[docs]</a>    <span class="k">def</span> <span class="nf">setup_orbit_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eccen</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Maelstrom.setup_orbit_model"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.Maelstrom.setup_orbit_model">[docs]</a>    <span class="k">def</span> <span class="nf">setup_orbit_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eccen</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates an unpinned orbit model for the system. Each</span>
 <span class="sd">        frequency in the model will be assigned a lighttime (asini).</span>
@@ -818,7 +641,7 @@
             <span class="c1"># Condition on the observations</span>
             <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lc_model</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logs</span><span class="p">),</span> <span class="n">observed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Maelstrom.pin_orbit_model"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.Maelstrom.pin_orbit_model">[docs]</a>    <span class="k">def</span> <span class="nf">pin_orbit_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Maelstrom.pin_orbit_model"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.Maelstrom.pin_orbit_model">[docs]</a>    <span class="k">def</span> <span class="nf">pin_orbit_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        Pins the orbit model to attribute the frequencies</span>
 <span class="sd">        to the correct stars. In doing so, the lighttimes are collapsed </span>
@@ -872,7 +695,7 @@
             <span class="n">new_model</span><span class="o">.</span><span class="n">init_orbit</span><span class="p">(</span><span class="n">opt</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pinned_lt</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
             <span class="k">return</span> <span class="n">new_model</span></div>
 
-    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Maelstrom.optimize"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.Maelstrom.optimize">[docs]</a>    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">with</span> <span class="bp">self</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">vars</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">map_soln</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">test_point</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mean_flux</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_hat_cos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W_hat_sin</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -889,10 +712,10 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">map_soln</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="nb">vars</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_assign_test_value</span><span class="p">(</span><span class="n">map_soln</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">map_soln</span></div>
+        <span class="k">return</span> <span class="n">map_soln</span></div></div>
 
 
-<div class="viewcode-block" id="PB1Model"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.PB1Model">[docs]</a><span class="k">class</span> <span class="nc">PB1Model</span><span class="p">(</span><span class="n">BaseOrbitModel</span><span class="p">):</span>
+<div class="viewcode-block" id="PB1Model"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.PB1Model">[docs]</a><span class="k">class</span> <span class="nc">PB1Model</span><span class="p">(</span><span class="n">BaseOrbitModel</span><span class="p">):</span>
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">name</span><span class="o">=</span><span class="s1">&#39;PB1&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -904,7 +727,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PB1Model</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">init_orbit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">asini</span><span class="p">,</span> <span class="n">with_eccen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_gp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PB1Model.init_orbit"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.PB1Model.init_orbit">[docs]</a>    <span class="k">def</span> <span class="nf">init_orbit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">asini</span><span class="p">,</span> <span class="n">with_eccen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_gp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">with_gp</span> <span class="o">=</span> <span class="n">with_gp</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">with_eccen</span> <span class="o">=</span> <span class="n">with_eccen</span>
@@ -962,10 +785,10 @@
                 <span class="n">pm</span><span class="o">.</span><span class="n">Potential</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">log_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flux</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">lc</span><span class="p">))</span>
             
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lc</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs_lc</span><span class="p">),</span> <span class="n">observed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="p">)</span>
+                <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lc</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs_lc</span><span class="p">),</span> <span class="n">observed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="p">)</span></div>
                 
 
-<div class="viewcode-block" id="PB1Model.add_radial_velocity"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.PB1Model.add_radial_velocity">[docs]</a>    <span class="k">def</span> <span class="nf">add_radial_velocity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">rv</span><span class="p">,</span> <span class="n">lighttime</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="PB1Model.add_radial_velocity"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.PB1Model.add_radial_velocity">[docs]</a>    <span class="k">def</span> <span class="nf">add_radial_velocity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">rv</span><span class="p">,</span> <span class="n">lighttime</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds radial velocity measurements to constrain the orbital model. </span>
 
@@ -1003,7 +826,7 @@
             <span class="n">rv_vrad</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammav</span>
             <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs_radial_velocity_&quot;</span><span class="o">+</span><span class="n">lighttime</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">rv_vrad</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logs_rv</span><span class="p">),</span> <span class="n">observed</span><span class="o">=</span><span class="n">rv</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PB1Model.optimize"><a class="viewcode-back" href="../../api/api.html#maelstrom.maelstrom.PB1Model.optimize">[docs]</a>    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PB1Model.optimize"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.PB1Model.optimize">[docs]</a>    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Optimises the model.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -1048,18 +871,26 @@
 </pre></div>
 
           </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2019, Daniel Hey.
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1 with <a href="https://github.com/romnnn/sphinx_press_theme">Press Theme</a>.
-</div>
-            </div>
-          </div>
-      </page>
+        </div>
+      </div>
+      <div class="clearer"></div>
     </div>
-    
-    
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">maelstrom 0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, Daniel Hey.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.3.1.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
   </body>
 </html>

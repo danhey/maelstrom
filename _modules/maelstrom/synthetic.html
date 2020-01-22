@@ -1,226 +1,57 @@
 <!DOCTYPE html>
-<html >
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>maelstrom.synthetic</title>
-    
-      <link rel="stylesheet" href="../../_static/pygments.css">
-      <link rel="stylesheet" href="../../_static/theme.css">
-      <link rel="stylesheet" href="../../_static/romnnn_sphinx_press_theme.css">
-          <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
-      
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-
-      <!-- sphinx script_files -->
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-
-      
-      <script src="../../_static/theme-vendors.js"></script>
-      <script src="../../_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="../../genindex.html" />
-  <link rel="search" title="Search" href="../../search.html" />
+    <meta charset="utf-8" />
+    <title>maelstrom.synthetic &#8212; maelstrom 0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link href="../../_static/style.css" rel="stylesheet" type="text/css">
 
-  </head>
-
-  <body>
-    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <div class="home-link-container">
-      <router-link to="../../index.html" class="home-link">
-      
-        <span class="site-name">maelstrom</span>
-    </router-link>
-  </div>
-
-  <div class="links">
-    <navlinks class="can-hide">
-
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         User Guide
-      </a>
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">maelstrom 0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
     </div>
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         Tutorials
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         Case studies
-      </a>
-    </div>
-  
-
-
-
-    </navlinks>
-  </div>
-</navbar>
-
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
-      </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
-          
-          <navlinks>
-            
-
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         User Guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         Tutorials
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../../index.html#maelstrom"
-         class="nav-link ">
-         Case studies
-      </a>
-    </div>
-  
-
-
-
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Search</span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
-      <form autocomplete="off" class="search" action="../../search.html" method="get">
-        <input type="text" name="q" autocomplete="off" />
-        <input type="submit" value="Go" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
     </div>
-  </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../../index.html#maelstrom">User Guide</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../../user/install.html" class="reference internal ">Installation</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../user/citation.html" class="reference internal ">Citing</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../api/api.html" class="reference internal ">API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../../index.html#maelstrom">Tutorials</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../../notebooks/Getting started.html" class="reference internal ">Getting started</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../notebooks/Estimating frequencies.html" class="reference internal ">Choosing the correct frequencies</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../notebooks/Custom priors.html" class="reference internal ">Custom priors</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../../index.html#maelstrom">Case studies</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../../case_studies/9651065.html" class="reference internal ">KIC 9651065</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../case_studies/6780873.html" class="reference internal ">KIC 6780873</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../../case_studies/10080943.html" class="reference internal ">KIC 10080943</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
 </div>
-        </sidebar>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-    
-      <li><a href="../index.html">Module code</a> &raquo;</li>
-    
-    <li>maelstrom.synthetic</li>
-  </ul>
-  
-
-  <ul class="page-nav">
-</ul>
-  
-</div>
-<hr>
-          <div class="content" role="main">
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
             
   <h1>Source code for maelstrom.synthetic</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
@@ -247,7 +78,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">make_lightcurve</span><span class="p">(</span><span class="n">tau</span><span class="o">=</span><span class="n">tau</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">flux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_true</span>
         
-    <span class="k">def</span> <span class="nf">make_lightcurve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="SyntheticBinary.make_lightcurve"><a class="viewcode-back" href="../../api/api.html#maelstrom.synthetic.SyntheticBinary.make_lightcurve">[docs]</a>    <span class="k">def</span> <span class="nf">make_lightcurve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tau</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generates the light curve with added binarity.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            tau (bool, optional): Whether to include binarity. Defaults to True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">flux_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">))</span>
         <span class="c1">#self.tau = 0</span>
         <span class="k">if</span> <span class="n">tau</span><span class="p">:</span>
@@ -263,31 +99,40 @@
         <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">A_j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">amplitude</span><span class="p">):</span>
             <span class="n">omega</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">j</span>
             <span class="c1">#self.flux_true += A_j * np.cos(omega * (self.time - self.tau)) + A_j * np.sin(omega * (self.time - self.tau))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">flux_true</span> <span class="o">+=</span> <span class="n">A_j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flux_true</span> <span class="o">+=</span> <span class="n">A_j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">))</span></div>
     
-    <span class="k">def</span> <span class="nf">add_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">snr</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<div class="viewcode-block" id="SyntheticBinary.add_noise"><a class="viewcode-back" href="../../api/api.html#maelstrom.synthetic.SyntheticBinary.add_noise">[docs]</a>    <span class="k">def</span> <span class="nf">add_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">snr</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the SNR of the oscillation signal.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            snr (float, optional): SNR. Defaults to 5.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Add noise</span>
         <span class="n">s_rms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">amplitude</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">))</span> <span class="o">*</span> <span class="n">snr</span><span class="p">)</span>
-        <span class="c1">#print(s_rms, self.amplitude)</span>
-        <span class="c1">#print(np.random.normal(loc=0.0, scale=s_rms, size=len(self.time)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">flux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_true</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">s_rms</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">))</span></div>
-        <span class="c1">#self.flux_err = noise * np.std(self.flux_true)</span>
-        <span class="c1">#self.flux = self.flux_true + self.flux_err * np.random.randn(len(self.flux_true))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_true</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">s_rms</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">))</span></div></div>
 </pre></div>
 
           </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2019, Daniel Hey.
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1 with <a href="https://github.com/romnnn/sphinx_press_theme">Press Theme</a>.
-</div>
-            </div>
-          </div>
-      </page>
+        </div>
+      </div>
+      <div class="clearer"></div>
     </div>
-    
-    
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">maelstrom 0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, Daniel Hey.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.3.1.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
   </body>
 </html>

@@ -1,245 +1,86 @@
 <!DOCTYPE html>
-<html >
+
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>Overview: module code</title>
-    
-      <link rel="stylesheet" href="../_static/pygments.css">
-      <link rel="stylesheet" href="../_static/theme.css">
-      <link rel="stylesheet" href="../_static/romnnn_sphinx_press_theme.css">
-          <link rel="stylesheet" href="../_static/style.css" type="text/css" />
-      
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-
-      <!-- sphinx script_files -->
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-
-      
-      <script src="../_static/theme-vendors.js"></script>
-      <script src="../_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="../genindex.html" />
-  <link rel="search" title="Search" href="../search.html" />
+    <meta charset="utf-8" />
+    <title>Overview: module code &#8212; maelstrom 0.2 documentation</title>
+    <link rel="stylesheet" href="../_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link href="../_static/style.css" rel="stylesheet" type="text/css">
 
-  </head>
-
-  <body>
-    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <div class="home-link-container">
-      <router-link to="../index.html" class="home-link">
-      
-        <span class="site-name">maelstrom</span>
-    </router-link>
-  </div>
-
-  <div class="links">
-    <navlinks class="can-hide">
-
-  
-    <div class="nav-item">
-      <a href="../index.html#maelstrom"
-         class="nav-link ">
-         User Guide
-      </a>
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
+      </ul>
     </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#maelstrom"
-         class="nav-link ">
-         Tutorials
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#maelstrom"
-         class="nav-link ">
-         Case studies
-      </a>
-    </div>
-  
-
-
-
-    </navlinks>
-  </div>
-</navbar>
-
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
-      </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
-          
-          <navlinks>
-            
-
-  
-    <div class="nav-item">
-      <a href="../index.html#maelstrom"
-         class="nav-link ">
-         User Guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#maelstrom"
-         class="nav-link ">
-         Tutorials
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#maelstrom"
-         class="nav-link ">
-         Case studies
-      </a>
-    </div>
-  
-
-
-
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Search</span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
-      <form autocomplete="off" class="search" action="../search.html" method="get">
-        <input type="text" name="q" autocomplete="off" />
-        <input type="submit" value="Go" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
     </div>
-  </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#maelstrom">User Guide</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../user/citation.html" class="reference internal ">Citing</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../api/api.html" class="reference internal ">API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#maelstrom">Tutorials</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../notebooks/Getting started.html" class="reference internal ">Getting started</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../notebooks/Estimating frequencies.html" class="reference internal ">Choosing the correct frequencies</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../notebooks/Custom priors.html" class="reference internal ">Custom priors</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#maelstrom">Case studies</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../case_studies/9651065.html" class="reference internal ">KIC 9651065</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../case_studies/6780873.html" class="reference internal ">KIC 6780873</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../case_studies/10080943.html" class="reference internal ">KIC 10080943</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
 </div>
-        </sidebar>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-    
-    <li>Overview: module code</li>
-  </ul>
-  
-
-  <ul class="page-nav">
-</ul>
-  
-</div>
-<hr>
-          <div class="content" role="main">
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
             
   <h1>All modules for which code is available</h1>
-<ul><li><a href="maelstrom/eddy.html">maelstrom.eddy</a></li>
+<ul><li><a href="maelstrom/estimator.html">maelstrom.estimator</a></li>
 <li><a href="maelstrom/maelstrom.html">maelstrom.maelstrom</a></li>
+<li><a href="maelstrom/orbit.html">maelstrom.orbit</a></li>
+<li><a href="maelstrom/periodogram.html">maelstrom.periodogram</a></li>
 <li><a href="maelstrom/synthetic.html">maelstrom.synthetic</a></li>
 <li><a href="maelstrom/utils.html">maelstrom.utils</a></li>
 </ul>
 
           </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2019, Daniel Hey.
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1 with <a href="https://github.com/romnnn/sphinx_press_theme">Press Theme</a>.
-</div>
-            </div>
-          </div>
-      </page>
+        </div>
+      </div>
+      <div class="clearer"></div>
     </div>
-    
-    
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2019, Daniel Hey.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.3.1.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
+    </div>
   </body>
 </html>

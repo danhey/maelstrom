@@ -6,7 +6,6 @@
 
    user/install
    user/citation
-   api/api
 
 .. toctree::
    :maxdepth: 2
@@ -17,13 +16,23 @@
    notebooks/Custom priors.ipynb
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Case studies
+   :maxdepth: 1
+   :caption: Case studies from paper
 
    case_studies/9651065.ipynb
    case_studies/6780873.ipynb
    case_studies/10080943.ipynb
 
+.. toctree::
+   :maxdepth: 2
+   :caption: API
+   
+   api/maelstrom
+   api/orbit
+   api/periodogram
+   api/utils
+   api/estimator
+   api/eddy
 
 License & attribution
 ---------------------
