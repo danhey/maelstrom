@@ -11,15 +11,8 @@ from exoplanet.orbits import get_true_anomaly
 __all__ = ["Orbit"]
 
 class Orbit:
-    def __init__(self, 
-                period=None, 
-                lighttime=None, 
-                freq=None,
-                eccen=None,
-                omega=None,
-                tref=None,
-                phi=None):
-        """This class defines an orbit model which solves equation 10 of 
+    """
+        This class defines an orbit model which solves equation 10 of 
         Hey+2020 for given input values, defined within Theano.
         
         Parameters
@@ -43,6 +36,15 @@ class Orbit:
             The systemic velocity prior. Must be included if with_rv is True.
             by default None
         """
+    def __init__(self, 
+                period=None, 
+                lighttime=None, 
+                freq=None,
+                eccen=None,
+                omega=None,
+                tref=None,
+                phi=None):
+        
         
         self.period = period
         self.lighttime = lighttime

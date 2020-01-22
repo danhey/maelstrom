@@ -1,11 +1,5 @@
-API
-============
-
-Maelstrom
-----------
-
-.. automodule:: maelstrom.maelstrom
-   :members:
+.. API
+.. ============
 
 Orbit
 ----------

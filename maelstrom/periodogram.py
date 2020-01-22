@@ -18,7 +18,17 @@ from astropy.stats import LombScargle
 __all__ = ["Periodogram"]
 
 class Periodogram:
+    """A class to brute force the likelihood in search of small signals.
+    For each orbital period, it will iterate over a simplified Maelstrom
+    model, optimise the values, and then record the loglikelihood. 
 
+    This is useful for planets.
+    
+    Args:
+        time (array): Time values
+        mag (array): Magnitude (or flux) values. Must be relative
+        freq (array): Array of frequencies
+    """
     def __init__(self, time, mag, freq):
         
         self.time = time
@@ -66,6 +76,14 @@ class Periodogram:
         return -info.fun, point
 
     def fit(self, periods):
+        """Run the periodogram model for a given array of periods.
+        
+        Args:
+            periods (array): Orbital periods over which to iterate.
+        
+        Returns:
+            array: Results
+        """
         results = []
         for f in self.freq:
             results.append([self._run_fit(p, f) for p in tqdm.tqdm(periods)])

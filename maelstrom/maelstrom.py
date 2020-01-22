@@ -498,28 +498,20 @@ class BaseOrbitModel(Model):
         p_guess = self.get_period_estimate()
         
 class Maelstrom(BaseOrbitModel):
+    """The real deal. This class provides an orbit model for an arbitrarily
+        sized binary system, where each frequency `freq` is assigned a separate
+        lighttime (asini). The time delays are forward-modelled directly onto
+        the light curve `time` and `flux` data.
+        
+        Args:
+            time (array): Time values of the light curve
+            flux (array): Flux values of the light curve
+            freq (array, optional): Frequencies on which to model the time
+            delay. If none are supplied, Maelstrom will attempt to find the
+            most optimal frequencies. Defaults to None.
+            name (str, optional): Model name. Defaults to ''.
+        """ 
     def __init__(self, time, flux, freq=None, name='', model=None, **kwargs):
-        """
-        The real deal. This class provides an orbit model
-        for an arbitrarily sized binary system, where each
-        frequency `freq` is assigned a separate lighttime (asini).
-        The time delays are forward-modelled directly onto the
-        light curve `time` and `flux` data.
-
-        Parameters
-        ----------
-        time : array-like
-            Time values of light curve
-        flux : array-like
-            Flux values for for every time point.
-        freq : array-like
-            Frequencies on which to model the time delay.
-            If none are supplied, Maelstrom will attempt to find
-            the most optimal frequencies.
-        **kwargs : 
-            Arguments for the `maelstrom.utils.estimate_frequencies function`
-
-        """
 
         super(Maelstrom, self).__init__(time, flux, freq=freq, name=name, model=model, **kwargs)
             

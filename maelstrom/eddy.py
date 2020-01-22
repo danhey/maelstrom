@@ -23,21 +23,16 @@ class Eddy(Model):
 
     def __init__(self, time: np.ndarray, tau: np.ndarray, period_guess=None,
                         asini_guess=None):
-        """A simplified model for modelling light travel time variations
-        in a binary system. This class directly models the time delay
-        information and should be used on longer period binaries.
+        """A PyMC3 model for modelling light travel time variations in a binary
+        system using the subdividing method.
         
-        Parameters
-        ----------
-        time : np.ndarray
-            Time observations
-        tau : np.ndarray
-            Extracted time delay for each `time` point. Should be weighted
-            by the amplitude of the modes
-        period_guess : float, optional
-            Initial guess of the orbital period, in units of days, by default None
-        asini_guess : float, optional
-            Initial guess of the projected semi-major axis in units of seconds, by default None
+        Args:
+            time (array): Time observations
+            tau (array): Flux observations
+            period_guess (float, optional): Initial guess of the orbital period,
+            in units of days. Defaults to None.
+            asini_guess (float, optional): Initial guess of the projected
+            semi-major axis, in units of seconds. Defaults to None.
         """
         self.time = time
         self.tau = tau
@@ -67,15 +62,12 @@ class Eddy(Model):
     def optimize(self, vars=None):
         """Optimises the model.
         
-        Parameters
-        ----------
-        vars : array of model parameters, optional
-            parameters of the model to be optimized, by default None
+        Args:
+            vars (list, optional): List of parameters in the model to optimize.
+            If none, will optimize all parameters at once. Defaults to None.
         
-        Returns
-        -------
-        dict
-            optimisation results
+        Returns:
+            dict: Optimisation results
         """
         
         with self as model:
@@ -90,7 +82,7 @@ class Eddy(Model):
         return map_params
 
     def sample(self, tune=3000, draws=3000, start=None, target_accept=0.9, **kwargs):
-        """
+                                """        
         Samples the model using the exoplanet PyMC3 sampler. By default,
         this will sample from 2 chains over 2 cores simultaneously.
         

@@ -8,15 +8,24 @@ from astropy.convolution import convolve, Box1DKernel
 from astropy import constants as const
 import astropy.units as u
 
-__all__ = ["unique_colors", "amplitude_spectrum", "dft_phase", "mass_function"]
+__all__ = ["unique_colors", "amplitude_spectrum", "dft_phase", "mass_function", "phase_error", "smooth"]
 
 
 def mass_function(period, asini):
+    """Calculates the mass function for a given system
+    
+    Args:
+        period (astropy.units.quantity.Quantity): Orbital period
+        asini (astropy.units.quantity.Quantity): Convolved semi-major axis
+    
+    Returns:
+        astropy.units.quantity.Quantity: Mass function in M_sun
+    """
     si = (4*np.pi**2 * (1*const.c**3)) / (1*const.G) * 1 / (period.to(u.s)**2) * (asini**3)
     return si.to(u.M_sun)
 
 def unique_colors(n, cmap="hls"):
-    """ 
+    """
     Calculates n unique colours for plotting in a given colorspace
     
     Parameters
@@ -79,7 +88,7 @@ def dft_phase(x, y, freq):
     ----------
         x : `array`
             Array in which to calculate 
-        x : `array`
+        y : `array`
     
     Returns:
     ----------
@@ -98,7 +107,18 @@ def dft_phase(x, y, freq):
         phase.append(np.arctan2(ft_imag,ft_real))
     return phase
 
-def smooth(freq, power, method='boxkernel', filter_width=2.):
+def smooth(freq, power, filter_width=2.):
+    """Smooths the input power spectrum with a boxkernel filter
+    
+    Args:
+        freq (array): Frequency values
+        power (array): Power values
+        filter_width (float, optional): Width of the boxkernel. Defaults to 2..
+    
+    Returns:
+        array: Smoothed power values
+    """
+    
     fs = np.mean(np.diff(freq))
     box_kernel = Box1DKernel(np.ceil((filter_width/fs)))
     smooth_power = convolve(power, box_kernel)
@@ -108,12 +128,12 @@ def phase_error(x, y, freq):
     """Calculates the phase uncertainty on the given frequency
     
     Args:
-        x (np.array): Time values
-        y (np.array): flux values
-        freq (Array-like or list): Frequency values
+        x (array): Time values
+        y (rray): flux values
+        freq (array): Frequency values
     
     Returns:
-        np.array: Array of uncertainties for each phase calculated
+        array: Array of uncertainties for each phase calculated
     """
     error = []
     freq = np.asarray(freq)

@@ -23,6 +23,11 @@ class SyntheticBinary(object):
         self.flux = self.flux_true
         
     def make_lightcurve(self, tau=True):
+        """Generates the light curve with added binarity.
+        
+        Args:
+            tau (bool, optional): Whether to include binarity. Defaults to True.
+        """
         self.flux_true = np.zeros(len(self.time))
         #self.tau = 0
         if tau:
@@ -41,10 +46,11 @@ class SyntheticBinary(object):
             self.flux_true += A_j * np.sin(omega * (self.time - self.tau))
     
     def add_noise(self, snr=5):
+        """Sets the SNR of the oscillation signal.
+        
+        Args:
+            snr (float, optional): SNR. Defaults to 5.
+        """
         # Add noise
         s_rms = self.amplitude.max() / (np.sqrt(np.pi / len(self.time)) * snr)
-        #print(s_rms, self.amplitude)
-        #print(np.random.normal(loc=0.0, scale=s_rms, size=len(self.time)))
         self.flux = self.flux_true + np.random.normal(loc=0.0, scale=s_rms, size=len(self.time))
-        #self.flux_err = noise * np.std(self.flux_true)
-        #self.flux = self.flux_true + self.flux_err * np.random.randn(len(self.flux_true))

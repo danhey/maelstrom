@@ -14,8 +14,7 @@
 #
 import os
 import sys
-import sphinx_rtd_theme
-
+import solar_theme
 
 sys.path.insert(0, os.path.abspath('../..'))
 sys.setrecursionlimit(1500)
@@ -30,7 +29,7 @@ author = 'Daniel Hey'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.2'
 
 
 # -- General configuration ---------------------------------------------------
@@ -48,7 +47,8 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
     'nbsphinx',
-    "sphinx_rtd_theme"
+    "sphinx_rtd_theme",
+    'sphinxcontrib.napoleon'
 ]
 
 
@@ -90,8 +90,8 @@ nbsphinx_prolog = r"""
 # a list of builtin themes.
 #
 # html_theme = "sphinx_rtd_theme"
-html_theme = "press"
-
+html_theme = "solar_theme"
+html_theme_path = [solar_theme.theme_path]
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
