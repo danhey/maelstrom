@@ -1,4 +1,10 @@
-from maelstrom.orbit import Orbit
+from __future__ import division, print_function
+
+import sys
+import pytest
+
+from ..orbit import Orbit
+
 import pymc3 as pm
 import exoplanet as xo
 import numpy as np

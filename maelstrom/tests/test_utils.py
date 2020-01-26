@@ -1,5 +1,9 @@
+from __future__ import division, print_function
 
-from maelstrom.utils import mass_function, unique_colors, amplitude_spectrum, dft_phase, smooth, phase_error
+import sys
+import pytest
+
+from ..utils import mass_function, unique_colors, amplitude_spectrum, dft_phase, smooth, phase_error
 import astropy.units as u
 import numpy as np
 

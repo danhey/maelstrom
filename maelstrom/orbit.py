@@ -42,9 +42,7 @@ class Orbit:
                 freq=None,
                 eccen=None,
                 omega=None,
-                tref=None,
                 phi=None):
-        
         
         self.period = period
         self.lighttime = lighttime
@@ -56,17 +54,13 @@ class Orbit:
 
 
     def get_time_delay(self, time):
-        """Calculates the time delay under the given values
+        """Calculates the time delay for the given time values.
         
-        Parameters
-        ----------
-        time : array-like
-            Values of time at which to calculate the time delay
+        Args:
+            time (array): Time values at which to calculate tau.
         
-        Returns
-        -------
-        array-like
-            Values of the time-delay
+        Returns:
+            array: Time delay values for each `time`
         """
         # Mean anom
         M = 2.0 * np.pi * time / self.period - self.phi

@@ -1,4 +1,9 @@
-from maelstrom.estimator import estimate_frequencies
+from __future__ import division, print_function
+
+import sys
+import pytest
+
+from ..estimator import estimate_frequencies
 import matplotlib.pyplot as plt
 import pytest
 import numpy as np
