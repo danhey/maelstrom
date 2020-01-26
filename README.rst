@@ -5,9 +5,10 @@ Maelstrom
    :target: https://docs.pymc.io
 .. image:: https://img.shields.io/badge/powered_by-exoplanet-EB5368.svg?style=flat
     :target: https://github.com/dfm/exoplanet
-
+.. image:: https://codecov.io/gh/danhey/maelstrom/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/danhey/maelstrom
 .. image:: https://github.com/danhey/maelstrom/workflows/maelstrom-tests/badge.svg
-
+  
 *maelstrom* is a set of custom PyMC3 Models and solvers for
 modelling binary orbits through the `phase modulation technique <https://arxiv.org/abs/1607.07879/>`_.
 Unlike previous codes, *maelstrom* fits each individual datapoint in the time series by forward modelling the time delay onto the light curve. This approach fully captures variations in a light curve caused by 
