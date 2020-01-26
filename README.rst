@@ -8,6 +8,8 @@ Maelstrom
 .. image:: https://codecov.io/gh/danhey/maelstrom/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/danhey/maelstrom
 .. image:: https://github.com/danhey/maelstrom/workflows/maelstrom-tests/badge.svg
+.. image:: https://github.com/danhey/maelstrom/workflows/Docs/badge.svg
+   :target: https://danhey.github.io/maelstrom/
   
 *maelstrom* is a set of custom PyMC3 Models and solvers for
 modelling binary orbits through the `phase modulation technique <https://arxiv.org/abs/1607.07879/>`_.
