@@ -29,9 +29,6 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="Estimating frequencies.html" title="Choosing the correct frequencies"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -280,13 +277,13 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">corner</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">exoplanet</span> <span class="k">as</span> <span class="nn">xo</span>
-<span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
-<span class="kn">import</span> <span class="nn">lightkurve</span> <span class="k">as</span> <span class="nn">lk</span>
+<span></span>import numpy as np
+import corner
+import pandas as pd
+import matplotlib.pyplot as plt
+import exoplanet as xo
+import pymc3 as pm
+import lightkurve as lk
 </pre></div>
 </div>
 </div>
@@ -295,10 +292,10 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">config</span> IPython.matplotlib.backend = &quot;retina&quot;
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
-<span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
-<span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;savefig.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+<span></span>%config IPython.matplotlib.backend = &quot;retina&quot;
+from matplotlib import rcParams
+rcParams[&quot;figure.dpi&quot;] = 150
+rcParams[&quot;savefig.dpi&quot;] = 150
 </pre></div>
 </div>
 </div>
@@ -308,8 +305,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">lc</span> <span class="o">=</span> <span class="n">lk</span><span class="o">.</span><span class="n">search_lightcurvefile</span><span class="p">(</span><span class="s1">&#39;KIC 9651065&#39;</span><span class="p">,</span> <span class="n">mission</span><span class="o">=</span><span class="s1">&#39;Kepler&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">download_all</span><span class="p">()</span><span class="o">.</span><span class="n">PDCSAP_FLUX</span><span class="o">.</span><span class="n">stitch</span><span class="p">()</span><span class="o">.</span><span class="n">remove_nans</span><span class="p">()</span>
-<span class="n">lc</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span></span>lc = lk.search_lightcurvefile(&#39;KIC 9651065&#39;, mission=&#39;Kepler&#39;).download_all().PDCSAP_FLUX.stitch().remove_nans()
+lc.plot()
 </pre></div>
 </div>
 </div>
@@ -337,10 +334,10 @@ some Nyquist aliases. We can tell they are aliases as their time delays will mat
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">maelstrom</span> <span class="kn">import</span> <span class="n">Maelstrom</span>
+<span></span>from maelstrom import Maelstrom
 
-<span class="n">ms</span> <span class="o">=</span> <span class="n">Maelstrom</span><span class="p">(</span><span class="n">lc</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">lc</span><span class="o">.</span><span class="n">flux</span><span class="p">,</span> <span class="n">max_peaks</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
-<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">()</span>
+ms = Maelstrom(lc.time, lc.flux, max_peaks=3, fmin=5, fmax=40)
+ms.first_look()
 </pre></div>
 </div>
 </div>
@@ -370,8 +367,8 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1a7f4518&gt;,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">period_guess</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">get_period_estimate</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">period_guess</span><span class="p">)</span>
+<span></span>period_guess = ms.get_period_estimate()
+print(period_guess)
 </pre></div>
 </div>
 </div>
@@ -390,8 +387,8 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1a7f4518&gt;,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ms</span><span class="o">.</span><span class="n">setup_orbit_model</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="n">period_guess</span><span class="p">)</span>
-<span class="n">opt</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+<span></span>ms.setup_orbit_model(period=period_guess)
+opt = ms.optimize()
 </pre></div>
 </div>
 </div>
@@ -400,7 +397,7 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1a7f4518&gt;,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">opt</span>
+<span></span>opt
 </pre></div>
 </div>
 </div>
@@ -431,8 +428,8 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1a7f4518&gt;,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">td_time</span><span class="p">,</span> <span class="n">td_td</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">get_time_delay</span><span class="p">()</span>
-<span class="n">td_average</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">td_td</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">get_weights</span><span class="p">())</span>
+<span></span>td_time, td_td = ms.get_time_delay()
+td_average = np.average(td_td, axis=-1, weights=ms.get_weights())
 </pre></div>
 </div>
 </div>
@@ -449,13 +446,13 @@ WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">with</span> <span class="n">ms</span><span class="p">:</span>
-    <span class="n">model_td</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">tau</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span> <span class="o">*</span> <span class="mi">86400</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">model_td</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">model_td</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">td_time</span><span class="p">,</span> <span class="n">td_average</span><span class="p">,</span> <span class="s1">&#39;.k&#39;</span><span class="p">)</span>
+<span></span>with ms:
+    model_td = xo.eval_in_model(ms.tau, opt) * 86400
+    plt.plot(ms.time, model_td - np.median(model_td), c=&#39;blue&#39;, linewidth=0.5)
+    plt.plot(td_time, td_average, &#39;.k&#39;)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [day]&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Time delay [s]&#39;</span><span class="p">)</span>
+plt.xlabel(&#39;Time [day]&#39;)
+plt.ylabel(&#39;Time delay [s]&#39;)
 </pre></div>
 </div>
 </div>
@@ -484,13 +481,13 @@ Text(0, 0.5, &#39;Time delay [s]&#39;)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">with</span> <span class="n">ms</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">lc_model</span><span class="p">,</span> <span class="n">opt</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Maelstrom&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">ms</span><span class="o">.</span><span class="n">flux</span><span class="p">,</span> <span class="s1">&#39;.k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">205</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [day]&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux [ppt]&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span></span>with ms:
+    plt.plot(ms.time, xo.eval_in_model(ms.lc_model, opt), c=&#39;blue&#39;, linewidth=0.5, label=&#39;Maelstrom&#39;)
+    plt.plot(ms.time, ms.flux, &#39;.k&#39;, label=&#39;Data&#39;)
+plt.xlim(200,205)
+plt.xlabel(&#39;Time [day]&#39;)
+plt.ylabel(&#39;Flux [ppt]&#39;)
+plt.legend()
 </pre></div>
 </div>
 </div>
@@ -516,8 +513,8 @@ Text(0, 0.5, &#39;Time delay [s]&#39;)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pb1_model</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">pin_orbit_model</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span>
-<span class="n">pb1_model</span>
+<span></span>pb1_model = ms.pin_orbit_model(opt)
+pb1_model
 </pre></div>
 </div>
 </div>
@@ -539,7 +536,7 @@ $$
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">pm</span><span class="o">.</span><span class="n">model_to_graphviz</span><span class="p">(</span><span class="n">pb1_model</span><span class="p">)</span>
+<span></span>pm.model_to_graphviz(pb1_model)
 </pre></div>
 </div>
 </div>
@@ -556,10 +553,10 @@ $$
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">with</span> <span class="n">pb1_model</span><span class="p">:</span>
-    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
-        <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">draws</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">xo</span><span class="o">.</span><span class="n">get_dense_nuts_step</span><span class="p">(</span><span class="n">target_accept</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
-    <span class="p">)</span>
+<span></span>with pb1_model:
+    trace = pm.sample(
+        tune=1000, draws=1000, step=xo.get_dense_nuts_step(target_accept=0.95)
+    )
 </pre></div>
 </div>
 </div>
@@ -663,9 +660,6 @@ During handling of the above exception, another exception occurred:
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li class="right" >
           <a href="Estimating frequencies.html" title="Choosing the correct frequencies"
              >next</a> |</li>

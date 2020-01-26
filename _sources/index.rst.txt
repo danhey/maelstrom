@@ -14,6 +14,7 @@
    notebooks/Getting started.ipynb
    notebooks/Estimating frequencies.ipynb
    notebooks/Custom priors.ipynb
+   notebooks/Recovering weak signals.ipynb
 
 .. toctree::
    :maxdepth: 1

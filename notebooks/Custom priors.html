@@ -17,7 +17,7 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="KIC 9651065" href="../case_studies/9651065.html" />
+    <link rel="next" title="Recovering weak signals" href="Recovering weak signals.html" />
     <link rel="prev" title="Choosing the correct frequencies" href="Estimating frequencies.html" />
     <link href="../_static/style.css" rel="stylesheet" type="text/css">
 
@@ -29,10 +29,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../case_studies/9651065.html" title="KIC 9651065"
+          <a href="Recovering weak signals.html" title="Recovering weak signals"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="Estimating frequencies.html" title="Choosing the correct frequencies"
@@ -46,8 +43,8 @@
   <p class="topless"><a href="Estimating frequencies.html"
                         title="previous chapter">Choosing the correct frequencies</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../case_studies/9651065.html"
-                        title="next chapter">KIC 9651065</a></p>
+  <p class="topless"><a href="Recovering weak signals.html"
+                        title="next chapter">Recovering weak signals</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -281,11 +278,11 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">maelstrom.orbit</span> <span class="kn">import</span> <span class="n">Orbit</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">exoplanet</span> <span class="k">as</span> <span class="nn">xo</span>
-<span class="kn">from</span> <span class="nn">maelstrom</span> <span class="kn">import</span> <span class="n">Maelstrom</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span></span>from maelstrom.orbit import Orbit
+import numpy as np
+import exoplanet as xo
+from maelstrom import Maelstrom
+import matplotlib.pyplot as plt
 </pre></div>
 </div>
 </div>
@@ -294,10 +291,10 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">lightkurve</span> <span class="k">as</span> <span class="nn">lk</span>
+<span></span>import lightkurve as lk
 
-<span class="n">lc</span> <span class="o">=</span> <span class="n">lk</span><span class="o">.</span><span class="n">search_lightcurvefile</span><span class="p">(</span><span class="s1">&#39;KIC 9651065&#39;</span><span class="p">,</span> <span class="n">mission</span><span class="o">=</span><span class="s1">&#39;Kepler&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">download_all</span><span class="p">()</span><span class="o">.</span><span class="n">stitch</span><span class="p">()</span><span class="o">.</span><span class="n">remove_nans</span><span class="p">()</span>
-<span class="n">lc</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+lc = lk.search_lightcurvefile(&#39;KIC 9651065&#39;, mission=&#39;Kepler&#39;).download_all().stitch().remove_nans()
+lc.plot()
 </pre></div>
 </div>
 </div>
@@ -331,8 +328,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ms</span> <span class="o">=</span> <span class="n">Maelstrom</span><span class="p">(</span><span class="n">lc</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">lc</span><span class="o">.</span><span class="n">flux</span><span class="p">,</span> <span class="n">max_peaks</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
-<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">()</span>
+<span></span>ms = Maelstrom(lc.time, lc.flux, max_peaks=3, fmax=48)
+ms.first_look()
 </pre></div>
 </div>
 </div>
@@ -369,8 +366,8 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2976de80&gt;,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">freq</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">freq</span>
-<span class="n">time</span><span class="p">,</span> <span class="n">flux</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">ms</span><span class="o">.</span><span class="n">flux</span>
+<span></span>freq = ms.freq
+time, flux = ms.time, ms.flux
 </pre></div>
 </div>
 </div>
@@ -380,48 +377,48 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2976de80&gt;,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
-<span class="kn">import</span> <span class="nn">theano.tensor</span> <span class="k">as</span> <span class="nn">tt</span>
+<span></span>import pymc3 as pm
+import theano.tensor as tt
 
-<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
-    <span class="c1"># Our orbital period prior</span>
-    <span class="n">period</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-    <span class="c1"># The phase of conjunction</span>
-    <span class="n">phi</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="s2">&quot;phi&quot;</span><span class="p">)</span>
-    <span class="c1"># Our standard deviation</span>
-    <span class="n">logs_lc</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;logs_lc&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">flux</span><span class="p">)),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
-    <span class="c1"># We want positive lighttimes only, sample in log-space</span>
-    <span class="n">logasini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;logasini&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>
-    <span class="n">asini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;asini&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logasini</span><span class="p">))</span>
-    <span class="c1"># Periastron sampled from uniform angle</span>
-    <span class="n">omega</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
-    <span class="c1"># Eccentricity</span>
-    <span class="n">eccen</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;eccen&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="c1"># The baseline flux</span>
-    <span class="n">mean</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.003</span><span class="p">)</span>
+with pm.Model() as model:
+    # Our orbital period prior
+    period = pm.Normal(&quot;period&quot;, mu=300, sd=50)
+    # The phase of conjunction
+    phi = xo.distributions.Angle(&quot;phi&quot;)
+    # Our standard deviation
+    logs_lc = pm.Normal(&#39;logs_lc&#39;, mu=np.log(np.std(flux)), sd=10, testval=0.)
+    # We want positive lighttimes only, sample in log-space
+    logasini = pm.Normal(&#39;logasini&#39;, mu=np.log(200), sd=100, testval=np.log(200))
+    asini = pm.Deterministic(&quot;asini&quot;, pm.math.exp(logasini))
+    # Periastron sampled from uniform angle
+    omega = xo.distributions.Angle(&quot;omega&quot;, testval=0.)
+    # Eccentricity
+    eccen = pm.Uniform(&quot;eccen&quot;, lower=0, upper=0.9, testval=0.5)
+    # The baseline flux
+    mean = pm.Normal(&quot;mean&quot;, mu=0.0, sd=10.0, testval=0.003)
 
-    <span class="n">lognu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;lognu&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">freq</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">))</span>
-    <span class="n">nu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;nu&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">lognu</span><span class="p">))</span>
+    lognu = pm.Normal(&quot;lognu&quot;, mu=np.log(freq), sd=0.1, shape=len(freq))
+    nu = pm.Deterministic(&quot;nu&quot;, pm.math.exp(lognu))
 
-    <span class="c1"># Here, we generate an Orbit instance and pass in our priors.</span>
-    <span class="n">orbit</span> <span class="o">=</span> <span class="n">Orbit</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="p">,</span>
-                  <span class="n">lighttime</span><span class="o">=</span><span class="n">asini</span><span class="p">,</span>
-                  <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">,</span>
-                  <span class="n">eccen</span><span class="o">=</span><span class="n">eccen</span><span class="p">,</span>
-                  <span class="n">phi</span><span class="o">=</span><span class="n">phi</span><span class="p">,</span>
-                  <span class="n">freq</span><span class="o">=</span><span class="n">nu</span><span class="p">)</span>
+    # Here, we generate an Orbit instance and pass in our priors.
+    orbit = Orbit(period=period,
+                  lighttime=asini,
+                  omega=omega,
+                  eccen=eccen,
+                  phi=phi,
+                  freq=nu)
 
-    <span class="c1"># Orbit makes available a method which will calculate the theoretical light curve given the orbital parameters, times, and fluxes, following</span>
-    <span class="c1"># equation 10 of the paper.</span>
-    <span class="n">lc</span> <span class="o">=</span> <span class="n">orbit</span><span class="o">.</span><span class="n">get_lightcurve_model</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">)</span> <span class="o">+</span> <span class="n">mean</span>
+    # Orbit makes available a method which will calculate the theoretical light curve given the orbital parameters, times, and fluxes, following
+    # equation 10 of the paper.
+    lc = orbit.get_lightcurve_model(time, flux) + mean
 
-    <span class="c1"># We pass this into our likelihood</span>
-    <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;obs&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">lc</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logs_lc</span><span class="p">),</span> <span class="n">observed</span><span class="o">=</span><span class="n">flux</span><span class="p">)</span>
+    # We pass this into our likelihood
+    pm.Normal(&#39;obs&#39;, mu=lc, sd=tt.exp(logs_lc), observed=flux)
 
-<span class="c1"># This is what our light curve looks like before any optimisation</span>
-<span class="k">with</span> <span class="n">model</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">lc</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+# This is what our light curve looks like before any optimisation
+with model:
+    plt.plot(time, flux, alpha=0.5)
+    plt.plot(time, xo.eval_in_model(lc), alpha=0.5)
 </pre></div>
 </div>
 </div>
@@ -437,21 +434,21 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2976de80&gt;,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">with</span> <span class="n">model</span><span class="p">:</span>
-    <span class="n">all_but</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">vars</span> <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;logP_interval__&quot;</span><span class="p">,</span> <span class="s2">&quot;logasini_interval__&quot;</span><span class="p">]]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">all_but</span><span class="p">)</span>
+<span></span>with model:
+    all_but = [v for v in model.vars if v.name not in [&quot;logP_interval__&quot;, &quot;logasini_interval__&quot;]]
+    print(all_but)
 
-    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">mean</span><span class="p">])</span>
-    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">logs_lc</span><span class="p">])</span>
-    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">eccen</span><span class="p">,</span> <span class="n">omega</span><span class="p">])</span>
-    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">phi</span><span class="p">])</span>
-    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="n">all_but</span><span class="p">)</span>
+    map_params = xo.optimize(start=None, vars=[mean])
+    map_params = xo.optimize(start=map_params, vars=[logs_lc])
+    map_params = xo.optimize(start=map_params, vars=[eccen, omega])
+    map_params = xo.optimize(start=map_params, vars=[phi])
+    map_params = xo.optimize(start=map_params, vars=all_but)
 
-    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">logasini</span><span class="p">])</span>
-    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="n">all_but</span><span class="p">)</span>
+    map_params = xo.optimize(start=map_params, vars=[logasini])
+    map_params = xo.optimize(start=map_params, vars=all_but)
 
-    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">period</span><span class="p">])</span>
-    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="n">all_but</span><span class="p">)</span>
+    map_params = xo.optimize(start=map_params, vars=[period])
+    map_params = xo.optimize(start=map_params, vars=all_but)
 </pre></div>
 </div>
 </div>
@@ -511,7 +508,7 @@ logp: -106479.01236347294 -&gt; -106479.01236347294
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">map_params</span>
+<span></span>map_params
 </pre></div>
 </div>
 </div>
@@ -551,10 +548,7 @@ logp: -106479.01236347294 -&gt; -106479.01236347294
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../case_studies/9651065.html" title="KIC 9651065"
+          <a href="Recovering weak signals.html" title="Recovering weak signals"
              >next</a> |</li>
         <li class="right" >
           <a href="Estimating frequencies.html" title="Choosing the correct frequencies"

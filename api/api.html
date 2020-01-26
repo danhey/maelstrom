@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Orbit &#8212; maelstrom 0.2 documentation</title>
+    <title>Synthetic light curves &#8212; maelstrom 0.2 documentation</title>
     <link rel="stylesheet" href="../_static/solar.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/style.css" />
@@ -26,23 +26,11 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Orbit</a></li>
-<li><a class="reference internal" href="#periodogram">Periodogram</a></li>
-<li><a class="reference internal" href="#module-maelstrom.utils">Utilities</a></li>
-<li><a class="reference internal" href="#eddy">Eddy</a></li>
-<li><a class="reference internal" href="#synthetic-light-curves">Synthetic light curves</a></li>
-</ul>
-
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -68,282 +56,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-maelstrom.orbit">
-<span id="orbit"></span><h1>Orbit<a class="headerlink" href="#module-maelstrom.orbit" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="maelstrom.orbit.Orbit">
-<em class="property">class </em><code class="sig-prename descclassname">maelstrom.orbit.</code><code class="sig-name descname">Orbit</code><span class="sig-paren">(</span><em class="sig-param">period=None</em>, <em class="sig-param">lighttime=None</em>, <em class="sig-param">freq=None</em>, <em class="sig-param">eccen=None</em>, <em class="sig-param">omega=None</em>, <em class="sig-param">tref=None</em>, <em class="sig-param">phi=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class defines an orbit model which solves equation 10 of
-Hey+2020 for given input values, defined within Theano.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>period</strong> (<em>pymc3.model.FreeRV</em>) – The orbital period prior</p></li>
-<li><p><strong>lighttime</strong> (<em>pymc3.model.FreeRV</em>) – The convolved semi-major axis (asini) prior, given in seconds</p></li>
-<li><p><strong>phi</strong> (<em>pymc3.model.FreeRV</em>) – The phase of periapsis</p></li>
-<li><p><strong>freq</strong> (<em>pymc3.model.FreeRV</em>) – Frequency prior</p></li>
-<li><p><strong>eccen</strong> (<em>pymc3.model.FreeRV</em><em>, </em><em>optional</em>) – The eccentricity prior, must be constrained between 0 and 1, by default None</p></li>
-<li><p><strong>omega</strong> (<em>pymc3.model.FreeRV</em><em>, </em><em>optional</em>) – The argument of periapsis prior, given in angular coordinates, by default None</p></li>
-<li><p><strong>with_rv</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to include radial velocity calculations. If True, a prior
-on the systemic velocity (gammav) must be provided, by default False</p></li>
-<li><p><strong>gammav</strong> (<em>pymc3.model.FreeRV</em><em>, </em><em>optional</em>) – The systemic velocity prior. Must be included if with_rv is True.
-by default None</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="method">
-<dt id="maelstrom.orbit.Orbit.get_lightcurve_model">
-<code class="sig-name descname">get_lightcurve_model</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">flux</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit.get_lightcurve_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit.get_lightcurve_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the light curve from the input time and flux data, with
-phase offsets from the time delays.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>time</strong> (<em>array-like</em>) – Values of time at which to calculate the light curve</p></li>
-<li><p><strong>flux</strong> (<em>array-like</em>) – Values of flux corresponding to <cite>time</cite>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Light curve</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>array-like</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="maelstrom.orbit.Orbit.get_radial_velocity">
-<code class="sig-name descname">get_radial_velocity</code><span class="sig-paren">(</span><em class="sig-param">time</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit.get_radial_velocity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit.get_radial_velocity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the radial velocity within the framework of the Orbit for
-given input times.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>time</strong> (<em>array-like</em>) – Time-values for each RV measurement</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>[description]</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>[type]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="maelstrom.orbit.Orbit.get_time_delay">
-<code class="sig-name descname">get_time_delay</code><span class="sig-paren">(</span><em class="sig-param">time</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit.get_time_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit.get_time_delay" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the time delay under the given values</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>time</strong> (<em>array-like</em>) – Values of time at which to calculate the time delay</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Values of the time-delay</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>array-like</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="periodogram">
-<h1>Periodogram<a class="headerlink" href="#periodogram" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-maelstrom.periodogram"></span><dl class="class">
-<dt id="maelstrom.periodogram.Periodogram">
-<em class="property">class </em><code class="sig-prename descclassname">maelstrom.periodogram.</code><code class="sig-name descname">Periodogram</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">mag</em>, <em class="sig-param">freq</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/periodogram.html#Periodogram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.periodogram.Periodogram" title="Permalink to this definition">¶</a></dt>
-<dd><p>A class to brute force the likelihood in search of small signals.
-For each orbital period, it will iterate over a simplified Maelstrom
-model, optimise the values, and then record the loglikelihood.</p>
-<p>This is useful for planets.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>time</strong> (<em>array</em>) – Time values</p></li>
-<li><p><strong>mag</strong> (<em>array</em>) – Magnitude (or flux) values. Must be relative</p></li>
-<li><p><strong>freq</strong> (<em>array</em>) – Array of frequencies</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="method">
-<dt id="maelstrom.periodogram.Periodogram.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">periods</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/periodogram.html#Periodogram.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.periodogram.Periodogram.fit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run the periodogram model for a given array of periods.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>periods</strong> (<em>array</em>) – Orbital periods over which to iterate.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Results</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-maelstrom.utils">
-<span id="utilities"></span><h1>Utilities<a class="headerlink" href="#module-maelstrom.utils" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
-<dt id="maelstrom.utils.unique_colors">
-<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">unique_colors</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">cmap='hls'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#unique_colors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.unique_colors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates n unique colours for plotting in a given colorspace</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>n</strong> (<cite>int</cite>) – Number of colours required.</p></li>
-<li><p><strong>cmap</strong> (<cite>str</cite>) – Colormap (either “hls” or “colorblind”)</p></li>
-</ul>
-</dd>
-</dl>
-<blockquote>
-<div><dl>
-<dt>phase<span class="classifier"><cite>list</cite></span></dt><dd><p>A list of phases for the given frequencies</p>
-</dd>
-</dl>
-</div></blockquote>
-</dd></dl>
-
-<dl class="function">
-<dt id="maelstrom.utils.amplitude_spectrum">
-<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">amplitude_spectrum</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">y</em>, <em class="sig-param">fmin=None</em>, <em class="sig-param">fmax=None</em>, <em class="sig-param">oversample_factor=10.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#amplitude_spectrum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.amplitude_spectrum" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the amplitude spectrum of a given signal</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>t</strong> (<cite>array</cite>) – Time values</p></li>
-<li><p><strong>y</strong> (<cite>array</cite>) – Flux or magnitude measurements</p></li>
-<li><p><strong>fmin</strong> (<em>float</em><em> (</em><em>default None</em><em>)</em>) – Minimum frequency to calculate spectrum. Defaults to df</p></li>
-<li><p><strong>fmax</strong> (<em>float</em>) – Maximum frequency to calculate spectrum. Defaults to Nyquist.</p></li>
-<li><p><strong>oversample_factor</strong> (<em>float</em>) – Amount by which to oversample the spectrum. Defaults to 10.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="maelstrom.utils.dft_phase">
-<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">dft_phase</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">freq</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#dft_phase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.dft_phase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Discrete fourier transform to calculate the ASTC phase
-given x, y, and an array of frequencies</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<cite>array</cite>) – Array in which to calculate</p></li>
-<li><p><strong>y</strong> (<cite>array</cite>) – </p></li>
-</ul>
-</dd>
-</dl>
-<blockquote>
-<div><dl>
-<dt>phase<span class="classifier"><cite>list</cite></span></dt><dd><p>A list of phases for the given frequencies</p>
-</dd>
-</dl>
-</div></blockquote>
-</dd></dl>
-
-<dl class="function">
-<dt id="maelstrom.utils.mass_function">
-<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">mass_function</code><span class="sig-paren">(</span><em class="sig-param">period</em>, <em class="sig-param">asini</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#mass_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.mass_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the mass function for a given system</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>period</strong> (<em>astropy.units.quantity.Quantity</em>) – Orbital period</p></li>
-<li><p><strong>asini</strong> (<em>astropy.units.quantity.Quantity</em>) – Convolved semi-major axis</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Mass function in M_sun</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>astropy.units.quantity.Quantity</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="maelstrom.utils.phase_error">
-<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">phase_error</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">freq</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#phase_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.phase_error" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the phase uncertainty on the given frequency</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>array</em>) – Time values</p></li>
-<li><p><strong>y</strong> (<em>rray</em>) – flux values</p></li>
-<li><p><strong>freq</strong> (<em>array</em>) – Frequency values</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Array of uncertainties for each phase calculated</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="maelstrom.utils.smooth">
-<code class="sig-prename descclassname">maelstrom.utils.</code><code class="sig-name descname">smooth</code><span class="sig-paren">(</span><em class="sig-param">freq</em>, <em class="sig-param">power</em>, <em class="sig-param">filter_width=2.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/utils.html#smooth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.utils.smooth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Smooths the input power spectrum with a boxkernel filter</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>freq</strong> (<em>array</em>) – Frequency values</p></li>
-<li><p><strong>power</strong> (<em>array</em>) – Power values</p></li>
-<li><p><strong>filter_width</strong> (<em>float</em><em>, </em><em>optional</em>) – Width of the boxkernel. Defaults to 2..</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Smoothed power values</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="eddy">
-<h1>Eddy<a class="headerlink" href="#eddy" title="Permalink to this headline">¶</a></h1>
-</div>
-<div class="section" id="synthetic-light-curves">
+  <div class="section" id="synthetic-light-curves">
 <h1>Synthetic light curves<a class="headerlink" href="#synthetic-light-curves" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-maelstrom.synthetic"></span><dl class="class">
-<dt id="maelstrom.synthetic.SyntheticBinary">
-<em class="property">class </em><code class="sig-prename descclassname">maelstrom.synthetic.</code><code class="sig-name descname">SyntheticBinary</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">freq</em>, <em class="sig-param">amplitude</em>, <em class="sig-param">period</em>, <em class="sig-param">eccen</em>, <em class="sig-param">asini</em>, <em class="sig-param">varpi</em>, <em class="sig-param">tref</em>, <em class="sig-param">tau=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/synthetic.html#SyntheticBinary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.synthetic.SyntheticBinary" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class makes a synthetic light curve and injects a time delay signal corresponding to the input binary orbit parameters</p>
-<dl class="method">
-<dt id="maelstrom.synthetic.SyntheticBinary.add_noise">
-<code class="sig-name descname">add_noise</code><span class="sig-paren">(</span><em class="sig-param">snr=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/synthetic.html#SyntheticBinary.add_noise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.synthetic.SyntheticBinary.add_noise" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the SNR of the oscillation signal.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>snr</strong> (<em>float</em><em>, </em><em>optional</em>) – SNR. Defaults to 5.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="maelstrom.synthetic.SyntheticBinary.make_lightcurve">
-<code class="sig-name descname">make_lightcurve</code><span class="sig-paren">(</span><em class="sig-param">tau=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/synthetic.html#SyntheticBinary.make_lightcurve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.synthetic.SyntheticBinary.make_lightcurve" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates the light curve with added binarity.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>tau</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to include binarity. Defaults to True.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -358,9 +72,6 @@ given x, y, and an array of frequencies</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">maelstrom 0.2 documentation</a> &#187;</li> 
       </ul>
     </div>

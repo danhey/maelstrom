@@ -29,9 +29,6 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="utils.html" title="Utilities"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -75,41 +72,6 @@
             
   <div class="section" id="periodogram">
 <h1>Periodogram<a class="headerlink" href="#periodogram" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-maelstrom.periodogram"></span><dl class="class">
-<dt id="maelstrom.periodogram.Periodogram">
-<em class="property">class </em><code class="sig-prename descclassname">maelstrom.periodogram.</code><code class="sig-name descname">Periodogram</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">mag</em>, <em class="sig-param">freq</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/periodogram.html#Periodogram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.periodogram.Periodogram" title="Permalink to this definition">¶</a></dt>
-<dd><p>A class to brute force the likelihood in search of small signals.
-For each orbital period, it will iterate over a simplified Maelstrom
-model, optimise the values, and then record the loglikelihood.</p>
-<p>This is useful for planets.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>time</strong> (<em>array</em>) – Time values</p></li>
-<li><p><strong>mag</strong> (<em>array</em>) – Magnitude (or flux) values. Must be relative</p></li>
-<li><p><strong>freq</strong> (<em>array</em>) – Array of frequencies</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="method">
-<dt id="maelstrom.periodogram.Periodogram.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">periods</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/periodogram.html#Periodogram.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.periodogram.Periodogram.fit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run the periodogram model for a given array of periods.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>periods</strong> (<em>array</em>) – Orbital periods over which to iterate.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Results</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>array</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -124,9 +86,6 @@ model, optimise the values, and then record the loglikelihood.</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li class="right" >
           <a href="utils.html" title="Utilities"
              >next</a> |</li>
