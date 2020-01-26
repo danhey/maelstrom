@@ -10,6 +10,7 @@ from exoplanet.orbits import get_true_anomaly
 
 __all__ = ["Orbit"]
 
+
 class Orbit:
     """
         This class defines an orbit model which solves equation 10 of 
@@ -36,14 +37,11 @@ class Orbit:
             The systemic velocity prior. Must be included if with_rv is True.
             by default None
         """
-    def __init__(self, 
-                period=None, 
-                lighttime=None, 
-                freq=None,
-                eccen=None,
-                omega=None,
-                phi=None):
-        
+
+    def __init__(
+        self, period=None, lighttime=None, freq=None, eccen=None, omega=None, phi=None
+    ):
+
         self.period = period
         self.lighttime = lighttime
         self.omega = omega
@@ -51,7 +49,6 @@ class Orbit:
         self.phi = phi
 
         self.freq = freq
-
 
     def get_time_delay(self, time):
         """Calculates the time delay for the given time values.
@@ -64,14 +61,19 @@ class Orbit:
         """
         # Mean anom
         M = 2.0 * np.pi * time / self.period - self.phi
-        
+
         # Negative psi to agree with Hey+2019. Implies closest star has negative
         # time delay
         if self.eccen is None:
             psi = -tt.sin(M)
         else:
             f = get_true_anomaly(M, self.eccen + tt.zeros_like(M))
-            psi = -1*(1 - tt.square(self.eccen)) * tt.sin(f+self.omega) / (1 + self.eccen*tt.cos(f))
+            psi = (
+                -1
+                * (1 - tt.square(self.eccen))
+                * tt.sin(f + self.omega)
+                / (1 + self.eccen * tt.cos(f))
+            )
 
         tau = (self.lighttime / 86400) * psi[:, None]
         return tau
@@ -94,12 +96,12 @@ class Orbit:
         """
         tau = self.get_time_delay(time)
 
-        arg = 2. * np.pi * self.freq * (time[:, None] - tau)
+        arg = 2.0 * np.pi * self.freq * (time[:, None] - tau)
         D = tt.concatenate((tt.cos(arg), tt.sin(arg)), axis=-1)
         w = tt.slinalg.solve(tt.dot(D.T, D), tt.dot(D.T, flux))
         lc_model = tt.dot(D, w)
         self.full_lc = lc_model
- 
+
         return self.full_lc
 
     def get_radial_velocity(self, time):
@@ -116,11 +118,18 @@ class Orbit:
         [type]
             [description]
         """
-        M = 2.0 * np.pi * time[:,None] / self.period - self.phi
+        M = 2.0 * np.pi * time[:, None] / self.period - self.phi
         f = get_true_anomaly(M, self.eccen + tt.zeros_like(M))
-        rv = -1*((self.lighttime / 86400) * (2.0 * np.pi * (1 / self.period) \
-            * (1/tt.sqrt(1.0 - tt.square(self.eccen))) \
-                * (tt.cos(f + self.omega) + self.eccen*tt.cos(self.omega))))
+        rv = -1 * (
+            (self.lighttime / 86400)
+            * (
+                2.0
+                * np.pi
+                * (1 / self.period)
+                * (1 / tt.sqrt(1.0 - tt.square(self.eccen)))
+                * (tt.cos(f + self.omega) + self.eccen * tt.cos(self.omega))
+            )
+        )
         rv *= 299792.458  # c in km/s
 
         return tt.squeeze(rv)

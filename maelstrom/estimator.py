@@ -11,8 +11,10 @@ import theano.tensor as tt
 
 __all__ = ["estimate_frequencies"]
 
-def estimate_frequencies(x, y, fmin=None, fmax=None, max_peaks=3,
-                         oversample=4.0, optimize_freq=True):
+
+def estimate_frequencies(
+    x, y, fmin=None, fmax=None, max_peaks=3, oversample=4.0, optimize_freq=True
+):
     """
     Attempts to pick out the best frequencies
     for use with phase modulation. 
@@ -59,27 +61,26 @@ def estimate_frequencies(x, y, fmin=None, fmax=None, max_peaks=3,
 
     # Find peaks
     peak_inds = (power[1:-1] > power[:-2]) & (power[1:-1] > power[2:])
-    peak_inds = np.arange(1, len(power)-1)[peak_inds]
+    peak_inds = np.arange(1, len(power) - 1)[peak_inds]
     peak_inds = peak_inds[np.argsort(power[peak_inds])][::-1]
     peaks = []
     for j in range(max_peaks):
         i = peak_inds[0]
         freq0 = freq[i]
-        alias = 2.0*ny - freq0
+        alias = 2.0 * ny - freq0
 
-        m = np.abs(freq[peak_inds] - alias) > 25*df
-        m &= np.abs(freq[peak_inds] - freq0) > 25*df
+        m = np.abs(freq[peak_inds] - alias) > 25 * df
+        m &= np.abs(freq[peak_inds] - freq0) > 25 * df
 
         peak_inds = peak_inds[m]
         peaks.append(freq0)
     peaks = np.array(peaks)
 
     if optimize_freq:
+
         def chi2(nu):
-            arg = 2*np.pi*nu[None, :]*x[:, None]
-            D = np.concatenate([np.cos(arg), np.sin(arg),
-                        np.ones((len(x), 1))],
-                        axis=1)
+            arg = 2 * np.pi * nu[None, :] * x[:, None]
+            D = np.concatenate([np.cos(arg), np.sin(arg), np.ones((len(x), 1))], axis=1)
 
             # Solve for the amplitudes and phases of the oscillations
             DTD = np.matmul(D.T, D)

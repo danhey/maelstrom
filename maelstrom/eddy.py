@@ -2,7 +2,14 @@
 from __future__ import division, print_function
 
 from .estimator import estimate_frequencies
-from .utils import unique_colors, amplitude_spectrum, dft_phase, phase_error, mass_function
+from .utils import (
+    unique_colors,
+    amplitude_spectrum,
+    dft_phase,
+    phase_error,
+    mass_function,
+)
+from .orbit import Orbit
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,7 +17,6 @@ import theano.tensor as tt
 import theano
 import pymc3 as pm
 from pymc3.model import Model
-from maelstrom.orbit import Orbit
 
 import exoplanet as xo
 from exoplanet.orbits import get_true_anomaly
@@ -19,10 +25,11 @@ import tqdm
 
 __all__ = ["Eddy"]
 
-class Eddy(Model):
 
-    def __init__(self, time: np.ndarray, tau: np.ndarray, period_guess=None,
-                        asini_guess=None):
+class Eddy(Model):
+    def __init__(
+        self, time: np.ndarray, tau: np.ndarray, period_guess=None, asini_guess=None
+    ):
         """A PyMC3 model for modelling light travel time variations in a binary
         system using the subdividing method.
         
@@ -38,25 +45,27 @@ class Eddy(Model):
         self.tau = tau
 
         if period_guess is None:
-            period_guess = 100.
+            period_guess = 100.0
         if asini_guess is None:
-            asini_guess = 100.
+            asini_guess = 100.0
 
         period = pm.Normal("period", mu=period_guess, sd=100)
         varpi = xo.distributions.Angle("varpi")
         eccen = pm.Uniform("eccen", lower=1e-3, upper=0.999)
-        lighttime = pm.Uniform('lighttime', lower=-2000, upper=2000, testval=asini_guess)
-        phi = xo.distributions.Angle('phi')
-        
-        M = 2. * np.pi * self.time / period - phi
+        lighttime = pm.Uniform(
+            "lighttime", lower=-2000, upper=2000, testval=asini_guess
+        )
+        phi = xo.distributions.Angle("phi")
+
+        M = 2.0 * np.pi * self.time / period - phi
         # True anom
         f = get_true_anomaly(M, eccen + tt.zeros_like(M))
         factor = 1.0 - tt.square(eccen)
         factor /= 1.0 + eccen * tt.cos(f)
         psi = -factor * tt.sin(f + varpi)
-        
+
         tau = lighttime * psi
-        taumodel = pm.Deterministic('tau', tau - tt.mean(tau))
+        taumodel = pm.Deterministic("tau", tau - tt.mean(tau))
         pm.Normal("obs", mu=taumodel, sd=tt.exp(logs), observed=self.tau)
 
     def optimize(self, vars=None):
@@ -69,12 +78,14 @@ class Eddy(Model):
         Returns:
             dict: Optimisation results
         """
-        
+
         with self as model:
             if vars is None:
                 map_params = xo.optimize(start=model.test_point, vars=[self.logs])
-                map_params = xo.optimize(start=map_params, vars=[self.eccen, self.omega])
-                    
+                map_params = xo.optimize(
+                    start=map_params, vars=[self.eccen, self.omega]
+                )
+
                 map_params = xo.optimize(start=map_params, vars=[self.phi])
                 map_params = xo.optimize(start=map_params)
             else:
@@ -82,7 +93,7 @@ class Eddy(Model):
         return map_params
 
     def sample(self, tune=3000, draws=3000, start=None, target_accept=0.9, **kwargs):
-                                """        
+        """        
         Samples the model using the exoplanet PyMC3 sampler. By default,
         this will sample from 2 chains over 2 cores simultaneously.
         
@@ -106,6 +117,11 @@ class Eddy(Model):
 
         """
         with self:
-            trace = pm.sample(tune=tune, draws=draws,
-                            step=xo.get_dense_nuts_step(target_accept=target_accept), start=start, **kwargs)
+            trace = pm.sample(
+                tune=tune,
+                draws=draws,
+                step=xo.get_dense_nuts_step(target_accept=target_accept),
+                start=start,
+                **kwargs
+            )
         return trace

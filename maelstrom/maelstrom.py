@@ -294,33 +294,7 @@ class BaseOrbitModel(Model):
         ax.set_yticks([]);
         ax.set_xlim(f[0], f[-1])
         ax.set_ylim(0, None)
-        return
-
-    def get_phase(self, nu, t, y):
-        """Some black magic to calculate the phase for a given
-        segment of data for set frequencies
-        
-        Parameters
-        ----------
-        nu : array-like
-            Frequencies for which the phase will be calculated
-        t : array-like
-            Time-stamps
-        y : array-like
-            Flux values corresponding to `t`
-        
-        Returns
-        -------
-        phases
-            Given phases for each frequency.
-        """
-        arg = 2*np.pi*nu[None, :]*t[:, None]
-        D = np.concatenate((np.sin(arg), np.cos(arg),
-                            np.ones((len(t), 1))), axis=1)
-        DT = D.T
-        DTD = np.dot(DT, D)
-        w = np.linalg.solve(DTD, np.dot(D.T, y))
-        return np.arctan(w[:len(nu)] / w[len(nu):2*len(nu)])
+        return ax
 
     def first_look(self, segment_size=None, save_path=None, period=False, **kwargs):
         """ 
@@ -359,18 +333,14 @@ class BaseOrbitModel(Model):
         ax.set_ylabel('Flux')
         
         # Plot the light curve periodogram
-        ax = axes[1]
-        self.plot_periodogram(ax=ax)
-
-        ax = axes[2]
-        self.plot_time_delay(ax=ax, segment_size=segment_size)
-
-        ax = axes[3]
-        self.plot_time_delay_periodogram(ax=ax, segment_size=segment_size, period=period)
+        self.plot_periodogram(ax=axes[1])
+        self.plot_time_delay(ax=axes[2], segment_size=segment_size)
+        self.plot_time_delay_periodogram(ax=axes[3], segment_size=segment_size, period=period)
 
         if save_path is not None:
             plt.savefig(save_path, dpi=150)
             plt.close("all")
+            return
 
         return axes
 
@@ -442,10 +412,6 @@ class BaseOrbitModel(Model):
         phase = np.array(phase).T
         # Phase wrapping patch
         for ph, f in zip(phase, self.freq):
-            # mean_phase = np.mean(ph)
-            # ph[np.where(ph - mean_phase > np.pi/2)] -= np.pi
-            # ph[np.where(ph - mean_phase < -np.pi/2)] += np.pi
-            # ph -= np.mean(ph)
             ph = np.unwrap(ph)
             ph -= np.mean(ph)
 
@@ -486,11 +452,6 @@ class BaseOrbitModel(Model):
         """
         with self as model:
             func = xo.utils.get_theano_function_for_var(model.logpt, profile=True)
-            #     func = xo.utils.get_theano_function_for_var(theano.grad(model.logpt, model.vars), profile=True)
-            #args = xo.utils.get_args_for_theano_function(model.test_point)
-            #print(func(*args))
-            
-            #%timeit func(*args)
         return func.profile.summary()
 
     def to_eddy(self):
