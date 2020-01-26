@@ -6,35 +6,31 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3.7]
-        
     steps:
-      - uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
-        with:
-          persist-credentials: false
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
-        with:
-          python-version: ${{ matrix.python-version }}
-      
-      - name: Install dependencies
-        run: |
-          sudo apt install pandoc
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install sphinx nbsphinx solar_theme
-        
-      # BUILD DOCS
-      - name: Build
-        run: |
-          make html --directory docs/
+    - uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+      with:
+        persist-credentials: false
+    - name: Set up Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
 
-      - name: Build and Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: test-docs # The branch the action should deploy to.
-          FOLDER: docs/build/html # The folder the action should deploy.
+    - name: Install dependencies
+      run: |
+        sudo apt install pandoc
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install sphinx nbsphinx solar_theme
+
+    # BUILD DOCS
+    - name: Build
+      run: |
+        make html --directory docs/
+
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BASE_BRANCH: master
+        BRANCH: test-docs # The branch the action should deploy to.
+        FOLDER: docs/_build/html # The folder the action should deploy.
