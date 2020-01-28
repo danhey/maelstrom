@@ -29,8 +29,6 @@ __all__ = ["Maelstrom", "PB1Model", "BaseOrbitModel"]
 
 class BaseOrbitModel(Model):
 
-    orange = [0.84627451, 0.28069204, 0.00410611]
-
     def __init__(self, time, flux, freq=None, name="", model=None, **kwargs):
         """A base orbit model from which all other orbit models inherit.
         
@@ -66,7 +64,7 @@ class BaseOrbitModel(Model):
                 " len(time)={}, len(flux)={}".format(len(time), len(flux))
             )
 
-        if len(flux[flux == np.nan]) > 0:
+        if len(flux[np.isnan(flux)]) > 0:
             raise ValueError("Flux array must not have nan values")
 
         # Find frequencies if none are supplied
@@ -174,7 +172,7 @@ class BaseOrbitModel(Model):
             ax.plot(
                 t0s,
                 np.average(time_delay, axis=1, weights=self.get_weights()),
-                c=self.orange,
+                c=[0.84627451, 0.28069204, 0.00410611],
             )
         ax.set_xlabel("Time [day]")
         ax.set_ylabel("Time delay [s]")
@@ -253,10 +251,9 @@ class BaseOrbitModel(Model):
             t0s[m], full[m], min_period=min_period, max_period=max_period
         )
         f, p = res["periodogram"]
-        ax.plot(1 / f, p / np.max(p), c=self.orange)
+        ax.plot(1 / f, p / np.max(p), c=[0.84627451, 0.28069204, 0.00410611])
         ax.set_xlabel("Period [day]")
         ax.set_ylabel("Power")
-        # ax.set_yticks([])
         """
         if annotate:
             period_guess = res["peaks"][0]["period"]
@@ -279,8 +276,16 @@ class BaseOrbitModel(Model):
             return res
         return
 
-    def plot_time_delay_periodogram(self, ax=None, period=False, **kwargs):
-        """ Plots the time delay periodogram
+    def plot_time_delay_periodogram(self, ax=None, **kwargs):
+        """Plots the time delay periodogram (i.e. the amplitude spectrum of
+        the time delay signal)
+        
+        Args:
+            ax (matplotlib axis, optional): Axis on which to plot. If None is
+            supplied, a new one will be generated. Defaults to None.
+        
+        Returns:
+            matplotlib axis: Axis on which the periodogram is plotted.
         """
         t0s, time_delay = self.get_time_delay(**kwargs)
 
@@ -296,37 +301,27 @@ class BaseOrbitModel(Model):
             ax.plot(f, p / np.max(p), c=color)
 
         f, p = amplitude_spectrum(t0s[m], full[m])
-        ax.plot(f, p / np.max(p), c=self.orange)
+        ax.plot(f, p / np.max(p), c=[0.84627451, 0.28069204, 0.00410611])
         ax.set_xlabel(r"Frequency [day$^{-1}$]")
         ax.set_ylabel("Power")
-        # ax.set_yticks([])
         ax.set_xlim(f[0], f[-1])
         ax.set_ylim(0, None)
         return ax
 
-    def first_look(self, segment_size=None, save_path=None, period=False, **kwargs):
-        """ 
-        Shows the light curve, its amplitude spectrum, and 
-        any time delay signal for the current self.freq in the model.
-        This is useful if you want to check whether a star
-        may be a PM binary. However, sometimes only the strongest
-        peak in the star will show a TD signal, and can be drowned
-        out by the others.
+    def first_look(self, segment_size=None, save_path=None, **kwargs):
+        """Shows the light curve, its amplitude spectrum, the time delay signal,
+        and the periodogram of the time delay signal in one convenient function.
+        This is useful if you want to check whether a star may be a PM binary. However,
+        sometimes only the strongest peak in the star will show a TD signal.
         
-        Parameters
-        ----------
-        segment_size : `float`
-            Segment size in which to separate the light curve, in units of
-            the light curve time. For example, the default segment size of 10 
-            will separate a 1000 d long light curve in 100 segments of 10 d
-            each. If none is specified, Maelstrom will do its best
-        save_path : `string`
-            If `save_path` is not `None`, will save a copy of the first_look
-            plots into the given path.
+        Args:
+            segment_size (float, optional): Segment size in which to subdivide the light curve, in units of `time`. Defaults to None.
+            save_path (str, optional): If you want to save the output of the axis, pass a save path. Defaults to None.
         
-        Returns
-        -------
+        Returns:
+            array: Array of matplotlib axes.
         """
+
         if segment_size is None:
             segment_size = self._estimate_segment()
 
@@ -344,7 +339,7 @@ class BaseOrbitModel(Model):
         self.plot_periodogram(ax=axes[1])
         self.plot_time_delay(ax=axes[2], segment_size=segment_size)
         self.plot_time_delay_periodogram(
-            ax=axes[3], segment_size=segment_size, period=period
+            ax=axes[3], segment_size=segment_size,
         )
 
         if save_path is not None:
