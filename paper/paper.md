@@ -7,10 +7,20 @@ tags:
 authors:
   - name: Daniel R. Hey
     orcid: 0000-0003-3244-5357
+    affiliation: "1, 2"
   - name: Simon J. Murphy
     orcid: 0000-0002-5648-3107
+    affiliation: "1, 2"
   - name: Daniel Foreman-Mackey
     orcid: 0000-0002-9328-5652
+    affiliation: "3"
+affiliations:
+ - name: School of Physics, Sydney Institute for Astronomy (SIfA), The University of Sydney, NSW 2006, Australia
+   index: 1
+ - name: Stellar Astrophysics Centre, Department of Physics and Astronomy, Aarhus University, DK-8000 Aarhus C, Denmark
+   index: 2
+ - name: Center for Computational Astrophysics, Flatiron Institute, 162 5th Ave, New York, NY 10010, USA
+   index: 3
 date: 28 January 2020
 bibliography: paper.bib
 
