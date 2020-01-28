@@ -83,3 +83,10 @@ def test_maelstrom_gp():
     time, flux = np.linspace(0, 100, 100), np.random.randn(100)
     ms = PB1Model(time, flux, freq=np.array([5]))
     ms.init_orbit(period=1, asini=1, with_gp=True)
+
+
+def test_maelstrom_sample():
+    time, flux = np.linspace(0, 100, 100), np.random.randn(100)
+    ms = Maelstrom(time, flux, freq=np.array([5]))
+    ms.setup_orbit_model(period=1)
+    trace = ms.sample(tune=10, draws=10)

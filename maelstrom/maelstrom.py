@@ -117,15 +117,14 @@ class BaseOrbitModel(Model):
         if start is None:
             start = self.optimize()
 
-        sampler = xo.PyMC3Sampler(start=50, window=50, finish=300)
         with self:
-            sampler.tune(
+            trace = pm.sample(
                 tune=tune,
+                draws=draws,
                 start=start,
-                **kwargs,
-                step_kwargs=dict(target_accept=target_accept)
+                chains=2,
+                step=xo.get_dense_nuts_step(target_accept=target_accept),
             )
-            trace = sampler.sample(draws=draws, **kwargs)
         return trace
 
     def evaluate(self, var, opt=None):
@@ -310,16 +309,17 @@ class BaseOrbitModel(Model):
 
     def first_look(self, segment_size=None, save_path=None, **kwargs):
         """Shows the light curve, its amplitude spectrum, the time delay signal,
-        and the periodogram of the time delay signal in one convenient function.
-        This is useful if you want to check whether a star may be a PM binary. However,
-        sometimes only the strongest peak in the star will show a TD signal.
-        
-        Args:
-            segment_size (float, optional): Segment size in which to subdivide the light curve, in units of `time`. Defaults to None.
-            save_path (str, optional): If you want to save the output of the axis, pass a save path. Defaults to None.
-        
-        Returns:
-            array: Array of matplotlib axes.
+        and the periodogram of the time delay signal in one convenient
+        function. This is useful if you want to check whether a star may be a
+        PM binary. However, sometimes only the strongest peak in the star will
+        show a TD signal.
+
+        Args: segment_size (float, optional): Segment size in which to
+            subdivide the light curve, in units of `time`. Defaults to None.
+            save_path (str, optional): If you want to save the output of the
+            axis, pass a save path. Defaults to None.
+
+        Returns: array: Array of matplotlib axes.
         """
 
         if segment_size is None:
