@@ -75,19 +75,19 @@ class BaseOrbitModel(Model):
         self.flux = (flux - np.mean(flux)) * 1e3
         self.freq = np.array(freq)
 
-    def uncertainty(self, map_soln):
-        """Calculates the Fisher information of the current model, returning
-        an estimate of the covariance of the parameters in the model. Note that this will
-        *not* work if any GP (celerite) kernels are active in your model.
+    # def uncertainty(self, map_soln):
+    #     """Calculates the Fisher information of the current model, returning
+    #     an estimate of the covariance of the parameters in the model. Note that this will
+    #     *not* work if any GP (celerite) kernels are active in your model.
         
-        Args:
-            map_soln (dict): Optimisation results.
+    #     Args:
+    #         map_soln (dict): Optimisation results.
         
-        Returns:
-            array: Diagonals of the covariance matrix.
-        """
-        with self:
-            return np.sqrt(np.diag(np.linalg.solve(pm.find_hessian(map_soln))))
+    #     Returns:
+    #         array: Diagonals of the covariance matrix.
+    #     """
+    #     with self:
+    #         return np.sqrt(np.diag(np.linalg.solve(pm.find_hessian(map_soln))))
 
     def sample(self, tune=3000, draws=3000, start=None, target_accept=0.9, **kwargs):
         """

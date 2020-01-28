@@ -71,12 +71,12 @@ def test_maelstrom_inputs():
         ms = Maelstrom(time, flux)
 
 
-def test_maelstrom_uncertainty():
-    time, flux = np.linspace(0, 100, 100), np.random.randn(100)
-    ms = Maelstrom(time, flux, freq=np.array([5]))
-    ms.setup_orbit_model(period=1)
-    opt = ms.optimize()
-    ms.uncertainty(opt)
+# def test_maelstrom_uncertainty():
+#     time, flux = np.linspace(0, 100, 100), np.random.randn(100)
+#     ms = Maelstrom(time, flux, freq=np.array([5]))
+#     ms.setup_orbit_model(period=1)
+#     opt = ms.optimize()
+#     ms.uncertainty(opt)
 
 
 def test_maelstrom_gp():
