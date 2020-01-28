@@ -11,13 +11,9 @@ authors:
     orcid: 0000-0002-5648-3107
   - name: Daniel Foreman-Mackey
     orcid: 0000-0002-9328-5652
-  - name: Timothy R. Bedding
-    orcid: 0000-0001-5222-4661
-  - name: Benjamin J.S. Pope
-    orcid: 0000-0003-2595-9114
-  - name: David W. Hogg
-    orcid: 0000-0003-2866-9403
-    
+date: 28 January 2020
+bibliography: paper.bib
+
 # Optional fields if submitting to a AAS journal too, see this blog post:
 # https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
 # aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
