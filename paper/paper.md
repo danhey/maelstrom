@@ -52,7 +52,7 @@ type are the $\delta$ Scuti variables, a class of A/F type stars. As the
 pulsating star is tugged around by the gravity of its companion, the time taken
 for its light to reach Earth varies. A map of the binary orbit can then be
 constructed by observing the phase of the pulsations over time, which can be
-converted into time delays $ \tau $: a measure of the relative time taken for
+converted into time delays $\tau$: a measure of the relative time taken for
 the light to reach Earth (as shown in Fig. 1). This method, phase modulation,
 is uniquely suited to observing intermediate period binaries
 `[@Murphy2015Deriving]`.
