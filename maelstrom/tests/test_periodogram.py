@@ -3,7 +3,7 @@ from __future__ import division, print_function
 import sys
 import pytest
 
-from ..maelstrom import Periodogram
+from ..periodogram import Periodogram
 import numpy as np
 import matplotlib.pyplot as plt
 
