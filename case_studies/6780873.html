@@ -431,7 +431,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>%run setup.py
+<span></span><span class="o">%</span><span class="k">run</span> setup.py
 </pre></div>
 </div>
 </div>
@@ -440,7 +440,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>t, y = np.loadtxt(&#39;../data/6780873_lc.txt&#39;, usecols=(0,1)).T
+<span></span><span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;../data/6780873_lc.txt&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
 </pre></div>
 </div>
 </div>
@@ -449,10 +449,10 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>time, flux = t, (y-1)*1e3
-freq = np.array([14.18764198, 13.43633836])
-weights = np.array([1.73064022, 0.97161184])
-plt.plot(time, flux)
+<span></span><span class="n">time</span><span class="p">,</span> <span class="n">flux</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">1e3</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">14.18764198</span><span class="p">,</span> <span class="mf">13.43633836</span><span class="p">])</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.73064022</span><span class="p">,</span> <span class="mf">0.97161184</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -477,7 +477,7 @@ plt.plot(time, flux)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>period_guess, a_guess = 9.159, 18
+<span></span><span class="n">period_guess</span><span class="p">,</span> <span class="n">a_guess</span> <span class="o">=</span> <span class="mf">9.159</span><span class="p">,</span> <span class="mi">18</span>
 </pre></div>
 </div>
 </div>
@@ -488,7 +488,7 @@ plt.plot(time, flux)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pg = ms.period_search()
+<span></span><span class="n">pg</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">period_search</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -497,8 +497,8 @@ plt.plot(time, flux)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>periods = np.linspace(2, 20, 200)
-results = pg.fit(periods)
+<span></span><span class="n">periods</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">periods</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -516,10 +516,10 @@ results = pg.fit(periods)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>ys = np.array([[r[0] for r in row] for row in results])
-sm = np.sum(ys, axis=0)
-period_ind = np.argmax(sm)
-plt.plot(periods, -sm);
+<span></span><span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="p">])</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">period_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">periods</span><span class="p">,</span> <span class="o">-</span><span class="n">sm</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -535,14 +535,14 @@ plt.plot(periods, -sm);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>def get_phase(nu, t, y):
-    arg = 2*np.pi*nu[None, :]*t[:, None]
-    D = np.concatenate((np.sin(arg), np.cos(arg),
-                        np.ones((len(t), 1))), axis=1)
-    DT = D.T
-    DTD = np.dot(DT, D)
-    w = np.linalg.solve(DTD, np.dot(D.T, y))
-    return np.arctan2(w[:len(nu)], w[len(nu):2*len(nu)]) / (2*np.pi*nu)
+<span></span><span class="k">def</span> <span class="nf">get_phase</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">arg</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">nu</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">*</span><span class="n">t</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="mi">1</span><span class="p">))),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">DT</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">DTD</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">DT</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">DTD</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">w</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">nu</span><span class="p">)],</span> <span class="n">w</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">nu</span><span class="p">):</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">nu</span><span class="p">)])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">nu</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -551,18 +551,18 @@ plt.plot(periods, -sm);
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import tqdm
-t0s = np.arange(time.min(), time.max(), 2.5)
-phases = np.empty((len(t0s)-1, len(freq)))
-phases[:] = np.nan
-for i, t0 in tqdm.tqdm(enumerate(t0s[:-1]), total=len(t0s)-1):
-    m = (t0 &lt;= time) &amp; (time &lt; t0s[i+1])
-    if m.sum() &lt; 100:
-        continue
-    phases[i] = get_phase(freq, time[m], flux[m])
+<span></span><span class="kn">import</span> <span class="nn">tqdm</span>
+<span class="n">t0s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">time</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="n">phases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">t0s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">)))</span>
+<span class="n">phases</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t0</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">t0s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">t0s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">t0</span> <span class="o">&lt;=</span> <span class="n">time</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">time</span> <span class="o">&lt;</span> <span class="n">t0s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">phases</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_phase</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">time</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">flux</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
 
-# phases -= np.nanmean(phases, axis=0)
-full = np.mean(phases, axis=1)
+<span class="c1"># phases -= np.nanmean(phases, axis=0)</span>
+<span class="n">full</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">phases</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -579,14 +579,14 @@ full = np.mean(phases, axis=1)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>m = np.isfinite(phases[:, 0])
-res = xo.estimators.lomb_scargle_estimator(t0s[:-1][m], full[m], min_period=7, max_period=25)
-f, p = res[&quot;periodogram&quot;]
-period_guess = res[&#39;peaks&#39;][0][&#39;period&#39;]
-plt.plot(1 / f, p)
-plt.axvline(res[&quot;peaks&quot;][0][&quot;period&quot;], color=&quot;k&quot;)
-plt.xlabel(&quot;period&quot;)
-plt.ylabel(&quot;power&quot;)
+<span></span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">phases</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">estimators</span><span class="o">.</span><span class="n">lomb_scargle_estimator</span><span class="p">(</span><span class="n">t0s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">m</span><span class="p">],</span> <span class="n">full</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">min_period</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">max_period</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;periodogram&quot;</span><span class="p">]</span>
+<span class="n">period_guess</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;peaks&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;period&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;peaks&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;period&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;period&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;power&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -611,13 +611,13 @@ Text(0, 0.5, &#39;power&#39;)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>uHz_conv = 1e-6 * 24 * 60 * 60
-tds = []
-for freq, phase in zip(ms.freq, phases[m].T):
-    phase = np.unwrap(phase)
-    phase -= np.mean(phase)
-    td = phase / (2*np.pi*(freq / uHz_conv * 1e-6))
-    tds.append(td)
+<span></span><span class="n">uHz_conv</span> <span class="o">=</span> <span class="mf">1e-6</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span>
+<span class="n">tds</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">freq</span><span class="p">,</span> <span class="n">phase</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span> <span class="n">phases</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">):</span>
+    <span class="n">phase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span>
+    <span class="n">phase</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span>
+    <span class="n">td</span> <span class="o">=</span> <span class="n">phase</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">freq</span> <span class="o">/</span> <span class="n">uHz_conv</span> <span class="o">*</span> <span class="mf">1e-6</span><span class="p">))</span>
+    <span class="n">tds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">td</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -626,14 +626,14 @@ for freq, phase in zip(ms.freq, phases[m].T):
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>##### period_guess = res[&quot;peaks&quot;][0][&quot;period&quot;]
-arg = 2*np.pi*t0s[:-1][m]/period_guess
-D = np.concatenate((np.sin(arg)[:, None],
-                    np.cos(arg)[:, None],
-                    np.ones((len(phases[m]), 1))), axis=-1)
-w = np.linalg.solve(np.dot(D.T, D), np.dot(D.T, phases[m, 0]))
-a_guess = np.sqrt(np.sum(w[:2]**2)) * 86400
-period_guess, a_guess
+<span></span><span class="c1">##### period_guess = res[&quot;peaks&quot;][0][&quot;period&quot;]</span>
+<span class="n">arg</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t0s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">m</span><span class="p">]</span><span class="o">/</span><span class="n">period_guess</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">arg</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">],</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">arg</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">],</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">phases</span><span class="p">[</span><span class="n">m</span><span class="p">]),</span> <span class="mi">1</span><span class="p">))),</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">D</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">phases</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+<span class="n">a_guess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="mi">86400</span>
+<span class="n">period_guess</span><span class="p">,</span> <span class="n">a_guess</span>
 </pre></div>
 </div>
 </div>
@@ -654,13 +654,13 @@ period_guess, a_guess
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from scipy.ndimage import gaussian_filter
-from maelstrom.utils import amplitude_spectrum
-y_low = gaussian_filter(y,1.8)
-y_high = y - y_low
+<span></span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">gaussian_filter</span>
+<span class="kn">from</span> <span class="nn">maelstrom.utils</span> <span class="kn">import</span> <span class="n">amplitude_spectrum</span>
+<span class="n">y_low</span> <span class="o">=</span> <span class="n">gaussian_filter</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mf">1.8</span><span class="p">)</span>
+<span class="n">y_high</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">y_low</span>
 
-plt.plot(*amplitude_spectrum(t, y), alpha=0.5)
-plt.plot(*amplitude_spectrum(t, y_high), alpha=0.5)
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">amplitude_spectrum</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">amplitude_spectrum</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_high</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -693,10 +693,10 @@ WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from maelstrom import Maelstrom
+<span></span><span class="kn">from</span> <span class="nn">maelstrom</span> <span class="kn">import</span> <span class="n">Maelstrom</span>
 
-ms = Maelstrom(t, y_high, freq=freq)
-ms.first_look()
+<span class="n">ms</span> <span class="o">=</span> <span class="n">Maelstrom</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_high</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">)</span>
+<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -725,8 +725,8 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c4f400b00&gt;,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>td_time, td_td = ms.get_time_delay(segment_size=2.8)
-td_td = np.average(td_td, weights=ms.get_weights(norm=False), axis=1)
+<span></span><span class="n">td_time</span><span class="p">,</span> <span class="n">td_td</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">get_time_delay</span><span class="p">(</span><span class="n">segment_size</span><span class="o">=</span><span class="mf">2.8</span><span class="p">)</span>
+<span class="n">td_td</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">td_td</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">ms</span><span class="o">.</span><span class="n">get_weights</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -735,18 +735,18 @@ td_td = np.average(td_td, weights=ms.get_weights(norm=False), axis=1)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># td_time, td_td = np.loadtxt(&#39;../data/kic6780873_time-delay_Q99_llc.txt&#39;, delimiter=&#39;,&#39;, usecols=(0,1)).T
-# td_time += 2400000
-# td_time -= 2454833
-#td_time -= np.median(td_time)
-td_time = td_time[td_td&lt; 70]
-td_td = td_td[td_td &lt; 70]
+<span></span><span class="c1"># td_time, td_td = np.loadtxt(&#39;../data/kic6780873_time-delay_Q99_llc.txt&#39;, delimiter=&#39;,&#39;, usecols=(0,1)).T</span>
+<span class="c1"># td_time += 2400000</span>
+<span class="c1"># td_time -= 2454833</span>
+<span class="c1">#td_time -= np.median(td_time)</span>
+<span class="n">td_time</span> <span class="o">=</span> <span class="n">td_time</span><span class="p">[</span><span class="n">td_td</span><span class="o">&lt;</span> <span class="mi">70</span><span class="p">]</span>
+<span class="n">td_td</span> <span class="o">=</span> <span class="n">td_td</span><span class="p">[</span><span class="n">td_td</span> <span class="o">&lt;</span> <span class="mi">70</span><span class="p">]</span>
 
-td_time = td_time[td_td&gt;- 70]
-td_td = td_td[td_td&gt;-70]
+<span class="n">td_time</span> <span class="o">=</span> <span class="n">td_time</span><span class="p">[</span><span class="n">td_td</span><span class="o">&gt;-</span> <span class="mi">70</span><span class="p">]</span>
+<span class="n">td_td</span> <span class="o">=</span> <span class="n">td_td</span><span class="p">[</span><span class="n">td_td</span><span class="o">&gt;-</span><span class="mi">70</span><span class="p">]</span>
 
-# td_time -= np.median(td_time)
-plt.plot(td_time, td_td)
+<span class="c1"># td_time -= np.median(td_time)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">td_time</span><span class="p">,</span> <span class="n">td_td</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -771,8 +771,8 @@ plt.plot(td_time, td_td)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from maelstrom.utils import amplitude_spectrum
-plt.plot(*amplitude_spectrum(td_time, td_td))
+<span></span><span class="kn">from</span> <span class="nn">maelstrom.utils</span> <span class="kn">import</span> <span class="n">amplitude_spectrum</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">amplitude_spectrum</span><span class="p">(</span><span class="n">td_time</span><span class="p">,</span> <span class="n">td_td</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -797,51 +797,51 @@ plt.plot(*amplitude_spectrum(td_time, td_td))
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import theano.tensor as tt
+<span></span><span class="kn">import</span> <span class="nn">theano.tensor</span> <span class="k">as</span> <span class="nn">tt</span>
 
-with pm.Model() as subdivide_model:
-    logP = pm.Normal(&quot;logP&quot;, mu=np.log(period_guess), sd=0.5, testval=np.log(period_guess))
-    period = pm.Deterministic(&quot;period&quot;, pm.math.exp(logP))
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">subdivide_model</span><span class="p">:</span>
+    <span class="n">logP</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;logP&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">period_guess</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">period_guess</span><span class="p">))</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logP</span><span class="p">))</span>
 
-    # The time of conjunction
-    logs_lc = pm.Normal(&#39;logs_lc&#39;, mu=np.log(np.std(flux)), sd=10, testval=0.)
-    logasini = pm.Normal(&#39;logasini&#39;, mu=np.log(a_guess), sd=10, testval=np.log(a_guess))
-    asini = pm.Deterministic(&quot;asini&quot;, tt.exp(logasini))
-    drift = pm.Normal(&#39;drift&#39;, mu=0., sd=0.1, testval=0)
-    # Periastron sampled from uniform angle
-    omega = xo.distributions.Angle(&quot;omega&quot;, testval=0.)
-    phi = xo.distributions.Angle(&quot;phi&quot;, testval=0.22)
-#     sinomega = pm.Uniform(&#39;sinomega&#39;, lower=-1, upper=1)
-#     sinphi = pm.Uniform(&quot;sinphi&quot;, lower=-1, upper=1)
-#     omega = pm.Uniform(&quot;omega&quot;, lower=-2*np.pi, upper=2*np.pi)
-    mean = pm.Normal(&#39;mean&#39;, mu=0, sd=5, testval=0.)
-    # Eccentricity
-    eccen = pm.Uniform(&quot;eccen&quot;, lower=0, upper=0.9, testval=0.05)
-#     BoundedBeta = pm.Bound(pm.Beta, lower=0, upper=1-1e-5)
-#     eccen = BoundedBeta(&quot;eccen&quot;, alpha=0.867, beta=3.03, shape=1,
-#                           testval=0.05)
-    # The baseline flux
-    #mean = pm.Normal(&quot;mean&quot;, mu=0.0, sd=10.0, testval=0.003)
+    <span class="c1"># The time of conjunction</span>
+    <span class="n">logs_lc</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;logs_lc&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">flux</span><span class="p">)),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+    <span class="n">logasini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;logasini&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">a_guess</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">a_guess</span><span class="p">))</span>
+    <span class="n">asini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;asini&quot;</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logasini</span><span class="p">))</span>
+    <span class="n">drift</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;drift&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Periastron sampled from uniform angle</span>
+    <span class="n">omega</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="s2">&quot;phi&quot;</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.22</span><span class="p">)</span>
+<span class="c1">#     sinomega = pm.Uniform(&#39;sinomega&#39;, lower=-1, upper=1)</span>
+<span class="c1">#     sinphi = pm.Uniform(&quot;sinphi&quot;, lower=-1, upper=1)</span>
+<span class="c1">#     omega = pm.Uniform(&quot;omega&quot;, lower=-2*np.pi, upper=2*np.pi)</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+    <span class="c1"># Eccentricity</span>
+    <span class="n">eccen</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;eccen&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="c1">#     BoundedBeta = pm.Bound(pm.Beta, lower=0, upper=1-1e-5)</span>
+<span class="c1">#     eccen = BoundedBeta(&quot;eccen&quot;, alpha=0.867, beta=3.03, shape=1,</span>
+<span class="c1">#                           testval=0.05)</span>
+    <span class="c1"># The baseline flux</span>
+    <span class="c1">#mean = pm.Normal(&quot;mean&quot;, mu=0.0, sd=10.0, testval=0.003)</span>
 
-    # Mean anom
-    M = 2.0 * np.pi * td_time / period - phi
+    <span class="c1"># Mean anom</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">td_time</span> <span class="o">/</span> <span class="n">period</span> <span class="o">-</span> <span class="n">phi</span>
 
-    # True anom
-    kepler_op = xo.theano_ops.kepler.KeplerOp()
-    sinf, cosf = kepler_op(M, eccen + np.zeros(len(td_time)))
+    <span class="c1"># True anom</span>
+    <span class="n">kepler_op</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">theano_ops</span><span class="o">.</span><span class="n">kepler</span><span class="o">.</span><span class="n">KeplerOp</span><span class="p">()</span>
+    <span class="n">sinf</span><span class="p">,</span> <span class="n">cosf</span> <span class="o">=</span> <span class="n">kepler_op</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">eccen</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">td_time</span><span class="p">)))</span>
 
-    factor = 1.0 - tt.square(eccen)
-    factor /= 1.0 + eccen * cosf
-    psi = factor * (sinf*tt.cos(omega)+cosf*tt.sin(omega))
-    tau = asini * psi
-    tau += td_time * drift
-    taumodel = pm.Deterministic(&#39;taumodel&#39;, tau - mean)
+    <span class="n">factor</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">tt</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">eccen</span><span class="p">)</span>
+    <span class="n">factor</span> <span class="o">/=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">eccen</span> <span class="o">*</span> <span class="n">cosf</span>
+    <span class="n">psi</span> <span class="o">=</span> <span class="n">factor</span> <span class="o">*</span> <span class="p">(</span><span class="n">sinf</span><span class="o">*</span><span class="n">tt</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">omega</span><span class="p">)</span><span class="o">+</span><span class="n">cosf</span><span class="o">*</span><span class="n">tt</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span><span class="p">))</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">asini</span> <span class="o">*</span> <span class="n">psi</span>
+    <span class="n">tau</span> <span class="o">+=</span> <span class="n">td_time</span> <span class="o">*</span> <span class="n">drift</span>
+    <span class="n">taumodel</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s1">&#39;taumodel&#39;</span><span class="p">,</span> <span class="n">tau</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span>
 
-    pm.Normal(&#39;obs&#39;, mu=taumodel, sd=tt.exp(logs_lc), observed=td_td)
+    <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;obs&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">taumodel</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logs_lc</span><span class="p">),</span> <span class="n">observed</span><span class="o">=</span><span class="n">td_td</span><span class="p">)</span>
 
 
-    plt.plot(td_time, xo.eval_in_model(taumodel))
-    plt.plot(td_time, td_td)
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">td_time</span><span class="p">,</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">taumodel</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">td_time</span><span class="p">,</span> <span class="n">td_td</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -857,14 +857,14 @@ with pm.Model() as subdivide_model:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>with subdivide_model:
-    map_params = xo.optimize(vars=[mean])
-    map_params = xo.optimize(vars=[logs_lc])
-    map_params = xo.optimize(vars=[logasini, phi])
-    map_params = xo.optimize(vars=[logs_lc])
-    map_params = xo.optimize(vars=[eccen, omega])
-    map_params = xo.optimize(vars=[logP])
-    map_params = xo.optimize()
+<span></span><span class="k">with</span> <span class="n">subdivide_model</span><span class="p">:</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">mean</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">logs_lc</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">logasini</span><span class="p">,</span> <span class="n">phi</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">logs_lc</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">eccen</span><span class="p">,</span> <span class="n">omega</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">logP</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -908,8 +908,8 @@ logp: -185871.60630944665 -&gt; -2134.83200433229
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>with subdivide_model:
-    trace = pm.sample(draws=2000, start=map_params)
+<span></span><span class="k">with</span> <span class="n">subdivide_model</span><span class="p">:</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -930,9 +930,9 @@ Sampling 2 chains: 100%|██████████| 5000/5000 [00:37&lt;00:0
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import corner
+<span></span><span class="kn">import</span> <span class="nn">corner</span>
 
-corner.corner(pm.trace_to_dataframe(trace, varnames=[&#39;period&#39;, &#39;asini&#39;, &#39;eccen&#39;, &#39;omega&#39;, &#39;phi&#39;]));
+<span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">trace_to_dataframe</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">varnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="s1">&#39;asini&#39;</span><span class="p">,</span> <span class="s1">&#39;eccen&#39;</span><span class="p">,</span> <span class="s1">&#39;omega&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">]));</span>
 </pre></div>
 </div>
 </div>
@@ -948,14 +948,14 @@ corner.corner(pm.trace_to_dataframe(trace, varnames=[&#39;period&#39;, &#39;asin
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from maelstrom.utils import mass_function
-import astropy.units as u
-rounding = 3
-samples = pm.trace_to_dataframe(trace, varnames=[&#39;period&#39;, &#39;asini&#39;])
-mfs = mass_function(samples[&#39;period&#39;].values * u.day, samples[&#39;asini&#39;].values*u.s)
-#mfs = np.array(mfs)
-upper, med, lower = np.percentile(mfs.value, [84.13, 50, 15.86])
-print(&#39;mass_func&#39;, &#39;: &#39;, np.round(med,rounding), &#39; + &#39;, np.round(upper - med,rounding), &#39; - &#39;, np.round(med - lower,rounding))
+<span></span><span class="kn">from</span> <span class="nn">maelstrom.utils</span> <span class="kn">import</span> <span class="n">mass_function</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="n">rounding</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">trace_to_dataframe</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">varnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="s1">&#39;asini&#39;</span><span class="p">])</span>
+<span class="n">mfs</span> <span class="o">=</span> <span class="n">mass_function</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">samples</span><span class="p">[</span><span class="s1">&#39;asini&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+<span class="c1">#mfs = np.array(mfs)</span>
+<span class="n">upper</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">mfs</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="p">[</span><span class="mf">84.13</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">15.86</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mass_func&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; + &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; - &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span> <span class="o">-</span> <span class="n">lower</span><span class="p">,</span><span class="n">rounding</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -972,12 +972,12 @@ mass_func :  0.034  +  0.018  -  0.012
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>phis = trace[&#39;omega&#39;]
-phis[phis &lt; 0] += 2*np.pi
-np.median(phis)
+<span></span><span class="n">phis</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;omega&#39;</span><span class="p">]</span>
+<span class="n">phis</span><span class="p">[</span><span class="n">phis</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">phis</span><span class="p">)</span>
 
-upper, med, lower = np.percentile(phis, [84.13, 50, 15.86])
-print(&#39;: &#39;, np.round(med,rounding), &#39; + &#39;, np.round(upper - med,rounding), &#39; - &#39;, np.round(med - lower,rounding))
+<span class="n">upper</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">phis</span><span class="p">,</span> <span class="p">[</span><span class="mf">84.13</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">15.86</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; + &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; - &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span> <span class="o">-</span> <span class="n">lower</span><span class="p">,</span><span class="n">rounding</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -994,11 +994,11 @@ print(&#39;: &#39;, np.round(med,rounding), &#39; + &#39;, np.round(upper - med,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>varnames=[&#39;period&#39;, &#39;phi&#39;, &#39;eccen&#39;, &#39;asini&#39;, &#39;omega&#39;]
-rounding = 3
-for varname in varnames:
-    upper, med, lower = np.percentile(trace[varname], [84.13, 50, 15.86])
-    print(varname, &#39;: &#39;, np.round(med,rounding), &#39; + &#39;, np.round(upper - med,rounding), &#39; - &#39;, np.round(med - lower,rounding))
+<span></span><span class="n">varnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="s1">&#39;eccen&#39;</span><span class="p">,</span> <span class="s1">&#39;asini&#39;</span><span class="p">,</span> <span class="s1">&#39;omega&#39;</span><span class="p">]</span>
+<span class="n">rounding</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">for</span> <span class="n">varname</span> <span class="ow">in</span> <span class="n">varnames</span><span class="p">:</span>
+    <span class="n">upper</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="n">varname</span><span class="p">],</span> <span class="p">[</span><span class="mf">84.13</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">15.86</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">varname</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; + &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; - &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span> <span class="o">-</span> <span class="n">lower</span><span class="p">,</span><span class="n">rounding</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1019,7 +1019,7 @@ omega :  1.742  +  1.003  -  4.357
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pm.save_trace(trace, &#39;traces/6780873_subdivided_final/&#39;, overwrite=True)
+<span></span><span class="n">pm</span><span class="o">.</span><span class="n">save_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="s1">&#39;traces/6780873_subdivided_final/&#39;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1038,33 +1038,33 @@ omega :  1.742  +  1.003  -  4.357
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 
-<span></span>fig, ax = plt.subplots(figsize=mnras_size(540), constrained_layout=True)
+<span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">mnras_size</span><span class="p">(</span><span class="mi">540</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-with subdivide_model:
-    for samp in xo.utils.get_samples_from_trace(trace, size=100):
-        #taumod = xo.eval_in_model(asini * psi, samp)
-        ttime = (td_time) % samp[&#39;period&#39;] / samp[&#39;period&#39;]
-        tau = samp[&#39;taumodel&#39;]
+<span class="k">with</span> <span class="n">subdivide_model</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">samp</span> <span class="ow">in</span> <span class="n">xo</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_samples_from_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="c1">#taumod = xo.eval_in_model(asini * psi, samp)</span>
+        <span class="n">ttime</span> <span class="o">=</span> <span class="p">(</span><span class="n">td_time</span><span class="p">)</span> <span class="o">%</span> <span class="n">samp</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">samp</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">]</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="n">samp</span><span class="p">[</span><span class="s1">&#39;taumodel&#39;</span><span class="p">]</span>
 
-        sort = np.argsort(ttime)
-        ax.plot(ttime[sort], tau[sort], linewidth=0.1, alpha=1, color=blue)
-        #ttime = (ms.time_mid + time - samp[&#39;tref&#39;]) % samp[&#39;period&#39;] / samp[&#39;period&#39;]
-        #ttime = (ms.time_mid + time) % samp[&#39;period&#39;] / samp[&#39;period&#39;]
-        #ttime = ((ms.time_mid + time) + (samp[&#39;phi&#39;] * samp[&#39;period&#39;] / (2*np.pi))) % samp[&#39;period&#39;] / samp[&#39;period&#39;]
-        #sort = np.argsort(ttime)
-        #ax.plot(ttime[sort], (taumod - np.mean(taumod))[sort], color=blue, linewidth=0.1, alpha=1, rasterized=True)
+        <span class="n">sort</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">ttime</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ttime</span><span class="p">[</span><span class="n">sort</span><span class="p">],</span> <span class="n">tau</span><span class="p">[</span><span class="n">sort</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">blue</span><span class="p">)</span>
+        <span class="c1">#ttime = (ms.time_mid + time - samp[&#39;tref&#39;]) % samp[&#39;period&#39;] / samp[&#39;period&#39;]</span>
+        <span class="c1">#ttime = (ms.time_mid + time) % samp[&#39;period&#39;] / samp[&#39;period&#39;]</span>
+        <span class="c1">#ttime = ((ms.time_mid + time) + (samp[&#39;phi&#39;] * samp[&#39;period&#39;] / (2*np.pi))) % samp[&#39;period&#39;] / samp[&#39;period&#39;]</span>
+        <span class="c1">#sort = np.argsort(ttime)</span>
+        <span class="c1">#ax.plot(ttime[sort], (taumod - np.mean(taumod))[sort], color=blue, linewidth=0.1, alpha=1, rasterized=True)</span>
 
 
-#a, b = ms.get_time_delay(segment_size=10)
-#bb = np.average(b, axis=1, weights=ms.get_weights())
-#plt.plot((a + ms.time_mid) % np.median(trace[&#39;period&#39;]) / np.median(trace[&#39;period&#39;]) ,bb, &#39;.k&#39;, markersize=2)
+<span class="c1">#a, b = ms.get_time_delay(segment_size=10)</span>
+<span class="c1">#bb = np.average(b, axis=1, weights=ms.get_weights())</span>
+<span class="c1">#plt.plot((a + ms.time_mid) % np.median(trace[&#39;period&#39;]) / np.median(trace[&#39;period&#39;]) ,bb, &#39;.k&#39;, markersize=2)</span>
 
-ax.set_xlabel(&#39;Orbital phase&#39;)
-ax.set_ylabel(&#39;Time delay (s)&#39;, c=blue)
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Orbital phase&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Time delay (s)&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">blue</span><span class="p">)</span>
 
-#ax.set_xlim(0, 1)
+<span class="c1">#ax.set_xlim(0, 1)</span>
 
-#plt.savefig(overleaf_path + &#39;6780873.png&#39;, dpi=300, bbox_inches=&#39;tight&#39;, pad_inches=0)
+<span class="c1">#plt.savefig(overleaf_path + &#39;6780873.png&#39;, dpi=300, bbox_inches=&#39;tight&#39;, pad_inches=0)</span>
 </pre></div>
 </div>
 </div>
@@ -1092,16 +1092,16 @@ Text(0, 0.5, &#39;Time delay (s)&#39;)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>rv_jd, rv_rv, rv_err = np.loadtxt(&#39;../../data/kic6780873_JDrv.txt&#39;, delimiter=&#39;,&#39;, usecols=(0,1,2)).T
-rv_jd += 2400000
-rv_jd -= 2454833
+<span></span><span class="n">rv_jd</span><span class="p">,</span> <span class="n">rv_rv</span><span class="p">,</span> <span class="n">rv_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;../../data/kic6780873_JDrv.txt&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+<span class="n">rv_jd</span> <span class="o">+=</span> <span class="mi">2400000</span>
+<span class="n">rv_jd</span> <span class="o">-=</span> <span class="mi">2454833</span>
 
-time, mag = np.loadtxt(&#39;../../data/kic6780873_lc.txt&#39;, usecols=(0,1)).T
-time += 2400000
-time -= 2454833
-time, mag = time, mag*1e3
+<span class="n">time</span><span class="p">,</span> <span class="n">mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;../../data/kic6780873_lc.txt&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+<span class="n">time</span> <span class="o">+=</span> <span class="mi">2400000</span>
+<span class="n">time</span> <span class="o">-=</span> <span class="mi">2454833</span>
+<span class="n">time</span><span class="p">,</span> <span class="n">mag</span> <span class="o">=</span> <span class="n">time</span><span class="p">,</span> <span class="n">mag</span><span class="o">*</span><span class="mf">1e3</span>
 
-freq = np.array([14.18764198, 13.43633836])
+<span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">14.18764198</span><span class="p">,</span> <span class="mf">13.43633836</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1110,43 +1110,43 @@ freq = np.array([14.18764198, 13.43633836])
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>with pm.Model() as model:
-    P = pm.Bound(pm.Normal, lower=1, upper=12)(&quot;P&quot;, mu=9.159153, sd=5,
-                                     shape=1, testval=9.159153)
+<span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">12</span><span class="p">)(</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">9.159153</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                                     <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">9.159153</span><span class="p">)</span>
 
-    # Wide log-normal prior for semi-amplitude
-    logasini = pm.Bound(pm.Normal, lower=1, upper=25)(&quot;logasini&quot;, mu=np.log(17.441530), sd=10,
-                                        shape=1, testval=np.log(17.441530))
-    logs_lc = pm.Normal(&#39;logs_lc&#39;, mu=0.0001*np.log(np.std(mag)), sd=10, testval=0.)
-    asini = pm.Deterministic(&#39;asini&#39;, tt.exp(logasini))
-    ecc = xo.distributions.UnitUniform(&quot;ecc&quot;, shape=1, testval=0.27)
-    omega = xo.distributions.Angle(&quot;omega&quot;, testval=2.306092)
-    phi = xo.distributions.Angle(&#39;phi&#39;, testval=0.377081)
-    lognu = pm.Normal(&quot;lognu&quot;, mu=np.log(freq), sd=0.1, shape=len(freq))
-    nu = pm.Deterministic(&quot;nu&quot;, tt.exp(lognu))
+    <span class="c1"># Wide log-normal prior for semi-amplitude</span>
+    <span class="n">logasini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">25</span><span class="p">)(</span><span class="s2">&quot;logasini&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">17.441530</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                        <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">17.441530</span><span class="p">))</span>
+    <span class="n">logs_lc</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;logs_lc&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.0001</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mag</span><span class="p">)),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+    <span class="n">asini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s1">&#39;asini&#39;</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logasini</span><span class="p">))</span>
+    <span class="n">ecc</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">UnitUniform</span><span class="p">(</span><span class="s2">&quot;ecc&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.27</span><span class="p">)</span>
+    <span class="n">omega</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">2.306092</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.377081</span><span class="p">)</span>
+    <span class="n">lognu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;lognu&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">freq</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">))</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;nu&quot;</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">lognu</span><span class="p">))</span>
 
-    orbit = Orbit(period=P,
-              lighttime=asini,
-              omega=omega,
-              eccen=ecc,
-              phi=phi,
-              freq=nu)
+    <span class="n">orbit</span> <span class="o">=</span> <span class="n">Orbit</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="n">P</span><span class="p">,</span>
+              <span class="n">lighttime</span><span class="o">=</span><span class="n">asini</span><span class="p">,</span>
+              <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">,</span>
+              <span class="n">eccen</span><span class="o">=</span><span class="n">ecc</span><span class="p">,</span>
+              <span class="n">phi</span><span class="o">=</span><span class="n">phi</span><span class="p">,</span>
+              <span class="n">freq</span><span class="o">=</span><span class="n">nu</span><span class="p">)</span>
 
-    lc = orbit.get_lightcurve_model(time, mag)
+    <span class="n">lc</span> <span class="o">=</span> <span class="n">orbit</span><span class="o">.</span><span class="n">get_lightcurve_model</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">mag</span><span class="p">)</span>
 
-    logw0 = pm.Bound(pm.Normal,
-                     lower=np.log(2*np.pi/100.0),
-                     upper=np.log(2*np.pi/0.1))(&quot;logw0&quot;, mu=np.log(2*np.pi/10), sd=10,
-                                                testval=2.58269602)
-    logpower = pm.Normal(&quot;logpower&quot;, mu=np.log(np.var(mag)), sd=100, testval=10.88269047)
-    logS0 = pm.Deterministic(&quot;logS0&quot;, logpower - 4 * logw0)
-    kernel = xo.gp.terms.SHOTerm(log_S0=logS0, log_w0=logw0, Q=1/np.sqrt(2))
-    gp = xo.gp.GP(kernel, time, tt.exp(2*logs_lc) + tt.zeros(len(time)), J=2)
-    gp_l = gp.log_likelihood(mag - lc)
-    # Weight likelihood equally with RV data
-    pm.Potential(&quot;obs&quot;, gp_l)
+    <span class="n">logw0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">,</span>
+                     <span class="n">lower</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">100.0</span><span class="p">),</span>
+                     <span class="n">upper</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">0.1</span><span class="p">))(</span><span class="s2">&quot;logw0&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">10</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                                <span class="n">testval</span><span class="o">=</span><span class="mf">2.58269602</span><span class="p">)</span>
+    <span class="n">logpower</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;logpower&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">mag</span><span class="p">)),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">10.88269047</span><span class="p">)</span>
+    <span class="n">logS0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;logS0&quot;</span><span class="p">,</span> <span class="n">logpower</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">logw0</span><span class="p">)</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">terms</span><span class="o">.</span><span class="n">SHOTerm</span><span class="p">(</span><span class="n">log_S0</span><span class="o">=</span><span class="n">logS0</span><span class="p">,</span> <span class="n">log_w0</span><span class="o">=</span><span class="n">logw0</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">gp</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">GP</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">logs_lc</span><span class="p">)</span> <span class="o">+</span> <span class="n">tt</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)),</span> <span class="n">J</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">gp_l</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">mag</span> <span class="o">-</span> <span class="n">lc</span><span class="p">)</span>
+    <span class="c1"># Weight likelihood equally with RV data</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">Potential</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">gp_l</span><span class="p">)</span>
 
-#     pm.Normal(&#39;obs&#39;, mu=lc, sd=tt.exp(logs_lc), observed=mag)
+<span class="c1">#     pm.Normal(&#39;obs&#39;, mu=lc, sd=tt.exp(logs_lc), observed=mag)</span>
 </pre></div>
 </div>
 </div>
@@ -1155,25 +1155,25 @@ freq = np.array([14.18764198, 13.43633836])
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>with model:
-    all_but = [v for v in model.vars if v.name not in [&quot;P_interval__&quot;]]
-    map_params = xo.optimize(start=None, vars=[logs_lc])
-    map_params = xo.optimize(start=map_params, vars=[ecc, omega])
-    map_params = xo.optimize(start=map_params, vars=[phi])
-    map_params = xo.optimize(start=map_params, vars=[lognu])
-    map_params = xo.optimize(start=map_params,
-                             vars=all_but
-                            )
+<span></span><span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">all_but</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">vars</span> <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;P_interval__&quot;</span><span class="p">]]</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">logs_lc</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">ecc</span><span class="p">,</span> <span class="n">omega</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">phi</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">lognu</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span>
+                             <span class="nb">vars</span><span class="o">=</span><span class="n">all_but</span>
+                            <span class="p">)</span>
 
-    map_params = xo.optimize(start=map_params, vars=[asini])
-    map_params = xo.optimize(start=map_params,
-                             vars=all_but
-                            )
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">asini</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span>
+                             <span class="nb">vars</span><span class="o">=</span><span class="n">all_but</span>
+                            <span class="p">)</span>
 
-    map_params = xo.optimize(start=map_params, vars=[P])
-    map_params = xo.optimize(start=map_params,
-                             vars=all_but
-                            )
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">P</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span>
+                             <span class="nb">vars</span><span class="o">=</span><span class="n">all_but</span>
+                            <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1182,42 +1182,42 @@ freq = np.array([14.18764198, 13.43633836])
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>fig, axes = plt.subplots(3,1, figsize=[3.33333, 2.06*2.3], gridspec_kw={&#39;height_ratios&#39;: [1,1,0.3]}, constrained_layout=True)
-from maelstrom.utils import amplitude_spectrum
-with model:
-    ax = axes[0]
-    ax.plot(*amplitude_spectrum(time, xo.eval_in_model(lc, map_params)),
-            c=blue, alpha=1, linewidth=0.8, label=&#39;Maelstrom&#39;)
-    ax.plot(*amplitude_spectrum(time, xo.eval_in_model(gp.predict(), map_params)),
-            c=red, alpha=1, linewidth=0.8, label=&#39;GP&#39;)
-    ax.set_xlim(0,24)
-    ax.set_ylim(0, None)
-    ax.legend()
+<span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mf">3.33333</span><span class="p">,</span> <span class="mf">2.06</span><span class="o">*</span><span class="mf">2.3</span><span class="p">],</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;height_ratios&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.3</span><span class="p">]},</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">maelstrom.utils</span> <span class="kn">import</span> <span class="n">amplitude_spectrum</span>
+<span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">amplitude_spectrum</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">lc</span><span class="p">,</span> <span class="n">map_params</span><span class="p">)),</span>
+            <span class="n">c</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Maelstrom&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">amplitude_spectrum</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(),</span> <span class="n">map_params</span><span class="p">)),</span>
+            <span class="n">c</span><span class="o">=</span><span class="n">red</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GP&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
-    #ax.plot(*amplitude_spectrum(time, flux), alpha=0.2, c=&#39;green&#39;)
+    <span class="c1">#ax.plot(*amplitude_spectrum(time, flux), alpha=0.2, c=&#39;green&#39;)</span>
 
-    ax.set_xlabel(&#39;Frequency (d$^{-1}$)&#39;)
-    ax.set_ylabel(&#39;Amplitude (ppt)&#39;)
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (d$^{-1}$)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude (ppt)&#39;</span><span class="p">)</span>
 
 
-    ax = axes[1]
-    med = xo.eval_in_model(gp.predict() + lc, map_params)
-    ax.plot(time, med , c=blue, alpha=1, linewidth=0.8, rasterized=True)
-    ax.plot(time, mag, &#39;.k&#39;, markersize=2, rasterized=True)
-    ax.set_xlim(200,205)
-    ax.set_ylim(-16.2,16.2)
-    ax.set_xticks([])
-    ax.set_ylabel(&#39;Amplitude (ppt)&#39;)
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">med</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span> <span class="o">+</span> <span class="n">lc</span><span class="p">,</span> <span class="n">map_params</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">med</span> <span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">rasterized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="s1">&#39;.k&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">rasterized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">205</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">16.2</span><span class="p">,</span><span class="mf">16.2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude (ppt)&#39;</span><span class="p">)</span>
 
-    ax = axes[2]
-    ax.plot(time, med - mag, &#39;.k&#39;,
-            c=blue, alpha=1, linewidth=0.7, label=&#39;Light curve model&#39;, markersize=2, rasterized=True)
-    ax.set_xlim(200,205)
-    ax.set_ylim(-1,1)
-    ax.set_xlabel(&#39;Time (BKJD)&#39;)
-    ax.set_ylabel(&#39;Res.&#39;)
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">med</span> <span class="o">-</span> <span class="n">mag</span><span class="p">,</span> <span class="s1">&#39;.k&#39;</span><span class="p">,</span>
+            <span class="n">c</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Light curve model&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">rasterized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">205</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (BKJD)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Res.&#39;</span><span class="p">)</span>
 
-# plt.savefig(overleaf_path + &#39;6780873_lc_model.pdf&#39;, dpi=300, bbox_inches=&#39;tight&#39;, pad_inches=0)
+<span class="c1"># plt.savefig(overleaf_path + &#39;6780873_lc_model.pdf&#39;, dpi=300, bbox_inches=&#39;tight&#39;, pad_inches=0)</span>
 </pre></div>
 </div>
 </div>
@@ -1226,16 +1226,16 @@ with model:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>np.random.seed(42)
-with model:
-    trace = pm.sample(
-        tune=1000,
-        draws=2000,
-        step=xo.get_dense_nuts_step(target_accept=0.9),
-        start=map_params
-    )
+<span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
+        <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+        <span class="n">draws</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">=</span><span class="n">xo</span><span class="o">.</span><span class="n">get_dense_nuts_step</span><span class="p">(</span><span class="n">target_accept</span><span class="o">=</span><span class="mf">0.9</span><span class="p">),</span>
+        <span class="n">start</span><span class="o">=</span><span class="n">map_params</span>
+    <span class="p">)</span>
 
-pm.save_trace(trace,&#39;traces/NEW/6780873_PM&#39;)
+<span class="n">pm</span><span class="o">.</span><span class="n">save_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span><span class="s1">&#39;traces/NEW/6780873_PM&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1244,8 +1244,8 @@ pm.save_trace(trace,&#39;traces/NEW/6780873_PM&#39;)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>with model:
-    trace = pm.load_trace(&#39;traces/NEW/6780873_PM&#39;)
+<span></span><span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">load_trace</span><span class="p">(</span><span class="s1">&#39;traces/NEW/6780873_PM&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1254,10 +1254,10 @@ pm.save_trace(trace,&#39;traces/NEW/6780873_PM&#39;)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>varnames = [&quot;P&quot;, &quot;asini&quot;, &quot;ecc&quot;, &quot;omega&quot;, &quot;phi&quot;]
-for var in varnames:
-    percentiles = np.percentile(trace[var], q=[15.87, 50, 84.13])
-    print(f&#39;{var}: {percentiles[0]:.3f} + {percentiles[1] - percentiles[0]:.3f} - {percentiles[2] - percentiles[1]:.3f}&#39;)
+<span></span><span class="n">varnames</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;asini&quot;</span><span class="p">,</span> <span class="s2">&quot;ecc&quot;</span><span class="p">,</span> <span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="s2">&quot;phi&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">varnames</span><span class="p">:</span>
+    <span class="n">percentiles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="p">[</span><span class="mf">15.87</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">84.13</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{var}</span><span class="s1">: </span><span class="si">{percentiles[0]:.3f}</span><span class="s1"> + {percentiles[1] - percentiles[0]:.3f} - {percentiles[2] - percentiles[1]:.3f}&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1278,7 +1278,7 @@ phi: -0.956 + 0.221 - 0.214
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pm.summary(trace)
+<span></span><span class="n">pm</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1473,13 +1473,13 @@ phi: -0.956 + 0.221 - 0.214
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from maelstrom.utils import mass_function
-import astropy.units as u
-rounding = 3
-samples = pm.trace_to_dataframe(trace, varnames=[&#39;P&#39;, &#39;asini&#39;])
-mfs = mass_function(samples[&#39;P__0&#39;].values * u.day, samples[&#39;asini__0&#39;].values*u.s)
-upper, med, lower = np.percentile(mfs.value, [84.13, 50, 15.86])
-print(&#39;mass_func&#39;, &#39;: &#39;, np.round(med,rounding), &#39; + &#39;, np.round(upper - med,rounding), &#39; - &#39;, np.round(med - lower,rounding))
+<span></span><span class="kn">from</span> <span class="nn">maelstrom.utils</span> <span class="kn">import</span> <span class="n">mass_function</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="n">rounding</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">trace_to_dataframe</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">varnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;asini&#39;</span><span class="p">])</span>
+<span class="n">mfs</span> <span class="o">=</span> <span class="n">mass_function</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="s1">&#39;P__0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">samples</span><span class="p">[</span><span class="s1">&#39;asini__0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+<span class="n">upper</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">mfs</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="p">[</span><span class="mf">84.13</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">15.86</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mass_func&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; + &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; - &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span> <span class="o">-</span> <span class="n">lower</span><span class="p">,</span><span class="n">rounding</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1499,51 +1499,51 @@ mass_func :  0.102  +  0.035  -  0.022
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>with pm.Model() as model:
-    period = pm.Bound(pm.Normal, lower=0, upper=12)(&quot;P&quot;, mu=9.159153, sd=5,
-                                     shape=1, testval=9.159153)
+<span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">12</span><span class="p">)(</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">9.159153</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                                     <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">9.159153</span><span class="p">)</span>
 
-    logasini = pm.Bound(pm.Normal, lower=0, upper=25)(&quot;logasini&quot;, mu=np.log(17.441530), sd=10,
-                                        shape=1, testval=np.log(17.441530))
-    logs_lc = pm.Normal(&#39;logs_lc&#39;, mu=0.0001*np.log(np.std(mag)), sd=10, testval=0.)
-    asini = pm.Deterministic(&#39;asini&#39;, tt.exp(logasini))
-    ecc = xo.distributions.UnitUniform(&quot;ecc&quot;, shape=1, testval=0.27)
-    omega = xo.distributions.Angle(&quot;omega&quot;, testval=2.306092)
-    phi = xo.distributions.Angle(&#39;phi&#39;, testval=0.377081)
-    lognu = pm.Normal(&quot;lognu&quot;, mu=np.log(freq), sd=0.1, shape=len(freq))
-    nu = pm.Deterministic(&quot;nu&quot;, tt.exp(lognu))
+    <span class="n">logasini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">25</span><span class="p">)(</span><span class="s2">&quot;logasini&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">17.441530</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                        <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">17.441530</span><span class="p">))</span>
+    <span class="n">logs_lc</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;logs_lc&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.0001</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mag</span><span class="p">)),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+    <span class="n">asini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s1">&#39;asini&#39;</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logasini</span><span class="p">))</span>
+    <span class="n">ecc</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">UnitUniform</span><span class="p">(</span><span class="s2">&quot;ecc&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.27</span><span class="p">)</span>
+    <span class="n">omega</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">2.306092</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="s1">&#39;phi&#39;</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.377081</span><span class="p">)</span>
+    <span class="n">lognu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;lognu&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">freq</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">))</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;nu&quot;</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">lognu</span><span class="p">))</span>
 
-    orbit = Orbit(period=period,
-              lighttime=asini,
-              omega=omega,
-              eccen=ecc,
-              phi=phi,
-              freq=nu)
+    <span class="n">orbit</span> <span class="o">=</span> <span class="n">Orbit</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="p">,</span>
+              <span class="n">lighttime</span><span class="o">=</span><span class="n">asini</span><span class="p">,</span>
+              <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">,</span>
+              <span class="n">eccen</span><span class="o">=</span><span class="n">ecc</span><span class="p">,</span>
+              <span class="n">phi</span><span class="o">=</span><span class="n">phi</span><span class="p">,</span>
+              <span class="n">freq</span><span class="o">=</span><span class="n">nu</span><span class="p">)</span>
 
-    lc = orbit.get_lightcurve_model(time, mag)
+    <span class="n">lc</span> <span class="o">=</span> <span class="n">orbit</span><span class="o">.</span><span class="n">get_lightcurve_model</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">mag</span><span class="p">)</span>
 
-#     # GP
-    logw0 = pm.Bound(pm.Normal,
-                     lower=np.log(2*np.pi/100.0),
-                     upper=np.log(2*np.pi/0.1))(&quot;logw0&quot;, mu=np.log(2*np.pi/10), sd=10,
-                                                testval=2.58269602)
-    logpower = pm.Normal(&quot;logpower&quot;, mu=np.log(np.var(mag)), sd=100, testval=10.88269047)
-    logS0 = pm.Deterministic(&quot;logS0&quot;, logpower - 4 * logw0)
-    kernel = xo.gp.terms.SHOTerm(log_S0=logS0, log_w0=logw0, Q=1/np.sqrt(2))
-    gp = xo.gp.GP(kernel, time, tt.exp(2*logs_lc) + tt.zeros(len(time)), J=2)
-    gp_l = gp.log_likelihood(mag - lc)
-    pm.Potential(&quot;obs&quot;, gp_l)
+<span class="c1">#     # GP</span>
+    <span class="n">logw0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Bound</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">,</span>
+                     <span class="n">lower</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">100.0</span><span class="p">),</span>
+                     <span class="n">upper</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">0.1</span><span class="p">))(</span><span class="s2">&quot;logw0&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">10</span><span class="p">),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                                <span class="n">testval</span><span class="o">=</span><span class="mf">2.58269602</span><span class="p">)</span>
+    <span class="n">logpower</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;logpower&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">mag</span><span class="p">)),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">10.88269047</span><span class="p">)</span>
+    <span class="n">logS0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;logS0&quot;</span><span class="p">,</span> <span class="n">logpower</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">logw0</span><span class="p">)</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">terms</span><span class="o">.</span><span class="n">SHOTerm</span><span class="p">(</span><span class="n">log_S0</span><span class="o">=</span><span class="n">logS0</span><span class="p">,</span> <span class="n">log_w0</span><span class="o">=</span><span class="n">logw0</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">gp</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">gp</span><span class="o">.</span><span class="n">GP</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">logs_lc</span><span class="p">)</span> <span class="o">+</span> <span class="n">tt</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)),</span> <span class="n">J</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">gp_l</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">mag</span> <span class="o">-</span> <span class="n">lc</span><span class="p">)</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">Potential</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">gp_l</span><span class="p">)</span>
 
-#     pm.Normal(&#39;obs&#39;, mu=lc, sd=tt.exp(logs_lc), observed=mag)
+<span class="c1">#     pm.Normal(&#39;obs&#39;, mu=lc, sd=tt.exp(logs_lc), observed=mag)</span>
 
-    # RV data:
-    gammav = pm.Uniform(&#39;gammav&#39;, lower=-50, upper=50, testval=11.)
-    logs_rv = pm.Normal(&#39;logs_rv&#39;, mu=np.log(np.std(rv_rv)), sd=10, testval=np.log(np.std(rv_rv)))
-    vrad = orbit.get_radial_velocity(rv_jd)
-    vrad += gammav # Systemic velocity
+    <span class="c1"># RV data:</span>
+    <span class="n">gammav</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s1">&#39;gammav&#39;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=-</span><span class="mi">50</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">11.</span><span class="p">)</span>
+    <span class="n">logs_rv</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;logs_rv&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rv_rv</span><span class="p">)),</span> <span class="n">sd</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rv_rv</span><span class="p">)))</span>
+    <span class="n">vrad</span> <span class="o">=</span> <span class="n">orbit</span><span class="o">.</span><span class="n">get_radial_velocity</span><span class="p">(</span><span class="n">rv_jd</span><span class="p">)</span>
+    <span class="n">vrad</span> <span class="o">+=</span> <span class="n">gammav</span> <span class="c1"># Systemic velocity</span>
 
-    err = tt.sqrt(2*rv_err**2 + tt.exp(2*logs_rv))
-    pm.Normal(&quot;obs_rv&quot;, mu=vrad, sd=err, observed=rv_rv)
+    <span class="n">err</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">rv_err</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">logs_rv</span><span class="p">))</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs_rv&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">vrad</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">err</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">rv_rv</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1552,29 +1552,29 @@ mass_func :  0.102  +  0.035  -  0.022
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>with model:
-    map_params = xo.optimize(start=model.test_point, vars=[gammav])
-    map_params = xo.optimize(start=map_params, vars=[phi])
+<span></span><span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">test_point</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">gammav</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">phi</span><span class="p">])</span>
 
-    all_but = [v for v in model.vars if v.name not in [&quot;period_interval__&quot;]]
-    map_params = xo.optimize(start=None, vars=[logs_lc])
-    map_params = xo.optimize(start=map_params, vars=[logpower, logw0])
-    map_params = xo.optimize(start=map_params, vars=[ecc, omega])
-    map_params = xo.optimize(start=map_params, vars=[phi])
-    map_params = xo.optimize(start=map_params, vars=[lognu])
-    map_params = xo.optimize(start=map_params,
-                             vars=all_but
-                            )
+    <span class="n">all_but</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">vars</span> <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;period_interval__&quot;</span><span class="p">]]</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">logs_lc</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">logpower</span><span class="p">,</span> <span class="n">logw0</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">ecc</span><span class="p">,</span> <span class="n">omega</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">phi</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">lognu</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span>
+                             <span class="nb">vars</span><span class="o">=</span><span class="n">all_but</span>
+                            <span class="p">)</span>
 
-    map_params = xo.optimize(start=map_params, vars=[asini])
-    map_params = xo.optimize(start=map_params,
-                             vars=all_but
-                            )
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">asini</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span>
+                             <span class="nb">vars</span><span class="o">=</span><span class="n">all_but</span>
+                            <span class="p">)</span>
 
-    map_params = xo.optimize(start=map_params, vars=[period])
-    map_params = xo.optimize(start=map_params,
-                             vars=all_but
-                            )
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="n">period</span><span class="p">])</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span>
+                             <span class="nb">vars</span><span class="o">=</span><span class="n">all_but</span>
+                            <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1583,16 +1583,16 @@ mass_func :  0.102  +  0.035  -  0.022
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>np.random.seed(42)
-with model:
-    trace = pm.sample(
-        tune=1000,
-        draws=2000,
-        step=xo.get_dense_nuts_step(target_accept=0.9),
-        start=map_params
-    )
+<span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
+        <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+        <span class="n">draws</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">=</span><span class="n">xo</span><span class="o">.</span><span class="n">get_dense_nuts_step</span><span class="p">(</span><span class="n">target_accept</span><span class="o">=</span><span class="mf">0.9</span><span class="p">),</span>
+        <span class="n">start</span><span class="o">=</span><span class="n">map_params</span>
+    <span class="p">)</span>
 
-pm.save_trace(trace,&#39;traces/NEW/6780873_PM_RV&#39;, overwrite=True)
+<span class="n">pm</span><span class="o">.</span><span class="n">save_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span><span class="s1">&#39;traces/NEW/6780873_PM_RV&#39;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1601,8 +1601,8 @@ pm.save_trace(trace,&#39;traces/NEW/6780873_PM_RV&#39;, overwrite=True)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>with model:
-    trace = pm.load_trace(&#39;traces/NEW/6780873_PM_RV&#39;)
+<span></span><span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">load_trace</span><span class="p">(</span><span class="s1">&#39;traces/NEW/6780873_PM_RV&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1611,7 +1611,7 @@ pm.save_trace(trace,&#39;traces/NEW/6780873_PM_RV&#39;, overwrite=True)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pm.summary(trace)
+<span></span><span class="n">pm</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1826,13 +1826,13 @@ pm.save_trace(trace,&#39;traces/NEW/6780873_PM_RV&#39;, overwrite=True)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from tqdm import tqdm
+<span></span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 
-tds, rvs = [], []
-with model:
-    for samp in tqdm(xo.utils.get_samples_from_trace(trace, size=1000), total=1000):
-        tds.append(xo.eval_in_model(orbit.get_time_delay(time), samp))
-        rvs.append(xo.eval_in_model(orbit.get_radial_velocity(time) + gammav, samp))
+<span class="n">tds</span><span class="p">,</span> <span class="n">rvs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">samp</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">xo</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_samples_from_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span> <span class="n">total</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">tds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">orbit</span><span class="o">.</span><span class="n">get_time_delay</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">samp</span><span class="p">))</span>
+        <span class="n">rvs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">orbit</span><span class="o">.</span><span class="n">get_radial_velocity</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">+</span> <span class="n">gammav</span><span class="p">,</span> <span class="n">samp</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1849,10 +1849,10 @@ with model:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>med_td = np.median(tds, axis=0)
-sd_td = np.std(tds, axis=0)
-med_rv = np.median(rvs, axis=0)
-sd_rv = np.std(rvs, axis=0)
+<span></span><span class="n">med_td</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">tds</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sd_td</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">tds</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">med_rv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">rvs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sd_rv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rvs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1861,39 +1861,39 @@ sd_rv = np.std(rvs, axis=0)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>fig, ax = plt.subplots(figsize=mnras_size(240), constrained_layout=True)
-ax2 = ax.twinx()
+<span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">mnras_size</span><span class="p">(</span><span class="mi">240</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
 
-np.random.seed(42)
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 
-with model:
-    for samp in xo.utils.get_samples_from_trace(trace, size=12):
-        times = time# + xo.eval_in_model(phi * period / (2*np.pi), samp)
-        fold = times % samp[&#39;P&#39;] / samp[&#39;P&#39;]
-        sort = np.argsort(fold)
-        ax.plot(fold[sort], xo.eval_in_model(orbit.get_time_delay(time), samp)[sort] * 86400, color=blue, alpha=1., linewidth=0.4)
+<span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">samp</span> <span class="ow">in</span> <span class="n">xo</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_samples_from_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+        <span class="n">times</span> <span class="o">=</span> <span class="n">time</span><span class="c1"># + xo.eval_in_model(phi * period / (2*np.pi), samp)</span>
+        <span class="n">fold</span> <span class="o">=</span> <span class="n">times</span> <span class="o">%</span> <span class="n">samp</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">samp</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span>
+        <span class="n">sort</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">fold</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fold</span><span class="p">[</span><span class="n">sort</span><span class="p">],</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">orbit</span><span class="o">.</span><span class="n">get_time_delay</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">samp</span><span class="p">)[</span><span class="n">sort</span><span class="p">]</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">blue</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 
-        times = time# + xo.eval_in_model(phi * period / (2*np.pi), samp)
-        fold = times % samp[&#39;P&#39;] / samp[&#39;P&#39;]
-        sort = np.argsort(fold)
-        ax2.plot(fold[sort], xo.eval_in_model(orbit.get_radial_velocity(time) + gammav, samp)[sort], color=red, alpha=1., linewidth=0.4)
+        <span class="n">times</span> <span class="o">=</span> <span class="n">time</span><span class="c1"># + xo.eval_in_model(phi * period / (2*np.pi), samp)</span>
+        <span class="n">fold</span> <span class="o">=</span> <span class="n">times</span> <span class="o">%</span> <span class="n">samp</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">samp</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span>
+        <span class="n">sort</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">fold</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fold</span><span class="p">[</span><span class="n">sort</span><span class="p">],</span> <span class="n">xo</span><span class="o">.</span><span class="n">eval_in_model</span><span class="p">(</span><span class="n">orbit</span><span class="o">.</span><span class="n">get_radial_velocity</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">+</span> <span class="n">gammav</span><span class="p">,</span> <span class="n">samp</span><span class="p">)[</span><span class="n">sort</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">red</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 
-ax2.plot(rv_jd % np.median(trace[&#39;P&#39;]) /  np.median(trace[&#39;P&#39;]), rv_rv, &#39;.&#39;, c=&#39;black&#39;, label=&#39;RV data&#39;, rasterized=True, zorder=50, markersize=3)
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rv_jd</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">])</span> <span class="o">/</span>  <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]),</span> <span class="n">rv_rv</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RV data&#39;</span><span class="p">,</span> <span class="n">rasterized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
-ax.set_xlabel(&#39;Orbital phase&#39;)
-ax.set_ylabel(&#39;Time delay (s)&#39;, c=blue)
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Orbital phase&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Time delay (s)&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">blue</span><span class="p">)</span>
 
-ax2.set_ylabel(&#39;RV (km/s)&#39;, c=red)
-ax.set_xlim(0, 1)
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;RV (km/s)&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">red</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-times = time# + xo.eval_in_model(phi * period / (2*np.pi), samp)
-fold = times % np.median(trace[&#39;P&#39;]) / np.median(trace[&#39;P&#39;])
-sort = np.argsort(fold)
-# plt.plot(fold[sort], med[sort] * 86400, color=blue, alpha=1., linewidth=0.2)
-ax.fill_between(fold[sort], (med - sd)[:,0][sort] * 86400, (med+sd)[:,0][sort] * 86400, alpha=0.2, color=blue)
-ax2.fill_between(fold[sort], (med_rv - sd_rv)[sort], (med_rv+sd_rv)[sort], alpha=0.2, color=red)
+<span class="n">times</span> <span class="o">=</span> <span class="n">time</span><span class="c1"># + xo.eval_in_model(phi * period / (2*np.pi), samp)</span>
+<span class="n">fold</span> <span class="o">=</span> <span class="n">times</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">])</span>
+<span class="n">sort</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">fold</span><span class="p">)</span>
+<span class="c1"># plt.plot(fold[sort], med[sort] * 86400, color=blue, alpha=1., linewidth=0.2)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">fold</span><span class="p">[</span><span class="n">sort</span><span class="p">],</span> <span class="p">(</span><span class="n">med</span> <span class="o">-</span> <span class="n">sd</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">sort</span><span class="p">]</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">,</span> <span class="p">(</span><span class="n">med</span><span class="o">+</span><span class="n">sd</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">sort</span><span class="p">]</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">blue</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">fold</span><span class="p">[</span><span class="n">sort</span><span class="p">],</span> <span class="p">(</span><span class="n">med_rv</span> <span class="o">-</span> <span class="n">sd_rv</span><span class="p">)[</span><span class="n">sort</span><span class="p">],</span> <span class="p">(</span><span class="n">med_rv</span><span class="o">+</span><span class="n">sd_rv</span><span class="p">)[</span><span class="n">sort</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">red</span><span class="p">)</span>
 
-plt.savefig(overleaf_path + &#39;6780873.png&#39;, dpi=300, bbox_inches=&#39;tight&#39;, pad_inches=0)
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">overleaf_path</span> <span class="o">+</span> <span class="s1">&#39;6780873.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1909,10 +1909,10 @@ plt.savefig(overleaf_path + &#39;6780873.png&#39;, dpi=300, bbox_inches=&#39;tig
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>varnames = [&quot;P&quot;, &quot;asini&quot;, &quot;ecc&quot;, &quot;omega&quot;, &quot;phi&quot;]
-for var in varnames:
-    percentiles = np.percentile(trace[var], q=[15.87, 50, 84.13])
-    print(f&#39;{var}: {percentiles[0]:.3f} + {percentiles[1] - percentiles[0]:.3f} - {percentiles[2] - percentiles[1]:.3f}&#39;)
+<span></span><span class="n">varnames</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;asini&quot;</span><span class="p">,</span> <span class="s2">&quot;ecc&quot;</span><span class="p">,</span> <span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="s2">&quot;phi&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">varnames</span><span class="p">:</span>
+    <span class="n">percentiles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">trace</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="p">[</span><span class="mf">15.87</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">84.13</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{var}</span><span class="s1">: </span><span class="si">{percentiles[0]:.3f}</span><span class="s1"> + {percentiles[1] - percentiles[0]:.3f} - {percentiles[2] - percentiles[1]:.3f}&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1933,13 +1933,13 @@ phi: 0.169 + 0.213 - 0.187
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from maelstrom.utils import mass_function
-import astropy.units as u
-rounding = 3
-samples = pm.trace_to_dataframe(trace, varnames=[&#39;P&#39;, &#39;asini&#39;])
-mfs = mass_function(samples[&#39;P__0&#39;].values * u.day, samples[&#39;asini__0&#39;].values*u.s)
-upper, med, lower = np.percentile(mfs.value, [84.13, 50, 15.86])
-print(&#39;mass_func&#39;, &#39;: &#39;, np.round(med,rounding), &#39; + &#39;, np.round(upper - med,rounding), &#39; - &#39;, np.round(med - lower,rounding))
+<span></span><span class="kn">from</span> <span class="nn">maelstrom.utils</span> <span class="kn">import</span> <span class="n">mass_function</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="n">rounding</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">trace_to_dataframe</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">varnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;asini&#39;</span><span class="p">])</span>
+<span class="n">mfs</span> <span class="o">=</span> <span class="n">mass_function</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="s1">&#39;P__0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">samples</span><span class="p">[</span><span class="s1">&#39;asini__0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+<span class="n">upper</span><span class="p">,</span> <span class="n">med</span><span class="p">,</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">mfs</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="p">[</span><span class="mf">84.13</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">15.86</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mass_func&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; + &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">med</span><span class="p">,</span><span class="n">rounding</span><span class="p">),</span> <span class="s1">&#39; - &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">med</span> <span class="o">-</span> <span class="n">lower</span><span class="p">,</span><span class="n">rounding</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>

@@ -425,13 +425,13 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import numpy as np
-import corner
-import pandas as pd
-import matplotlib.pyplot as plt
-import exoplanet as xo
-import pymc3 as pm
-import lightkurve as lk
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">corner</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">exoplanet</span> <span class="k">as</span> <span class="nn">xo</span>
+<span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">import</span> <span class="nn">lightkurve</span> <span class="k">as</span> <span class="nn">lk</span>
 </pre></div>
 </div>
 </div>
@@ -440,10 +440,10 @@ import lightkurve as lk
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>%config IPython.matplotlib.backend = &quot;retina&quot;
-from matplotlib import rcParams
-rcParams[&quot;figure.dpi&quot;] = 150
-rcParams[&quot;savefig.dpi&quot;] = 150
+<span></span><span class="o">%</span><span class="k">config</span> IPython.matplotlib.backend = &quot;retina&quot;
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;savefig.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
 </pre></div>
 </div>
 </div>
@@ -452,8 +452,8 @@ rcParams[&quot;savefig.dpi&quot;] = 150
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>lc = lk.search_lightcurvefile(&#39;KIC 7917485&#39;, mission=&#39;Kepler&#39;).download_all().PDCSAP_FLUX.stitch().remove_nans()
-lc.plot()
+<span></span><span class="n">lc</span> <span class="o">=</span> <span class="n">lk</span><span class="o">.</span><span class="n">search_lightcurvefile</span><span class="p">(</span><span class="s1">&#39;KIC 7917485&#39;</span><span class="p">,</span> <span class="n">mission</span><span class="o">=</span><span class="s1">&#39;Kepler&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">download_all</span><span class="p">()</span><span class="o">.</span><span class="n">PDCSAP_FLUX</span><span class="o">.</span><span class="n">stitch</span><span class="p">()</span><span class="o">.</span><span class="n">remove_nans</span><span class="p">()</span>
+<span class="n">lc</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -478,10 +478,10 @@ lc.plot()
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from maelstrom import Maelstrom
+<span></span><span class="kn">from</span> <span class="nn">maelstrom</span> <span class="kn">import</span> <span class="n">Maelstrom</span>
 
-ms = Maelstrom(lc.time, lc.flux, max_peaks=2)
-ms.first_look(segment_size=20)
+<span class="n">ms</span> <span class="o">=</span> <span class="n">Maelstrom</span><span class="p">(</span><span class="n">lc</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">lc</span><span class="o">.</span><span class="n">flux</span><span class="p">,</span> <span class="n">max_peaks</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">(</span><span class="n">segment_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -510,7 +510,7 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2d4a3358&gt;,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>ms.plot_time_delay_periodogram_period()
+<span></span><span class="n">ms</span><span class="o">.</span><span class="n">plot_time_delay_periodogram_period</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -526,7 +526,7 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2d4a3358&gt;,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pg = ms.period_search()
+<span></span><span class="n">pg</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">period_search</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -535,8 +535,8 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2d4a3358&gt;,
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>periods = np.linspace(500,1200,200)
-pg.fit(periods)
+<span></span><span class="n">periods</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">pg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">periods</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -4562,7 +4562,7 @@ pg.fit(periods)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>pg.diagnose()
+<span></span><span class="n">pg</span><span class="o">.</span><span class="n">diagnose</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
