@@ -97,21 +97,29 @@ class Periodogram:
         return self.results
 
     def diagnose(self):
+        """Diagnose the fit values
+        
+        Returns:
+            array: array of matplotlib axes.
+        """
         results = self.results
-        fig, axes = plt.subplots(1, 2, figsize=[10, 7])
+        fig, axes = plt.subplots(1, 2, figsize=[11, 4])
 
         ax = axes[0]
         ys = np.array([[r[0] for r in row] for row in results])
         sm = np.sum(ys, axis=0)
         period_ind = np.argmax(sm)
         ax.plot(self.periods, sm)
+        ax.axvline(self.periods[period_ind], c="red", linestyle="dashed")
         ax.set_xlabel("Period [day]")
         ax.set_ylabel("Model likelihood")
+        ax.set_xlim(self.periods[0], self.periods[-1])
 
         ax = axes[1]
         ys = np.array([[np.exp(r[1]["logasini"]) for r in row] for row in results])
         ax.plot(self.periods, ys.T)
         ax.set_xlabel("Period [day]")
         ax.set_ylabel("asini (s)")
+        ax.set_xlim(self.periods[0], self.periods[-1])
 
         return axes
