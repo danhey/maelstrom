@@ -1,7 +1,7 @@
 <h1 align="center">Maelstrom</h1>
 
 <p align="center">
-   <a><img
+   <a href="https://github.com/danhey/maelstrom/actions?query=workflow%3Amaelstrom-tests"><img
    src="https://github.com/danhey/maelstrom/workflows/maelstrom-tests/badge.svg"/></a>
    <a href="https://danhey.github.io/maelstrom/"><img
    src="https://github.com/danhey/maelstrom/workflows/Docs/badge.svg"/></a>
