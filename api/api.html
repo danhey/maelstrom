@@ -200,6 +200,34 @@
 </style>
 <div class="section" id="synthetic-light-curves">
 <h1>Synthetic light curves<a class="headerlink" href="#synthetic-light-curves" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-maelstrom.synthetic"></span><dl class="class">
+<dt id="maelstrom.synthetic.SyntheticBinary">
+<em class="property">class </em><code class="sig-prename descclassname">maelstrom.synthetic.</code><code class="sig-name descname">SyntheticBinary</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">freq</em>, <em class="sig-param">amplitude</em>, <em class="sig-param">period</em>, <em class="sig-param">eccen</em>, <em class="sig-param">asini</em>, <em class="sig-param">varpi</em>, <em class="sig-param">tref</em>, <em class="sig-param">tau=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/synthetic.html#SyntheticBinary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.synthetic.SyntheticBinary" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class makes a synthetic light curve and injects a time delay signal corresponding to the input binary orbit parameters</p>
+<dl class="method">
+<dt id="maelstrom.synthetic.SyntheticBinary.add_noise">
+<code class="sig-name descname">add_noise</code><span class="sig-paren">(</span><em class="sig-param">snr=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/synthetic.html#SyntheticBinary.add_noise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.synthetic.SyntheticBinary.add_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the SNR of the oscillation signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>snr</strong> (<em>float</em><em>, </em><em>optional</em>) – SNR. Defaults to 5.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.synthetic.SyntheticBinary.make_lightcurve">
+<code class="sig-name descname">make_lightcurve</code><span class="sig-paren">(</span><em class="sig-param">tau=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/synthetic.html#SyntheticBinary.make_lightcurve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.synthetic.SyntheticBinary.make_lightcurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the light curve with added binarity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tau</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to include binarity. Defaults to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 

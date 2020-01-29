@@ -200,8 +200,87 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="orbit">
-<h1>Orbit<a class="headerlink" href="#orbit" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-maelstrom.orbit">
+<span id="orbit"></span><h1>Orbit<a class="headerlink" href="#module-maelstrom.orbit" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="maelstrom.orbit.Orbit">
+<em class="property">class </em><code class="sig-prename descclassname">maelstrom.orbit.</code><code class="sig-name descname">Orbit</code><span class="sig-paren">(</span><em class="sig-param">period=None</em>, <em class="sig-param">lighttime=None</em>, <em class="sig-param">freq=None</em>, <em class="sig-param">eccen=None</em>, <em class="sig-param">omega=None</em>, <em class="sig-param">phi=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class defines an orbit model which solves equation 10 of
+Hey+2020 for given input values, defined within Theano.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>period</strong> (<em>pymc3.model.FreeRV</em>) – The orbital period prior</p></li>
+<li><p><strong>lighttime</strong> (<em>pymc3.model.FreeRV</em>) – The convolved semi-major axis (asini) prior, given in seconds</p></li>
+<li><p><strong>phi</strong> (<em>pymc3.model.FreeRV</em>) – The phase of periapsis</p></li>
+<li><p><strong>freq</strong> (<em>pymc3.model.FreeRV</em>) – Frequency prior</p></li>
+<li><p><strong>eccen</strong> (<em>pymc3.model.FreeRV</em><em>, </em><em>optional</em>) – The eccentricity prior, must be constrained between 0 and 1, by default None</p></li>
+<li><p><strong>omega</strong> (<em>pymc3.model.FreeRV</em><em>, </em><em>optional</em>) – The argument of periapsis prior, given in angular coordinates, by default None</p></li>
+<li><p><strong>with_rv</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to include radial velocity calculations. If True, a prior
+on the systemic velocity (gammav) must be provided, by default False</p></li>
+<li><p><strong>gammav</strong> (<em>pymc3.model.FreeRV</em><em>, </em><em>optional</em>) – The systemic velocity prior. Must be included if with_rv is True.
+by default None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="maelstrom.orbit.Orbit.get_lightcurve_model">
+<code class="sig-name descname">get_lightcurve_model</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">flux</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit.get_lightcurve_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit.get_lightcurve_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the light curve from the input time and flux data, with
+phase offsets from the time delays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>array-like</em>) – Values of time at which to calculate the light curve</p></li>
+<li><p><strong>flux</strong> (<em>array-like</em>) – Values of flux corresponding to <cite>time</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Light curve</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.orbit.Orbit.get_radial_velocity">
+<code class="sig-name descname">get_radial_velocity</code><span class="sig-paren">(</span><em class="sig-param">time</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit.get_radial_velocity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit.get_radial_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the radial velocity within the framework of the Orbit for
+given input times.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>array-like</em>) – Time-values for each RV measurement</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.orbit.Orbit.get_time_delay">
+<code class="sig-name descname">get_time_delay</code><span class="sig-paren">(</span><em class="sig-param">time</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/orbit.html#Orbit.get_time_delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.orbit.Orbit.get_time_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the time delay for the given time values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>array</em>) – Time values at which to calculate tau.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Time delay values for each <cite>time</cite></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 

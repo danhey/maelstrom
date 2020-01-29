@@ -199,8 +199,72 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="eddy">
-<h1>Eddy<a class="headerlink" href="#eddy" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-maelstrom.eddy">
+<span id="eddy"></span><h1>Eddy<a class="headerlink" href="#module-maelstrom.eddy" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="maelstrom.eddy.Eddy">
+<em class="property">class </em><code class="sig-prename descclassname">maelstrom.eddy.</code><code class="sig-name descname">Eddy</code><span class="sig-paren">(</span><em class="sig-param">time: numpy.ndarray</em>, <em class="sig-param">tau: numpy.ndarray</em>, <em class="sig-param">period_guess=None</em>, <em class="sig-param">asini_guess=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/eddy.html#Eddy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.eddy.Eddy" title="Permalink to this definition">¶</a></dt>
+<dd><p>A PyMC3 model for modelling light travel time variations in a binary
+system using the subdividing method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>array</em>) – Time observations</p></li>
+<li><p><strong>tau</strong> (<em>array</em>) – Flux observations</p></li>
+<li><p><strong>period_guess</strong> (<em>float</em><em>, </em><em>optional</em>) – Initial guess of the orbital period,</p></li>
+<li><p><strong>units of days. Defaults to None.</strong> (<em>in</em>) – </p></li>
+<li><p><strong>asini_guess</strong> (<em>float</em><em>, </em><em>optional</em>) – Initial guess of the projected</p></li>
+<li><p><strong>axis</strong><strong>, </strong><strong>in units of seconds. Defaults to None.</strong> (<em>semi-major</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="maelstrom.eddy.Eddy.optimize">
+<code class="sig-name descname">optimize</code><span class="sig-paren">(</span><em class="sig-param">vars=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/eddy.html#Eddy.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.eddy.Eddy.optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimises the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vars</strong> (<em>list</em><em>, </em><em>optional</em>) – List of parameters in the model to optimize.</p></li>
+<li><p><strong>none</strong><strong>, </strong><strong>will optimize all parameters at once. Defaults to None.</strong> (<em>If</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Optimisation results</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="maelstrom.eddy.Eddy.sample">
+<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param">tune=3000</em>, <em class="sig-param">draws=3000</em>, <em class="sig-param">start=None</em>, <em class="sig-param">target_accept=0.9</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/eddy.html#Eddy.sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.eddy.Eddy.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Samples the midel using the exoplanet PyMC3 sampler. By default, this
+will sample from 2 chains over 2 cores simultaneously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tune</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of tuning steps. Defaults to 3000.</p></li>
+<li><p><strong>draws</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples. Defaults to 3000.</p></li>
+<li><p><strong>start</strong> (<em>dict</em><em>, </em><em>optional</em>) – Starting location of the sampler. If none is</p></li>
+<li><p><strong>the sampler will first optimize the model. Defaults to None.</strong> (<em>supplied</em><em>,</em>) – </p></li>
+<li><p><strong>target_accept</strong> (<em>float</em><em>, </em><em>optional</em>) – Target acceptance ratio of the NUTS</p></li>
+<li><p><strong>Defaults to 0.9.</strong> (<em>sampler.</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A PyMC3 trace of the posterior.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>trace</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 

@@ -1,57 +1,176 @@
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8" />
-    <title>maelstrom.periodogram &#8212; maelstrom 0.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/solar.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/style.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>maelstrom.periodogram &mdash; maelstrom 0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link href="../../_static/style.css" rel="stylesheet" type="text/css">
 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">maelstrom 0.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
-      </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> maelstrom
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/citation.html">Citing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Getting started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Estimating frequencies.html">Choosing the correct frequencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Custom priors.html">Custom priors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Recovering weak signals.html">Recovering weak signals</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Case studies from paper</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../case_studies/9651065.html">KIC 9651065</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../case_studies/6780873.html">KIC 6780873</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../case_studies/10080943.html">KIC 10080943</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/maelstrom.html">Maelstrom</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/orbit.html">Orbit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/periodogram.html">Periodogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/utils.html">Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/estimator.html">Estimator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/eddy.html">Eddy</a></li>
+</ul>
+
+            
+          
         </div>
       </div>
+    </nav>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">maelstrom</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>maelstrom.periodogram</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <h1>Source code for maelstrom.periodogram</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
@@ -73,6 +192,7 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Periodogram&quot;</span><span class="p">]</span>
 
+
 <div class="viewcode-block" id="Periodogram"><a class="viewcode-back" href="../../api/periodogram.html#maelstrom.periodogram.Periodogram">[docs]</a><span class="k">class</span> <span class="nc">Periodogram</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;A class to brute force the likelihood in search of small signals.</span>
 <span class="sd">    For each orbital period, it will iterate over a simplified Maelstrom</span>
@@ -85,8 +205,9 @@
 <span class="sd">        mag (array): Magnitude (or flux) values. Must be relative</span>
 <span class="sd">        freq (array): Array of frequencies</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">freq</span><span class="p">):</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">time</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mag</span> <span class="o">=</span> <span class="n">mag</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">freq</span>
@@ -98,29 +219,30 @@
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
             <span class="n">period</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Flat</span><span class="p">(</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
             <span class="n">nu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Flat</span><span class="p">(</span><span class="s2">&quot;nu&quot;</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-            
+
             <span class="n">phi</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="s2">&quot;phi&quot;</span><span class="p">)</span>
-            <span class="n">logasini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;logasini&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
-                                <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+            <span class="n">logasini</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+                <span class="s2">&quot;logasini&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+            <span class="p">)</span>
             <span class="n">drift</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;drift&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-            
+
             <span class="n">M</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">/</span> <span class="n">period</span> <span class="o">-</span> <span class="n">phi</span>
-            
-            <span class="n">factor</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">nu</span>
+
+            <span class="n">factor</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">nu</span>
             <span class="n">A</span> <span class="o">=</span> <span class="n">factor</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">drift</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span>
             <span class="n">B</span> <span class="o">=</span> <span class="o">-</span><span class="n">factor</span> <span class="o">*</span> <span class="p">(</span><span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logasini</span><span class="p">)</span> <span class="o">/</span> <span class="mi">86400</span><span class="p">)</span> <span class="o">*</span> <span class="n">tt</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-            
-            <span class="n">sinarg</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
-            <span class="n">cosarg</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
-            
+
+            <span class="n">sinarg</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">A</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span>
+            <span class="n">cosarg</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">A</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span>
+
             <span class="n">DT</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">sinarg</span><span class="p">,</span> <span class="n">cosarg</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">sinarg</span><span class="p">)))</span>
             <span class="n">w</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">slinalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">tt</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">DT</span><span class="p">,</span> <span class="n">DT</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">tt</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">DT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mag</span><span class="p">))</span>
             <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
             <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;phase&quot;</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
             <span class="n">lc_model</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">DT</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
-                
+
             <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">lc_model</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span>
-            
+
             <span class="bp">self</span><span class="o">.</span><span class="n">fit_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">vars</span> <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="s2">&quot;nu&quot;</span><span class="p">]]</span>
 
     <span class="k">def</span> <span class="nf">_run_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
@@ -128,7 +250,9 @@
             <span class="n">start</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">test_point</span><span class="p">)</span>
             <span class="n">start</span><span class="p">[</span><span class="s2">&quot;period&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
             <span class="n">start</span><span class="p">[</span><span class="s2">&quot;nu&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nu</span>
-            <span class="n">point</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_params</span><span class="p">,</span> <span class="n">return_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">point</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+                <span class="n">start</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_params</span><span class="p">,</span> <span class="n">return_info</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">)</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">info</span><span class="o">.</span><span class="n">fun</span><span class="p">,</span> <span class="n">point</span>
 
 <div class="viewcode-block" id="Periodogram.fit"><a class="viewcode-back" href="../../api/periodogram.html#maelstrom.periodogram.Periodogram.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">periods</span><span class="p">):</span>
@@ -149,46 +273,62 @@
 
     <span class="k">def</span> <span class="nf">diagnose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span>
-        <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
 
         <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="p">])</span>
         <span class="n">sm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">period_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">periods</span><span class="p">,</span> <span class="n">sm</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Period [day]&#39;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Model likelihood&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Period [day]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Model likelihood&quot;</span><span class="p">)</span>
 
         <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;logasini&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="p">])</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">periods</span><span class="p">,</span> <span class="n">ys</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Period [day]&#39;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;asini (s)&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Period [day]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;asini (s)&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">axes</span></div>
 </pre></div>
 
+           </div>
+           
           </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Daniel Hey
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">maelstrom 0.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-        &copy; Copyright 2019, Daniel Hey.
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.3.1.Theme is <a href="http://github.com/vimalkvn/solar-theme">Solar</a>
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

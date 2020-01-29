@@ -200,8 +200,37 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="estimator">
-<h1>Estimator<a class="headerlink" href="#estimator" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-maelstrom.estimator">
+<span id="estimator"></span><h1>Estimator<a class="headerlink" href="#module-maelstrom.estimator" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="maelstrom.estimator.estimate_frequencies">
+<code class="sig-prename descclassname">maelstrom.estimator.</code><code class="sig-name descname">estimate_frequencies</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">fmin=None</em>, <em class="sig-param">fmax=None</em>, <em class="sig-param">max_peaks=3</em>, <em class="sig-param">oversample=4.0</em>, <em class="sig-param">optimize_freq=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/estimator.html#estimate_frequencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.estimator.estimate_frequencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to pick out the best frequencies
+for use with phase modulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em><em>, </em><em>optional</em>) – Number of tuning steps for the sampler (default 3000)</p></li>
+<li><p><strong>y</strong> (<em>float</em><em>, </em><em>optional</em>) – Number of samples from which to populate the trace (default 3000)</p></li>
+<li><p><strong>fmin</strong> (<em>bool</em><em>, </em><em>optional</em>) – If set to True, the sampler will optimize the model before
+attempting to sample. If False (default), the sampler will
+initialise at the testpoints of your priors.</p></li>
+<li><p><strong>fmax</strong> (<em>float</em><em>, </em><em>optional</em>) – The target acceptance ratio of the NUTS sampler (default 0.9).</p></li>
+<li><p><strong>max_peaks</strong> (<em>int</em>) – Maximum number of frequencies to return (default 3)</p></li>
+<li><p><strong>oversample</strong> (<em>float</em>) – Oversample factor for the spectrum (default 4.)</p></li>
+<li><p><strong>optimize_freq</strong> (<em>bool</em>) – Whether to optimize the frequencies according to the
+Maelstrom model using Scipy.optimize (default True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>peaks</strong> – Array of frequencies of length <cite>max_peaks</cite></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>numpy.ndarray</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
