@@ -23,7 +23,7 @@ class Periodogram:
     For each orbital period, it will iterate over a simplified Maelstrom
     model, optimise the values, and then record the loglikelihood. 
 
-    This is useful for planets.
+    This is useful for planets, and short period binaries.
     
     Args:
         time (array): Time values
@@ -36,7 +36,7 @@ class Periodogram:
         self.time = time
         self.mag = mag
         self.freq = freq
-
+        # Initialise the model
         self.model = pm.Model()
 
         self.results = []
@@ -97,7 +97,9 @@ class Periodogram:
         return self.results
 
     def diagnose(self):
-        """Diagnose the fit values
+        """Generate diagnostic plots of the fit values. After running 
+        `Periodogram.fit()`, `diagnose` will plot the resulting period vs 
+        likelihood and period vs optimised asini values.
         
         Returns:
             array: array of matplotlib axes.

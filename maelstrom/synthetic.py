@@ -10,8 +10,20 @@ __all__ = ["SyntheticBinary"]
 
 
 class SyntheticBinary(object):
-    """
-    This class makes a synthetic light curve and injects a time delay signal corresponding to the input binary orbit parameters    
+    """This class generates a synthetic light curve and injects a time delay
+    signal corresponding to the input binary orbit parameters. Note that the 
+    input parameters do *NOT* need to be PyMC3 tensors, unlike the `Orbit` module.
+    
+    Args:
+        time (array): time-stamps 
+        freq (array): oscillation modes of the light curve
+        amplitude (array): amplitudes corresponding to each `freq`
+        period (float): Orbital period in days
+        eccen (float): Orbital eccentricity, must be between 0 and 1
+        asini (float): The projected semi-major axis of the orbit in seconds.
+        varpi (float): Angle between the ascending node and periapsis
+        tref (float): Reference time of periapsis
+        tau (bool, optional): Whether to inject binary motion or not. Defaults to True.
     """
 
     def __init__(

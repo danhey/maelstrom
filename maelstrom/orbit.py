@@ -12,36 +12,30 @@ __all__ = ["Orbit"]
 
 
 class Orbit:
-    """
-        This class defines an orbit model which solves equation 10 of 
-        Hey+2020 for given input values, defined within Theano.
-        
-        Parameters
-        ----------
-        period : pymc3.model.FreeRV
-            The orbital period prior
-        lighttime : pymc3.model.FreeRV
-            The convolved semi-major axis (asini) prior, given in seconds
-        phi : pymc3.model.FreeRV
-            The phase of periapsis
-        freq : pymc3.model.FreeRV
-            Frequency prior
-        eccen : pymc3.model.FreeRV, optional
-            The eccentricity prior, must be constrained between 0 and 1, by default None
-        omega : pymc3.model.FreeRV, optional
-            The argument of periapsis prior, given in angular coordinates, by default None
-        with_rv : bool, optional
-            Whether to include radial velocity calculations. If True, a prior
-            on the systemic velocity (gammav) must be provided, by default False
-        gammav : pymc3.model.FreeRV, optional
-            The systemic velocity prior. Must be included if with_rv is True.
-            by default None
-        """
-
     def __init__(
         self, period=None, lighttime=None, freq=None, eccen=None, omega=None, phi=None
     ):
-
+        """This class defines an orbit model which solves the time delay equations
+         for given input parameters and times. The orbit model can return
+         either a synthetic light curve composed of `freq` sinusoids which are
+         phase modulated with the orbital parameters, or instead can return a
+         synthetic time delay curve. `Orbit` will also solve radial velocity
+         curves given the same parameters.
+        
+        Args:
+            period (pymc3.model.FreeRV, optional): Orbital period tensor. 
+            Defaults to None.
+            lighttime (pymc3.model.FreeRV, optional): Projected semi-major axis
+            tensor. Defaults to None.
+            freq (array or pymc3.model.FreeRV, optional): Frequencies used in 
+            the model. Defaults to None.
+            eccen (pymc3.model.FreeRV, optional): Eccentricity tensor. Defaults
+            to None.
+            omega (pymc3.model.FreeRV, optional): Periapsis tensor. Defaults to
+            None.
+            phi (pymc3.model.FreeRV, optional): Phase of periapsis tensor. 
+            Defaults to None.
+        """
         self.period = period
         self.lighttime = lighttime
         self.omega = omega
@@ -79,20 +73,16 @@ class Orbit:
         return tau
 
     def get_lightcurve_model(self, time, flux):
-        """Calculates the light curve from the input time and flux data, with
-        phase offsets from the time delays.
+        """Calculates a synthetic light curve given the orbital parameters of 
+        the `Orbit` object and supplied times and fluxes. The `orbit.freq` are
+        phase modulated with binary motion.
         
-        Parameters
-        ----------
-        time : array-like
-            Values of time at which to calculate the light curve
-        flux : array-like
-            Values of flux corresponding to `time`.
+        Args:
+            time (array): Time-stamps
+            flux (array): Flux values for each `time`
         
-        Returns
-        -------
-        array-like
-            Light curve
+        Returns:
+            array: Synthetic light curve
         """
         tau = self.get_time_delay(time)
 
@@ -105,18 +95,13 @@ class Orbit:
         return self.full_lc
 
     def get_radial_velocity(self, time):
-        """Calculates the radial velocity within the framework of the Orbit for
-        given input times.
+        """Calculates the radial velocity for the given time values
         
-        Parameters
-        ----------
-        time : array-like
-            Time-values for each RV measurement
+        Args:
+            time (array): time values
         
-        Returns
-        -------
-        [type]
-            [description]
+        Returns:
+            array: RV values
         """
         M = 2.0 * np.pi * time[:, None] / self.period - self.phi
         f = get_true_anomaly(M, self.eccen + tt.zeros_like(M))
