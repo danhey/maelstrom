@@ -435,7 +435,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -448,7 +448,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>The default behaviour in Maelstrom is to estimate a set of frequencies for the model if none are supplied. While in most cases, these frequencies are fine, there are cases where special care must be taken. Let’s first generate a synthetic light curve with TESS sampling. We’ll consider a very rapidly oscillating star (frequency of 300 cpd), in a binary system with period 5 d. This is a rather unusual system, but we’ll use it to prove a point.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -461,8 +461,8 @@ div.rendered_html tbody tr:hover {
 <span class="n">tref</span> <span class="o">=</span> <span class="mf">0.</span>
 
 <span class="n">n_freqs</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">freqs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">300.</span><span class="p">]</span>
-<span class="n">amps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">freqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">300.</span><span class="p">])</span>
+<span class="n">amps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">24</span> <span class="o">*</span> <span class="mi">30</span><span class="p">))</span>
 
@@ -475,7 +475,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>Now, let’s ask Maelstrom to have a quick look at the star for any time delay signal.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -483,31 +483,18 @@ div.rendered_html tbody tr:hover {
 <span class="n">ms</span> <span class="o">=</span> <span class="n">Maelstrom</span><span class="p">(</span><span class="n">lc</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">lc</span><span class="o">.</span><span class="n">flux</span> <span class="o">/</span> <span class="mf">1e3</span><span class="p">,</span>
               <span class="n">max_peaks</span><span class="o">=</span><span class="mi">1</span>
               <span class="p">)</span>
-<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">(</span><span class="n">segment_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">(</span><span class="n">segment_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c272d9198&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2811d940&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c29840ef0&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c268454e0&gt;],
-      dtype=object)
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Estimating_frequencies_6_1.png" src="../_images/notebooks_Estimating_frequencies_6_1.png" />
+<img alt="../_images/notebooks_Estimating_frequencies_6_0.png" src="../_images/notebooks_Estimating_frequencies_6_0.png" />
 </div>
 </div>
-<p>What’s going on here? You’ll notice that the time delay signal seems to be steadily decreasing over time. We can see the binary motion, but if we try and it it we’ll get some nonsense back out. Maelstrom wasn’t designed for this!</p>
+<p>What’s going on here? You’ll notice that the time delay signal seems to be steadily decreasing over time. We can see the binary motion, but if we try and fit it we’ll get some nonsense back out. Maelstrom wasn’t designed for this!</p>
 <p>In fact, this motion is caused by Maelstrom incorrectly picking out the correct frequency. Frequency modulation causes a series of sidelobes to manifest in the amplitude spectrum. In some cases, such as stars with high frequency and low orbital period, these sidelobes can have higher amplitudes than the true frequency. So, let’s take a closer look at the synthetic data by calculating the amplitude spectrum.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -518,24 +505,15 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c272d9198&gt;,
 <span class="n">ax</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">plot_periodogram</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">fmin</span><span class="p">,</span> <span class="n">fmax</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">ms</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-&lt;matplotlib.lines.Line2D at 0x1c267cf470&gt;
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Estimating_frequencies_8_1.png" src="../_images/notebooks_Estimating_frequencies_8_1.png" />
+<img alt="../_images/notebooks_Estimating_frequencies_8_0.png" src="../_images/notebooks_Estimating_frequencies_8_0.png" />
 </div>
 </div>
 <p>You’ll notice that the true frequency at 300 cpd is split on both sides by a series of peaks. These peaks separated by the orbital frequency of the binary system (1/Porb). When Maelstrom looks for the frequency, it grabs the highest peak and optimizes that. Indeed, if we grab the sidelobe immediately to the right of the central peak, we’ll notice that the time delay signal is instead increasing over time:</p>
@@ -548,31 +526,18 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c272d9198&gt;,
 <span class="n">ms</span> <span class="o">=</span> <span class="n">Maelstrom</span><span class="p">(</span><span class="n">lc</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">lc</span><span class="o">.</span><span class="n">flux</span><span class="p">,</span>
               <span class="n">freq</span><span class="o">=</span><span class="p">[</span><span class="mf">300.2</span><span class="p">]</span>
               <span class="p">)</span>
-<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">(</span><span class="n">segment_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">(</span><span class="n">segment_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2988ee10&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c29e6c2e8&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2a11e860&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2a14ce10&gt;],
-      dtype=object)
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Estimating_frequencies_10_1.png" src="../_images/notebooks_Estimating_frequencies_10_1.png" />
+<img alt="../_images/notebooks_Estimating_frequencies_10_0.png" src="../_images/notebooks_Estimating_frequencies_10_0.png" />
 </div>
 </div>
-<p>Finally, let’s check that we can recover the time delay signal by inputting the original frequency.</p>
+<p>Hopefully this illustrates how important it is to choose your oscillation modes carefully. Finally, let’s make sure we can recover the original time delay signal by picking the correct frequency:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
@@ -582,28 +547,15 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2988ee10&gt;,
 <span class="n">ms</span> <span class="o">=</span> <span class="n">Maelstrom</span><span class="p">(</span><span class="n">lc</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">lc</span><span class="o">.</span><span class="n">flux</span><span class="p">,</span>
                <span class="n">freq</span><span class="o">=</span><span class="n">freqs</span><span class="p">,</span>
               <span class="p">)</span>
-<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">(</span><span class="n">segment_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">(</span><span class="n">segment_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2a197080&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2b0fcef0&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2d8744e0&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c2d8a4a90&gt;],
-      dtype=object)
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Estimating_frequencies_12_1.png" src="../_images/notebooks_Estimating_frequencies_12_1.png" />
+<img alt="../_images/notebooks_Estimating_frequencies_12_0.png" src="../_images/notebooks_Estimating_frequencies_12_0.png" />
 </div>
 </div>
 </div>

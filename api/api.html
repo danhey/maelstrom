@@ -203,7 +203,24 @@
 <span class="target" id="module-maelstrom.synthetic"></span><dl class="class">
 <dt id="maelstrom.synthetic.SyntheticBinary">
 <em class="property">class </em><code class="sig-prename descclassname">maelstrom.synthetic.</code><code class="sig-name descname">SyntheticBinary</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">freq</em>, <em class="sig-param">amplitude</em>, <em class="sig-param">period</em>, <em class="sig-param">eccen</em>, <em class="sig-param">asini</em>, <em class="sig-param">varpi</em>, <em class="sig-param">tref</em>, <em class="sig-param">tau=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/synthetic.html#SyntheticBinary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.synthetic.SyntheticBinary" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class makes a synthetic light curve and injects a time delay signal corresponding to the input binary orbit parameters</p>
+<dd><p>This class generates a synthetic light curve and injects a time delay
+signal corresponding to the input binary orbit parameters. Note that the
+input parameters do <em>NOT</em> need to be PyMC3 tensors, unlike the <cite>Orbit</cite> module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>array</em>) – time-stamps</p></li>
+<li><p><strong>freq</strong> (<em>array</em>) – oscillation modes of the light curve</p></li>
+<li><p><strong>amplitude</strong> (<em>array</em>) – amplitudes corresponding to each <cite>freq</cite></p></li>
+<li><p><strong>period</strong> (<em>float</em>) – Orbital period in days</p></li>
+<li><p><strong>eccen</strong> (<em>float</em>) – Orbital eccentricity, must be between 0 and 1</p></li>
+<li><p><strong>asini</strong> (<em>float</em>) – The projected semi-major axis of the orbit in seconds.</p></li>
+<li><p><strong>varpi</strong> (<em>float</em>) – Angle between the ascending node and periapsis</p></li>
+<li><p><strong>tref</strong> (<em>float</em>) – Reference time of periapsis</p></li>
+<li><p><strong>tau</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to inject binary motion or not. Defaults to True.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="maelstrom.synthetic.SyntheticBinary.add_noise">
 <code class="sig-name descname">add_noise</code><span class="sig-paren">(</span><em class="sig-param">snr=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/synthetic.html#SyntheticBinary.add_noise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.synthetic.SyntheticBinary.add_noise" title="Permalink to this definition">¶</a></dt>

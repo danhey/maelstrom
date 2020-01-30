@@ -436,7 +436,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -447,7 +447,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>Let’s download a nice star that has good time-delays – KIC 9651065.</p>
+<p>In this notebook, we’re going to inspect and fit the time delays for a well known Kepler <span class="math notranslate nohighlight">\(\delta\)</span> Scuti system, KIC 9651065. This tutorial assumes basic working knowledge of PyMC3. <a class="reference external" href="https://docs.exoplanet.codes/en/stable/tutorials/intro-to-pymc3/">A great introduction to this can be found here</a></p>
+<p>Now, let’s first download the light curve.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -464,7 +465,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.axes._subplots.AxesSubplot at 0x1118c1f28&gt;
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x114a3f828&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -474,9 +475,12 @@ div.rendered_html tbody tr:hover {
 <img alt="../_images/notebooks_Getting_started_4_1.png" src="../_images/notebooks_Getting_started_4_1.png" />
 </div>
 </div>
-<p>Here, we pass the time and flux data into Maelstrom. Note that lightkurve automatically subtracts the Kepler zero time (2454844 days). If you want to include additional data, you must work within the same reference time. If the <code class="docutils literal notranslate"><span class="pre">freq</span></code> argument is not specified, Maelstrom will automatically try and detect some good peaks. Be warned however, this does not always work and you should always check which frequencies you use! I have set the upper limit on the peak search to 40 cpd, since there are
-some Nyquist aliases. We can tell they are aliases as their time delays will match the Kepler orbital period. Neat!</p>
-<p>First look will subdivide the lightcurve using the old method, and have a quick look at the orbital signal. The frequencies are colored by their amplitude, and the orange line is the weighted average value. We see a nice peak around 272 d, which is the orbital period.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Lightkurve automatically subtracts the Kepler zero time (2454844 days), so all times are reported in Barycentric Kepler Julian Date (BKJD). <em>If you want to include additional data, you must work within the same reference time</em>.</p>
+</div>
+<p>Here, we pass the time and flux data into <code class="docutils literal notranslate"><span class="pre">Maelstrom</span></code>. If the <code class="docutils literal notranslate"><span class="pre">freq</span></code> argument is not specified, <code class="docutils literal notranslate"><span class="pre">Maelstrom</span></code> will automatically try and detect some good peaks to use. Be warned however, this does not always work and you should always check which frequencies you use! I have set the upper limit on the peak search to 40 d<span class="math notranslate nohighlight">\(^{-1}\)</span>, since there are some Nyquist aliases. We can tell they are aliases as their time delays will match the Kepler orbital period. Neat!</p>
+<p><code class="docutils literal notranslate"><span class="pre">first_look</span></code> will subdivide the lightcurve using the old method, and make some diagnostic plots. In order, these are the light curve, the amplitude spectrum, the extracted time delays, and the periodogram of the time delays. The frequencies are colored by their amplitude, and the orange line is the weighted average value. We see a nice peak around 272 d in the last panel, which is the orbital period of the system.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -485,38 +489,43 @@ some Nyquist aliases. We can tell they are aliases as their time delays will mat
 <span></span><span class="kn">from</span> <span class="nn">maelstrom</span> <span class="kn">import</span> <span class="n">Maelstrom</span>
 
 <span class="n">ms</span> <span class="o">=</span> <span class="n">Maelstrom</span><span class="p">(</span><span class="n">lc</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">lc</span><span class="o">.</span><span class="n">flux</span><span class="p">,</span> <span class="n">max_peaks</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
-<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">()</span>
+<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">();</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1a7f4518&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c21fb4da0&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1b3cc390&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1b3f6940&gt;],
-      dtype=object)
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_6_1.png" src="../_images/notebooks_Getting_started_6_1.png" />
+<img alt="../_images/notebooks_Getting_started_7_0.png" src="../_images/notebooks_Getting_started_7_0.png" />
 </div>
+</div>
+<p>Note that if you want the frequencies <code class="docutils literal notranslate"><span class="pre">Maelstrom</span></code> has found, simply call <code class="docutils literal notranslate"><span class="pre">ms.freq</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Oscillation modes are at </span><span class="si">{ms.freq}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Oscillation modes are at [19.47767606 21.71213419 30.80189468]
+</pre></div></div>
 </div>
 <p>To read off this period, we can calculate the peak in the power spectrum of the time delays (the bottom left panel above)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">period_guess</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">get_period_estimate</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">period_guess</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The orbital period is around </span><span class="si">{period_guess:.2f}</span><span class="s2"> days&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -525,13 +534,13 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1a7f4518&gt;,
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-269.95909667504344
+The orbital period is around 269.96 days
 </pre></div></div>
 </div>
+<p>This is pretty good for a few lines of code! In fact, the actual orbital period is closer to 272 d.</p>
 <p>Let’s now perform an initial optimisation.. We first need to call <code class="docutils literal notranslate"><span class="pre">setup_orbit_model</span></code>, but an orbital period estimate is not required (unless the time delay signal is very weak..!). We can also pass along an initial guess for the eccentricity, but let’s leave it at 0 and see what happens.</p>
-<p>We then optimize the model</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -541,7 +550,7 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1a7f4518&gt;,
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -550,7 +559,7 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1a7f4518&gt;,
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -570,9 +579,18 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1a7f4518&gt;,
  &#39;tref&#39;: array(24.82834397)}
 </pre></div></div>
 </div>
+<p>Let’s go through some of those parameters for a sec. The ones not mentioned are nuisance parameters which are required for the model.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">t0</span></code>: Time of periastron passage (d)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lighttime</span></code>: The projected semi-major axis calculated for each frequency in the model. Note that most of these agree, indicating that all the frequencies in the <code class="docutils literal notranslate"><span class="pre">Maelstrom</span></code> model belong to the same star.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">period</span></code>: The orbital period of the system.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">varpi</span></code>: The angle between the ascending node and periapsis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eccen</span></code>: Orbital eccentricity</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tref</span></code>: Time of reference passage of periapsis</p></li>
+</ul>
 <p>Let’s see what the theoretical time delays look like in the optimised model vs the actual extracted values.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -581,16 +599,8 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1c1a7f4518&gt;,
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has been deprecated and will no longer be supported in future. Please import this class from the astropy.timeseries module instead [astropy.stats.lombscargle]
-</pre></div></div>
-</div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -605,7 +615,7 @@ WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -617,7 +627,7 @@ Text(0, 0.5, &#39;Time delay [s]&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_14_1.png" src="../_images/notebooks_Getting_started_14_1.png" />
+<img alt="../_images/notebooks_Getting_started_19_1.png" src="../_images/notebooks_Getting_started_19_1.png" />
 </div>
 </div>
 <p>Cool! Each frequency in the light curve has its own independent <code class="docutils literal notranslate"><span class="pre">asini</span></code> in the Maelstrom model. This is useful for when there are multiple stars pulsating in the same binary system, as they would be (mostly) equal and opposite in sign.</p>
@@ -625,7 +635,7 @@ Text(0, 0.5, &#39;Time delay [s]&#39;)
 <p><span class="math notranslate nohighlight">\(y(t) = \sum_{j=1}^{J} \Big[A_j \cos(\omega_j (t - \tau)) + B_j \sin(\omega_j (t-\tau))\Big]\)</span></p>
 <p>Although it is not as useful as looking at the time-delays, we can still inspect the actual light curve that is generated from the time delay signal:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -640,24 +650,24 @@ Text(0, 0.5, &#39;Time delay [s]&#39;)
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x1c43c6ac18&gt;
+&lt;matplotlib.legend.Legend at 0x132291860&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_19_1.png" src="../_images/notebooks_Getting_started_19_1.png" />
+<img alt="../_images/notebooks_Getting_started_24_1.png" src="../_images/notebooks_Getting_started_24_1.png" />
 </div>
 </div>
 <p>Maelstrom has decided that all these frequencies belong to one star, as their lighttimes are all positive (or negative). This means the system is PB1. We can get a ready-made model from the get go by asking nicely, and passing in the optimisation results. The PB1 model is for binaries with only one pulsating component. All the frequencies now use the same <code class="docutils literal notranslate"><span class="pre">asini</span></code> parameter, unlike our first model</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -667,20 +677,20 @@ Text(0, 0.5, &#39;Time delay [s]&#39;)
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="math notranslate nohighlight">
 $$
             \begin{array}{rcl}
-            \text{PB1_logs_lc} &amp;\sim &amp; \text{Normal}(\mathit{mu}=0.6424636244773865,~\mathit{sigma}=10.0)\\\text{PB1_mean} &amp;\sim &amp; \text{Normal}(\mathit{mu}=4.582359380833623e-08,~\mathit{sigma}=1.0)\\\text{PB1_lognu} &amp;\sim &amp; \text{Normal}(\mathit{mu}=array,~\mathit{sigma}=0.1)\\\text{PB1_logpower} &amp;\sim &amp; \text{Normal}(\mathit{mu}=1.2849271297454834,~\mathit{sigma}=10.0)\\\text{PB1_period} &amp;\sim &amp; \text{Deterministic}(\text{Constant},~\text{Constant},~\text{PB1_logP_interval__},~\text{Constant})\\\text{PB1_asini} &amp;\sim &amp; \text{Deterministic}(\text{Constant},~\text{Constant},~\text{PB1_logasini_interval__},~\text{Constant})\\\text{PB1_nu} &amp;\sim &amp; \text{Deterministic}(\text{PB1_lognu})\\\text{PB1_eccen} &amp;\sim &amp; \text{Uniform}(\mathit{lower}=0.0,~\mathit{upper}=0.9)\\\text{PB1_logS0} &amp;\sim &amp; \text{Deterministic}(\text{PB1_logpower},~\text{Constant},~\text{Constant},~\text{Constant},~\text{PB1_logw0_interval__},~\text{Constant})
+            \text{PB1_logs_lc} &amp;\sim &amp; \text{Normal}(\mathit{mu}=0.6424636244773865,~\mathit{sigma}=10.0)\\\text{PB1_mean} &amp;\sim &amp; \text{Normal}(\mathit{mu}=4.582359380833623e-08,~\mathit{sigma}=1.0)\\\text{PB1_lognu} &amp;\sim &amp; \text{Normal}(\mathit{mu}=array,~\mathit{sigma}=0.1)\\\text{PB1_period} &amp;\sim &amp; \text{Deterministic}(\text{Constant},~\text{Constant},~\text{PB1_logP_interval__},~\text{Constant})\\\text{PB1_asini} &amp;\sim &amp; \text{Deterministic}(\text{Constant},~\text{Constant},~\text{PB1_logasini_interval__},~\text{Constant})\\\text{PB1_nu} &amp;\sim &amp; \text{Deterministic}(\text{PB1_lognu})\\\text{PB1_eccen} &amp;\sim &amp; \text{Uniform}(\mathit{lower}=0.0,~\mathit{upper}=0.9)\\\text{PB1_obs} &amp;\sim &amp; \text{Normal}(\mathit{mu}=f(f(f(f(f(f(f(f(),~\text{PB1_nu})),~f(array,~f(f(f(\text{PB1_asini})),~f(f(f(f(f(f(f(\text{PB1_eccen})))),~f(f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f())))),~f(\text{PB1_omega})))),~f(f(),~f(f(\text{PB1_eccen}),~f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))))))))))))),~f(f(f(f(f(),~\text{PB1_nu})),~f(array,~f(f(f(\text{PB1_asini})),~f(f(f(f(f(f(f(\text{PB1_eccen})))),~f(f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f())))),~f(\text{PB1_omega})))),~f(f(),~f(f(\text{PB1_eccen}),~f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f())))))))))))))),~f(f(f(f(f(f(f(f(f(),~\text{PB1_nu})),~f(array,~f(f(f(\text{PB1_asini})),~f(f(f(f(f(f(f(\text{PB1_eccen})))),~f(f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f())))),~f(\text{PB1_omega})))),~f(f(),~f(f(\text{PB1_eccen}),~f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))))))))))))),~f(f(f(f(f(),~\text{PB1_nu})),~f(array,~f(f(f(\text{PB1_asini})),~f(f(f(f(f(f(f(\text{PB1_eccen})))),~f(f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f())))),~f(\text{PB1_omega})))),~f(f(),~f(f(\text{PB1_eccen}),~f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))))))))))))))),~f(f(f(f(f(f(),~\text{PB1_nu})),~f(array,~f(f(f(\text{PB1_asini})),~f(f(f(f(f(f(f(\text{PB1_eccen})))),~f(f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f())))),~f(\text{PB1_omega})))),~f(f(),~f(f(\text{PB1_eccen}),~f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))))))))))))),~f(f(f(f(f(),~\text{PB1_nu})),~f(array,~f(f(f(\text{PB1_asini})),~f(f(f(f(f(f(f(\text{PB1_eccen})))),~f(f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f())))),~f(\text{PB1_omega})))),~f(f(),~f(f(\text{PB1_eccen}),~f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))))))))))))))),~f(f(f(f(f(f(f(f(),~\text{PB1_nu})),~f(array,~f(f(f(\text{PB1_asini})),~f(f(f(f(f(f(f(\text{PB1_eccen})))),~f(f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f())))),~f(\text{PB1_omega})))),~f(f(),~f(f(\text{PB1_eccen}),~f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))))))))))))),~f(f(f(f(f(),~\text{PB1_nu})),~f(array,~f(f(f(\text{PB1_asini})),~f(f(f(f(f(f(f(\text{PB1_eccen})))),~f(f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f())))),~f(\text{PB1_omega})))),~f(f(),~f(f(\text{PB1_eccen}),~f(f(f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f(f(\text{PB1_eccen}),~f(f(f(array,~f(\text{PB1_period})),~f(\text{PB1_phi})),~f()))))))))))))))),~array))),~f(\text{PB1_mean})),~\mathit{sigma}=f(f(\text{PB1_logs_lc})))
             \end{array}
             $$</div></div>
 </div>
 <p>As we can see, pb1_model inherits from the PyMC3 Models object. It is, by definition, a custom model which has access to all of the properties of the default Model class. This means we can do cool things like this:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -689,13 +699,287 @@ $$
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_23_0.svg" src="../_images/notebooks_Getting_started_23_0.svg" /></div>
+<img alt="../_images/notebooks_Getting_started_28_0.svg" src="../_images/notebooks_Getting_started_28_0.svg" /></div>
 </div>
 <p>Finally, if we are happy with the default priors in Maelstrom we can sample the model. There are strong covariances between some of the parameters. This means that sampling will slow down significantly unless we use a custom NUTS step (see <a class="reference external" href="https://exoplanet.dfm.io/en/stable/tutorials/pymc3-extras/#dense-mass-matrices">https://exoplanet.dfm.io/en/stable/tutorials/pymc3-extras/#dense-mass-matrices</a>)</p>
+<p>Sampling is quite slow while the mass matrix is tuned (typically the first 1000 steps). Because of this, I’m only going to make 10 draws of the posterior distribution.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">pb1_model</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">tune</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">draws</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+optimizing logp for variables: [PB1_mean]
+4it [00:00, 22.28it/s, logp=-1.150728e+05]
+message: Optimization terminated successfully.
+logp: -115072.80884284787 -&gt; -115072.7881902971
+optimizing logp for variables: [PB1_logs_lc]
+8it [00:00, 27.62it/s, logp=-1.097041e+05]
+message: Optimization terminated successfully.
+logp: -115072.7881902971 -&gt; -109704.06934437387
+optimizing logp for variables: [PB1_omega, PB1_eccen]
+45it [00:01, 26.08it/s, logp=-1.066786e+05]
+message: Optimization terminated successfully.
+logp: -109704.06934437387 -&gt; -106678.6001791905
+optimizing logp for variables: [PB1_phi]
+20it [00:00, 26.86it/s, logp=-1.066570e+05]
+message: Optimization terminated successfully.
+logp: -106678.6001791905 -&gt; -106657.04265097293
+optimizing logp for variables: [PB1_lognu]
+103it [00:03, 32.85it/s, logp=-1.066545e+05]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -106657.04265097293 -&gt; -106654.54220594438
+optimizing logp for variables: [PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
+323it [00:11, 27.99it/s, logp=-1.064707e+05]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -106654.54220594438 -&gt; -106470.71703961623
+optimizing logp for variables: [PB1_logasini]
+67it [00:02, 32.72it/s, logp=-1.064707e+05]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -106470.71703961623 -&gt; -106470.71703961623
+optimizing logp for variables: [PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
+81it [00:02, 27.78it/s, logp=-1.508331e+05]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -106470.71703961623 -&gt; -106470.71703961623
+optimizing logp for variables: [PB1_logP]
+4it [00:00, 23.40it/s, logp=-1.064707e+05]
+message: Optimization terminated successfully.
+logp: -106470.71703961623 -&gt; -106470.71703961515
+optimizing logp for variables: [PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
+133it [00:04, 28.31it/s, logp=-1.064707e+05]
+message: Desired error not necessarily achieved due to precision loss.
+logp: -106470.71703961515 -&gt; -106470.71703961305
+Only 10 samples in chain.
+Multiprocess sampling (2 chains in 2 jobs)
+NUTS: [PB1_eccen, PB1_omega, PB1_lognu, PB1_mean, PB1_logasini, PB1_logs_lc, PB1_phi, PB1_logP]
+Sampling 2 chains: 100%|██████████| 40/40 [00:59&lt;00:00,  1.49s/draws]
+/Users/danielhey/anaconda3/lib/python3.7/site-packages/pymc3/sampling.py:464: UserWarning: The number of samples is too small to check convergence reliably.
+  warnings.warn(&#34;The number of samples is too small to check convergence reliably.&#34;)
+There were 7 divergences after tuning. Increase `target_accept` or reparameterize.
+The acceptance probability does not match the target. It is 0.06641073900830238, but should be close to 0.9. Try to increase the number of tuning steps.
+There were 7 divergences after tuning. Increase `target_accept` or reparameterize.
+The acceptance probability does not match the target. It is 2.2473988127317096e-06, but should be close to 0.9. Try to increase the number of tuning steps.
+</pre></div></div>
+</div>
+<p>Look at all those errors! That’s because we only sampled for 10 steps across 2 chains. For a full sampling run, check out the case studies in the sidebar.</p>
+<p>In any case, our trace is a PyMC3 trace object which can be manipulated accordingly:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pm</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/danielhey/anaconda3/lib/python3.7/site-packages/pymc3/stats.py:991: FutureWarning: The join_axes-keyword is deprecated. Use .reindex or .reindex_like on the result to achieve the same functionality.
+  axis=1, join_axes=[dforg.index])
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>mc_error</th>
+      <th>hpd_2.5</th>
+      <th>hpd_97.5</th>
+      <th>n_eff</th>
+      <th>Rhat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>PB1_logs_lc</th>
+      <td>0.212922</td>
+      <td>8.600234e-06</td>
+      <td>2.719611e-06</td>
+      <td>0.212913</td>
+      <td>0.212931</td>
+      <td>NaN</td>
+      <td>234.349313</td>
+    </tr>
+    <tr>
+      <th>PB1_mean</th>
+      <td>0.000748</td>
+      <td>9.571820e-06</td>
+      <td>3.026826e-06</td>
+      <td>0.000739</td>
+      <td>0.000758</td>
+      <td>NaN</td>
+      <td>103.871715</td>
+    </tr>
+    <tr>
+      <th>PB1_lognu__0</th>
+      <td>2.969269</td>
+      <td>3.418779e-08</td>
+      <td>1.057404e-08</td>
+      <td>2.969269</td>
+      <td>2.969269</td>
+      <td>NaN</td>
+      <td>4.133664</td>
+    </tr>
+    <tr>
+      <th>PB1_lognu__1</th>
+      <td>3.077871</td>
+      <td>1.183244e-07</td>
+      <td>3.247042e-08</td>
+      <td>3.077871</td>
+      <td>3.077872</td>
+      <td>NaN</td>
+      <td>1.318653</td>
+    </tr>
+    <tr>
+      <th>PB1_lognu__2</th>
+      <td>3.427576</td>
+      <td>6.475697e-08</td>
+      <td>1.901471e-08</td>
+      <td>3.427576</td>
+      <td>3.427576</td>
+      <td>NaN</td>
+      <td>1.087233</td>
+    </tr>
+    <tr>
+      <th>PB1_logP</th>
+      <td>5.605784</td>
+      <td>7.644901e-06</td>
+      <td>2.417445e-06</td>
+      <td>5.605777</td>
+      <td>5.605792</td>
+      <td>NaN</td>
+      <td>69.104374</td>
+    </tr>
+    <tr>
+      <th>PB1_period</th>
+      <td>271.995197</td>
+      <td>2.079376e-03</td>
+      <td>6.575335e-04</td>
+      <td>271.993118</td>
+      <td>271.997319</td>
+      <td>1.052922</td>
+      <td>69.103851</td>
+    </tr>
+    <tr>
+      <th>PB1_phi</th>
+      <td>0.569194</td>
+      <td>2.178819e-06</td>
+      <td>6.889910e-07</td>
+      <td>0.569192</td>
+      <td>0.569196</td>
+      <td>NaN</td>
+      <td>120.295888</td>
+    </tr>
+    <tr>
+      <th>PB1_logasini</th>
+      <td>5.221367</td>
+      <td>1.418273e-05</td>
+      <td>4.484865e-06</td>
+      <td>5.221352</td>
+      <td>5.221381</td>
+      <td>NaN</td>
+      <td>72.400180</td>
+    </tr>
+    <tr>
+      <th>PB1_asini</th>
+      <td>185.187119</td>
+      <td>2.626459e-03</td>
+      <td>8.305392e-04</td>
+      <td>185.184426</td>
+      <td>185.189745</td>
+      <td>1.052904</td>
+      <td>72.401205</td>
+    </tr>
+    <tr>
+      <th>PB1_nu__0</th>
+      <td>19.477680</td>
+      <td>6.658988e-07</td>
+      <td>2.059578e-07</td>
+      <td>19.477679</td>
+      <td>19.477681</td>
+      <td>NaN</td>
+      <td>4.133665</td>
+    </tr>
+    <tr>
+      <th>PB1_nu__1</th>
+      <td>21.712135</td>
+      <td>2.569075e-06</td>
+      <td>7.050022e-07</td>
+      <td>21.712132</td>
+      <td>21.712139</td>
+      <td>3.268674</td>
+      <td>1.318653</td>
+    </tr>
+    <tr>
+      <th>PB1_nu__2</th>
+      <td>30.801896</td>
+      <td>1.994638e-06</td>
+      <td>5.856890e-07</td>
+      <td>30.801893</td>
+      <td>30.801898</td>
+      <td>4.569588</td>
+      <td>1.087233</td>
+    </tr>
+    <tr>
+      <th>PB1_omega</th>
+      <td>2.201137</td>
+      <td>5.935100e-07</td>
+      <td>1.876577e-07</td>
+      <td>2.201136</td>
+      <td>2.201138</td>
+      <td>NaN</td>
+      <td>30.042722</td>
+    </tr>
+    <tr>
+      <th>PB1_eccen</th>
+      <td>0.457221</td>
+      <td>7.910098e-07</td>
+      <td>2.500954e-07</td>
+      <td>0.457220</td>
+      <td>0.457222</td>
+      <td>1.054756</td>
+      <td>25.987299</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>

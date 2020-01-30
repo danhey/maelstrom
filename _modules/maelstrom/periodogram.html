@@ -198,7 +198,7 @@
 <span class="sd">    For each orbital period, it will iterate over a simplified Maelstrom</span>
 <span class="sd">    model, optimise the values, and then record the loglikelihood. </span>
 
-<span class="sd">    This is useful for planets.</span>
+<span class="sd">    This is useful for planets, and short period binaries.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
 <span class="sd">        time (array): Time values</span>
@@ -211,7 +211,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">time</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mag</span> <span class="o">=</span> <span class="n">mag</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">freq</span>
-
+        <span class="c1"># Initialise the model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
@@ -272,7 +272,9 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span></div>
 
 <div class="viewcode-block" id="Periodogram.diagnose"><a class="viewcode-back" href="../../api/periodogram.html#maelstrom.periodogram.Periodogram.diagnose">[docs]</a>    <span class="k">def</span> <span class="nf">diagnose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Diagnose the fit values</span>
+        <span class="sd">&quot;&quot;&quot;Generate diagnostic plots of the fit values. After running </span>
+<span class="sd">        `Periodogram.fit()`, `diagnose` will plot the resulting period vs </span>
+<span class="sd">        likelihood and period vs optimised asini values.</span>
 <span class="sd">        </span>
 <span class="sd">        Returns:</span>
 <span class="sd">            array: array of matplotlib axes.</span>

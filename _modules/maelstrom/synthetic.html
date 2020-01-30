@@ -185,8 +185,20 @@
 
 
 <div class="viewcode-block" id="SyntheticBinary"><a class="viewcode-back" href="../../api/api.html#maelstrom.synthetic.SyntheticBinary">[docs]</a><span class="k">class</span> <span class="nc">SyntheticBinary</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class makes a synthetic light curve and injects a time delay signal corresponding to the input binary orbit parameters    </span>
+    <span class="sd">&quot;&quot;&quot;This class generates a synthetic light curve and injects a time delay</span>
+<span class="sd">    signal corresponding to the input binary orbit parameters. Note that the </span>
+<span class="sd">    input parameters do *NOT* need to be PyMC3 tensors, unlike the `Orbit` module.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        time (array): time-stamps </span>
+<span class="sd">        freq (array): oscillation modes of the light curve</span>
+<span class="sd">        amplitude (array): amplitudes corresponding to each `freq`</span>
+<span class="sd">        period (float): Orbital period in days</span>
+<span class="sd">        eccen (float): Orbital eccentricity, must be between 0 and 1</span>
+<span class="sd">        asini (float): The projected semi-major axis of the orbit in seconds.</span>
+<span class="sd">        varpi (float): Angle between the ascending node and periapsis</span>
+<span class="sd">        tref (float): Reference time of periapsis</span>
+<span class="sd">        tau (bool, optional): Whether to inject binary motion or not. Defaults to True.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>

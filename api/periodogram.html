@@ -208,7 +208,7 @@
 <dd><p>A class to brute force the likelihood in search of small signals.
 For each orbital period, it will iterate over a simplified Maelstrom
 model, optimise the values, and then record the loglikelihood.</p>
-<p>This is useful for planets.</p>
+<p>This is useful for planets, and short period binaries.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -221,7 +221,9 @@ model, optimise the values, and then record the loglikelihood.</p>
 <dl class="method">
 <dt id="maelstrom.periodogram.Periodogram.diagnose">
 <code class="sig-name descname">diagnose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/maelstrom/periodogram.html#Periodogram.diagnose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#maelstrom.periodogram.Periodogram.diagnose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Diagnose the fit values</p>
+<dd><p>Generate diagnostic plots of the fit values. After running
+<cite>Periodogram.fit()</cite>, <cite>diagnose</cite> will plot the resulting period vs
+likelihood and period vs optimised asini values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>array of matplotlib axes.</p>
