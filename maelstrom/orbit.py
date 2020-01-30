@@ -12,30 +12,25 @@ __all__ = ["Orbit"]
 
 
 class Orbit:
+    """This class defines an orbit model which solves the time delay equations
+        for given input parameters and times. The orbit model can return
+        either a synthetic light curve composed of `freq` sinusoids which are
+        phase modulated with the orbital parameters, or instead can return a
+        synthetic time delay curve. `Orbit` will also solve radial velocity
+        curves given the same parameters.
+    
+    Args:
+        period (pymc3.model.FreeRV, optional): Orbital period tensor. Defaults to None.
+        lighttime (pymc3.model.FreeRV, optional): Projected semi-major axis tensor. Defaults to None.
+        freq (array or pymc3.model.FreeRV, optional): Frequencies used in the model. Defaults to None.
+        eccen (pymc3.model.FreeRV, optional): Eccentricity tensor. Defaults to None.
+        omega (pymc3.model.FreeRV, optional): Periapsis tensor. Defaults to None.
+        phi (pymc3.model.FreeRV, optional): Phase of periapsis tensor. Defaults to None.
+    """
+
     def __init__(
         self, period=None, lighttime=None, freq=None, eccen=None, omega=None, phi=None
     ):
-        """This class defines an orbit model which solves the time delay equations
-         for given input parameters and times. The orbit model can return
-         either a synthetic light curve composed of `freq` sinusoids which are
-         phase modulated with the orbital parameters, or instead can return a
-         synthetic time delay curve. `Orbit` will also solve radial velocity
-         curves given the same parameters.
-        
-        Args:
-            period (pymc3.model.FreeRV, optional): Orbital period tensor. 
-            Defaults to None.
-            lighttime (pymc3.model.FreeRV, optional): Projected semi-major axis
-            tensor. Defaults to None.
-            freq (array or pymc3.model.FreeRV, optional): Frequencies used in 
-            the model. Defaults to None.
-            eccen (pymc3.model.FreeRV, optional): Eccentricity tensor. Defaults
-            to None.
-            omega (pymc3.model.FreeRV, optional): Periapsis tensor. Defaults to
-            None.
-            phi (pymc3.model.FreeRV, optional): Phase of periapsis tensor. 
-            Defaults to None.
-        """
         self.period = period
         self.lighttime = lighttime
         self.omega = omega
