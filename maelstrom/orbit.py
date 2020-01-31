@@ -12,7 +12,8 @@ __all__ = ["Orbit"]
 
 
 class Orbit:
-    """This class defines an orbit model which solves the time delay equations
+    """
+    This class defines an orbit model which solves the time delay equations
         for given input parameters and times. The orbit model can return
         either a synthetic light curve composed of `freq` sinusoids which are
         phase modulated with the orbital parameters, or instead can return a
