@@ -22,7 +22,13 @@ an orbital companion.
 
 To install the current version
 
-```python
+```bash
+pip install maelstrom
+```
+
+To install the developer version
+
+```bash
 git clone https://github.com/danhey/maelstrom.git
 cd maelstrom
 pip install -e .
