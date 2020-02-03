@@ -297,7 +297,7 @@ class BaseOrbitModel(Model):
 
         for td, color in zip(time_delay.T, colors):
             f, p = amplitude_spectrum(t0s[m], td[m])
-            ax.plot(f, p / np.max(p), c=color)
+            ax.plot(f, p / np.max(p), c=color, linewidth=0.7)
 
         f, p = amplitude_spectrum(t0s[m], full[m])
         ax.plot(f, p / np.max(p), c=[0.84627451, 0.28069204, 0.00410611])
