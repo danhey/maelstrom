@@ -1,0 +1,2 @@
+Name,Porb, Porb_sig_p, Porb_sig_m, a1sini/c, a1sini/c_sig_p, a1sini/c_sig_m, e, e_sig_p, e_sig_m, phip, phip_sig_p, phip_sig_m, varpi, varpi_sig_p, varpi_sig_m, f(M)Msun, f(M)Msun_sig_p, f(M)Msun_sig_m, gradient, grad_sig_p, grad_sig_m, t_p, t_p_sig_p, t_p_sig_m, K1_ms, K1_ms_sig_p, K1_ms_sig_m
+kic6780873,9.154712,0.000259,0.00031,16.277833,0.041959,0.044592,0.00036,0.000554,0.000239,0.970692,0.021351,0.021152,4.845725,0.118095,0.113337,0.0552565,0.0004273,0.0004541,0.002045,0.021254,0.023478,54974.716766,0.195462,0.193641,38768.3,57.8,61.7
