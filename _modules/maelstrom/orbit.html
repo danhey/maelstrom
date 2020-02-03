@@ -188,35 +188,25 @@
 
 <div class="viewcode-block" id="Orbit"><a class="viewcode-back" href="../../api/orbit.html#maelstrom.orbit.Orbit">[docs]</a><span class="k">class</span> <span class="nc">Orbit</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This class defines an orbit model which solves equation 10 of </span>
-<span class="sd">        Hey+2020 for given input values, defined within Theano.</span>
-<span class="sd">        </span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        period : pymc3.model.FreeRV</span>
-<span class="sd">            The orbital period prior</span>
-<span class="sd">        lighttime : pymc3.model.FreeRV</span>
-<span class="sd">            The convolved semi-major axis (asini) prior, given in seconds</span>
-<span class="sd">        phi : pymc3.model.FreeRV</span>
-<span class="sd">            The phase of periapsis</span>
-<span class="sd">        freq : pymc3.model.FreeRV</span>
-<span class="sd">            Frequency prior</span>
-<span class="sd">        eccen : pymc3.model.FreeRV, optional</span>
-<span class="sd">            The eccentricity prior, must be constrained between 0 and 1, by default None</span>
-<span class="sd">        omega : pymc3.model.FreeRV, optional</span>
-<span class="sd">            The argument of periapsis prior, given in angular coordinates, by default None</span>
-<span class="sd">        with_rv : bool, optional</span>
-<span class="sd">            Whether to include radial velocity calculations. If True, a prior</span>
-<span class="sd">            on the systemic velocity (gammav) must be provided, by default False</span>
-<span class="sd">        gammav : pymc3.model.FreeRV, optional</span>
-<span class="sd">            The systemic velocity prior. Must be included if with_rv is True.</span>
-<span class="sd">            by default None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">    This class defines an orbit model which solves the time delay equations</span>
+<span class="sd">        for given input parameters and times. The orbit model can return</span>
+<span class="sd">        either a synthetic light curve composed of `freq` sinusoids which are</span>
+<span class="sd">        phase modulated with the orbital parameters, or instead can return a</span>
+<span class="sd">        synthetic time delay curve. `Orbit` will also solve radial velocity</span>
+<span class="sd">        curves given the same parameters.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        period (pymc3.model.FreeRV, optional): Orbital period tensor. Defaults to None.</span>
+<span class="sd">        lighttime (pymc3.model.FreeRV, optional): Projected semi-major axis tensor. Defaults to None.</span>
+<span class="sd">        freq (array or pymc3.model.FreeRV, optional): Frequencies used in the model. Defaults to None.</span>
+<span class="sd">        eccen (pymc3.model.FreeRV, optional): Eccentricity tensor. Defaults to None.</span>
+<span class="sd">        omega (pymc3.model.FreeRV, optional): Periapsis tensor. Defaults to None.</span>
+<span class="sd">        phi (pymc3.model.FreeRV, optional): Phase of periapsis tensor. Defaults to None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lighttime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eccen</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="kc">None</span>
     <span class="p">):</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">period</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lighttime</span> <span class="o">=</span> <span class="n">lighttime</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">omega</span> <span class="o">=</span> <span class="n">omega</span>
@@ -254,20 +244,16 @@
         <span class="k">return</span> <span class="n">tau</span></div>
 
 <div class="viewcode-block" id="Orbit.get_lightcurve_model"><a class="viewcode-back" href="../../api/orbit.html#maelstrom.orbit.Orbit.get_lightcurve_model">[docs]</a>    <span class="k">def</span> <span class="nf">get_lightcurve_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculates the light curve from the input time and flux data, with</span>
-<span class="sd">        phase offsets from the time delays.</span>
+        <span class="sd">&quot;&quot;&quot;Calculates a synthetic light curve given the orbital parameters of </span>
+<span class="sd">        the `Orbit` object and supplied times and fluxes. The `orbit.freq` are</span>
+<span class="sd">        phase modulated with binary motion.</span>
 <span class="sd">        </span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        time : array-like</span>
-<span class="sd">            Values of time at which to calculate the light curve</span>
-<span class="sd">        flux : array-like</span>
-<span class="sd">            Values of flux corresponding to `time`.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            time (array): Time-stamps</span>
+<span class="sd">            flux (array): Flux values for each `time`</span>
 <span class="sd">        </span>
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        array-like</span>
-<span class="sd">            Light curve</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            array: Synthetic light curve</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">tau</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_time_delay</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
 
@@ -280,18 +266,13 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_lc</span></div>
 
 <div class="viewcode-block" id="Orbit.get_radial_velocity"><a class="viewcode-back" href="../../api/orbit.html#maelstrom.orbit.Orbit.get_radial_velocity">[docs]</a>    <span class="k">def</span> <span class="nf">get_radial_velocity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculates the radial velocity within the framework of the Orbit for</span>
-<span class="sd">        given input times.</span>
+        <span class="sd">&quot;&quot;&quot;Calculates the radial velocity for the given time values</span>
 <span class="sd">        </span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        time : array-like</span>
-<span class="sd">            Time-values for each RV measurement</span>
+<span class="sd">        Args:</span>
+<span class="sd">            time (array): time values</span>
 <span class="sd">        </span>
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        [type]</span>
-<span class="sd">            [description]</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            array: RV values</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">M</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">time</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">phi</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">get_true_anomaly</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">eccen</span> <span class="o">+</span> <span class="n">tt</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">M</span><span class="p">))</span>

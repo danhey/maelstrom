@@ -425,11 +425,22 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="KIC-9651065">
 <h1>KIC 9651065<a class="headerlink" href="#KIC-9651065" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">run</span> setup.py
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">exoplanet</span> <span class="k">as</span> <span class="nn">xo</span>
+<span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">from</span> <span class="nn">maelstrom</span> <span class="kn">import</span> <span class="n">Maelstrom</span>
+<span class="kn">from</span> <span class="nn">astropy.stats</span> <span class="kn">import</span> <span class="n">LombScargle</span>
+<span class="kn">from</span> <span class="nn">lightkurve</span> <span class="kn">import</span> <span class="n">search_lightcurvefile</span>
+<span class="kn">import</span> <span class="nn">lightkurve</span> <span class="k">as</span> <span class="nn">lk</span>
+<span class="kn">from</span> <span class="nn">maelstrom.orbit</span> <span class="kn">import</span> <span class="n">Orbit</span>
+<span class="kn">from</span> <span class="nn">exoplanet.orbits</span> <span class="kn">import</span> <span class="n">get_true_anomaly</span>
+<span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">import</span> <span class="nn">theano.tensor</span> <span class="k">as</span> <span class="nn">tt</span>
 </pre></div>
 </div>
 </div>
@@ -438,46 +449,36 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;../data/9651065_lc.txt&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+<span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;savefig.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/danhey/maelstrom/master/paper/lc/9651065_lc.txt&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="n">ms</span> <span class="o">=</span> <span class="n">Maelstrom</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_peaks</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
-<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">()</span>
+<span class="n">ms</span><span class="o">.</span><span class="n">first_look</span><span class="p">();</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-WARNING: AstropyDeprecationWarning: Importing LombScargle from astropy.stats has been deprecated and will no longer be supported in future. Please import this class from the astropy.timeseries module instead [astropy.stats.lombscargle]
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x10ff450b8&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x12e73f4e0&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x12e7835f8&gt;,
-       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x10f2dd710&gt;],
-      dtype=object)
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/case_studies_9651065_3_2.png" src="../_images/case_studies_9651065_3_2.png" />
+<img alt="../_images/case_studies_9651065_4_0.png" src="../_images/case_studies_9651065_4_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -541,7 +542,7 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x10ff450b8&gt;,
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/case_studies_9651065_7_0.png" src="../_images/case_studies_9651065_7_0.png" />
+<img alt="../_images/case_studies_9651065_8_0.png" src="../_images/case_studies_9651065_8_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -581,7 +582,7 @@ array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x10ff450b8&gt;,
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/case_studies_9651065_9_0.png" src="../_images/case_studies_9651065_9_0.png" />
+<img alt="../_images/case_studies_9651065_10_0.png" src="../_images/case_studies_9651065_10_0.png" />
 </div>
 </div>
 <div class="section" id="Maelstrom">
@@ -1090,7 +1091,7 @@ There was 1 divergence after tuning. Increase `target_accept` or reparameterize.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/case_studies_9651065_23_0.png" src="../_images/case_studies_9651065_23_0.png" />
+<img alt="../_images/case_studies_9651065_24_0.png" src="../_images/case_studies_9651065_24_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -1178,7 +1179,7 @@ phi: 0.45 + 0.07 - 0.07
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/case_studies_9651065_28_1.png" src="../_images/case_studies_9651065_28_1.png" />
+<img alt="../_images/case_studies_9651065_29_1.png" src="../_images/case_studies_9651065_29_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -1231,7 +1232,7 @@ phi: 0.45 + 0.07 - 0.07
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/case_studies_9651065_29_0.png" src="../_images/case_studies_9651065_29_0.png" />
+<img alt="../_images/case_studies_9651065_30_0.png" src="../_images/case_studies_9651065_30_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -1575,7 +1576,7 @@ mass_func :  0.091  +  0.006  -  0.005
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/case_studies_9651065_36_1.png" src="../_images/case_studies_9651065_36_1.png" />
+<img alt="../_images/case_studies_9651065_37_1.png" src="../_images/case_studies_9651065_37_1.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
