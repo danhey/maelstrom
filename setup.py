@@ -8,7 +8,7 @@ from setuptools import setup, Extension
 if "release" in sys.argv[-1]:
     os.system("python setup.py sdist bdist_wheel")
     os.system("twine upload dist/*")
-    os.system("rm -rf dist/echelle*")
+    os.system("rm -rf dist/maelstrom*")
     sys.exit()
 
 # Load the __version__ variable without importing the package already
