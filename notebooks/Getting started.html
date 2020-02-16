@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting started &mdash; maelstrom 0.2 documentation</title>
+  <title>What is Maelstrom? &mdash; maelstrom 0.2 documentation</title>
   
 
   
@@ -93,10 +93,12 @@
 </ul>
 <p class="caption"><span class="caption-text">Tutorials</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">What is Maelstrom?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Getting-started">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Estimating frequencies.html">Choosing the correct frequencies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Custom priors.html">Custom priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Recovering weak signals.html">Recovering weak signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQ</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Case studies from paper</span></p>
 <ul>
@@ -157,7 +159,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Getting started</li>
+      <li>What is Maelstrom?</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -418,6 +420,12 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
+<div class="section" id="What-is-Maelstrom?">
+<h1>What is Maelstrom?<a class="headerlink" href="#What-is-Maelstrom?" title="Permalink to this headline">¶</a></h1>
+<p>Maelstrom is a code that enables the modelling and analysis of binary light curves with a pulsating component. When a pulsating star is in orbit with a companion, the time taken for the stellar pulsations to reach us changes over time. This information is encoded in the phase of the pulsation, which, for the coherently pulsating <span class="math notranslate nohighlight">\(\delta\)</span> Scuti stars can be used as clocks to infer the position of the stars throughout the orbit.</p>
+<p>This method is known as <em>phase modulation</em>. Phase modulation has been used for a wide range of stars, most notable of which being pulsars, whose highly precise millisecond level precision enabled the detection of the first planet. For intermediate mass stars, phase modulation is useful for the A/F type pulsators to infer stellar mass companions.</p>
+<p>The Maelstrom code contains routines for forward modelling these orbits. In a forward model, a light curve is generated from the orbital parameters and fit to the actual light curve data.</p>
+</div>
 <div class="section" id="Getting-started">
 <h1>Getting started<a class="headerlink" href="#Getting-started" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput nblast docutils container">
@@ -472,7 +480,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_4_1.png" src="../_images/notebooks_Getting_started_4_1.png" />
+<img alt="../_images/notebooks_Getting_started_8_1.png" src="../_images/notebooks_Getting_started_8_1.png" />
 </div>
 </div>
 <div class="admonition note">
@@ -497,7 +505,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_7_0.png" src="../_images/notebooks_Getting_started_7_0.png" />
+<img alt="../_images/notebooks_Getting_started_11_0.png" src="../_images/notebooks_Getting_started_11_0.png" />
 </div>
 </div>
 <p>Note that if you want the frequencies <code class="docutils literal notranslate"><span class="pre">Maelstrom</span></code> has found, simply call <code class="docutils literal notranslate"><span class="pre">ms.freq</span></code></p>
@@ -627,7 +635,7 @@ Text(0, 0.5, &#39;Time delay [s]&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_19_1.png" src="../_images/notebooks_Getting_started_19_1.png" />
+<img alt="../_images/notebooks_Getting_started_23_1.png" src="../_images/notebooks_Getting_started_23_1.png" />
 </div>
 </div>
 <p>Cool! Each frequency in the light curve has its own independent <code class="docutils literal notranslate"><span class="pre">asini</span></code> in the Maelstrom model. This is useful for when there are multiple stars pulsating in the same binary system, as they would be (mostly) equal and opposite in sign.</p>
@@ -662,7 +670,7 @@ Text(0, 0.5, &#39;Time delay [s]&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_24_1.png" src="../_images/notebooks_Getting_started_24_1.png" />
+<img alt="../_images/notebooks_Getting_started_28_1.png" src="../_images/notebooks_Getting_started_28_1.png" />
 </div>
 </div>
 <p>Maelstrom has decided that all these frequencies belong to one star, as their lighttimes are all positive (or negative). This means the system is PB1. We can get a ready-made model from the get go by asking nicely, and passing in the optimisation results. The PB1 model is for binaries with only one pulsating component. All the frequencies now use the same <code class="docutils literal notranslate"><span class="pre">asini</span></code> parameter, unlike our first model</p>
@@ -703,7 +711,7 @@ $$
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Getting_started_28_0.svg" src="../_images/notebooks_Getting_started_28_0.svg" /></div>
+<img alt="../_images/notebooks_Getting_started_32_0.svg" src="../_images/notebooks_Getting_started_32_0.svg" /></div>
 </div>
 <p>Finally, if we are happy with the default priors in Maelstrom we can sample the model. There are strong covariances between some of the parameters. This means that sampling will slow down significantly unless we use a custom NUTS step (see <a class="reference external" href="https://exoplanet.dfm.io/en/stable/tutorials/pymc3-extras/#dense-mass-matrices">https://exoplanet.dfm.io/en/stable/tutorials/pymc3-extras/#dense-mass-matrices</a>)</p>
 <p>Sampling is quite slow while the mass matrix is tuned (typically the first 1000 steps). Because of this, I’m only going to make 10 draws of the posterior distribution.</p>

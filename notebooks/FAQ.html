@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Citing &mdash; maelstrom 0.2 documentation</title>
+  <title>FAQ &mdash; maelstrom 0.2 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="What is Maelstrom?" href="../notebooks/Getting started.html" />
-    <link rel="prev" title="Installation" href="install.html" />
+    <link rel="next" title="KIC 9651065" href="../case_studies/9651065.html" />
+    <link rel="prev" title="Recovering weak signals" href="Recovering weak signals.html" />
     <link href="../_static/style.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -87,18 +87,18 @@
             
             
               <p class="caption"><span class="caption-text">User Guide</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Citing</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/citation.html">Citing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Tutorials</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/Getting started.html">What is Maelstrom?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/Getting started.html#Getting-started">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/Estimating frequencies.html">Choosing the correct frequencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/Custom priors.html">Custom priors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/Recovering weak signals.html">Recovering weak signals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/FAQ.html">FAQ</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Getting started.html">What is Maelstrom?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Getting started.html#Getting-started">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Estimating frequencies.html">Choosing the correct frequencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom priors.html">Custom priors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recovering weak signals.html">Recovering weak signals</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Case studies from paper</span></p>
 <ul>
@@ -159,13 +159,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Citing</li>
+      <li>FAQ</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/user/citation.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/notebooks/FAQ.ipynb.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -202,9 +202,16 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="citing">
-<h1>Citing<a class="headerlink" href="#citing" title="Permalink to this headline">¶</a></h1>
-<p>If you have used Maelstrom in your work, please consider citing it.</p>
+<div class="section" id="FAQ">
+<h1>FAQ<a class="headerlink" href="#FAQ" title="Permalink to this headline">¶</a></h1>
+<p>Q: Can I use Maelstrom for <em>X</em> star?</p>
+<p>A: It depends! Phase modulation is most useful when the oscillation frequencies exceed 60 Hz, and when the oscillations do not change over the course of the orbit. Most stars that have been used with phase modulation are pulsars, <span class="math notranslate nohighlight">\(\delta\)</span> Scuti stars, and subdwarf B stars.</p>
+<hr class="docutils" />
+<p>Q: What SNR should my pulsation be for it to be useful?</p>
+<p>A: In general, the pulsation should be clear of any nearby peaks and exceed a SNR of 5. See the Maelstrom paper for a more detailed analysis.</p>
+<hr class="docutils" />
+<p>Q: Will this work for ground-based data?</p>
+<p>A: No, I have not yet found any cases where Maelstrom has worked on ground-based data. So far, all analyses have used the <em>Kepler</em> or <em>TESS</em> satellites.</p>
 </div>
 
 
@@ -215,10 +222,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../notebooks/Getting started.html" class="btn btn-neutral float-right" title="What is Maelstrom?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../case_studies/9651065.html" class="btn btn-neutral float-right" title="KIC 9651065" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Recovering weak signals.html" class="btn btn-neutral float-left" title="Recovering weak signals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
