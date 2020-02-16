@@ -43,6 +43,7 @@ To get started::
    notebooks/Estimating frequencies.ipynb
    notebooks/Custom priors.ipynb
    notebooks/Recovering weak signals.ipynb
+   notebooks/FAQ.ipynb
 
 .. toctree::
    :maxdepth: 1
