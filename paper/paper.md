@@ -14,6 +14,15 @@ authors:
   - name: Daniel Foreman-Mackey
     orcid: 0000-0002-9328-5652
     affiliation: "3"
+  - name: Timothy R. Bedding
+    orcid: 0000-0001-5222-4661
+    affiliation: "1, 2"
+  - name: Benjamin J.S. Pope
+    orcid: 0000-0003-2595-9114
+    affiliation: "4,5"
+  - name: David W. Hogg
+    orcid: 0000-0003-2866-9403
+    affiliation: "4, 3, 5, 6"
 affiliations:
  - name: School of Physics, Sydney Institute for Astronomy (SIfA), The University of Sydney, NSW 2006, Australia
    index: 1
@@ -21,6 +30,12 @@ affiliations:
    index: 2
  - name: Center for Computational Astrophysics, Flatiron Institute, 162 5th Ave, New York, NY 10010, USA
    index: 3
+ - name: Center for Cosmology and Particle Physics, Department of PhysicsNew York University, 726 Broadway, New York, NY 10003, USA
+   index: 4
+ - name: Center for Data Science, New York University, 60 Fifth Ave, New York, NY 10011, USA
+   index: 5
+ - name: Max-Planck-Institut für Astronomie, Königstuhl 17, D-69117 Heidelberg
+   index: 6
 date: 28 January 2020
 bibliography: paper.bib
 
@@ -31,8 +46,7 @@ bibliography: paper.bib
 ---
 
 # Summary
-Most stars are members of binary systems. Observations of these systems provide
-optimal testing grounds for stellar models. Traditional observations of these
+Most stars are members of binary systems. Traditional observations of these
 systems rely on eclipses, where the secondary body occludes light from the
 primary star and vice versa. This leads to a strong bias on the orbital
 parameters -- to observe these eclipses the system must have a high inclination
