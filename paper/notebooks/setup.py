@@ -1,4 +1,5 @@
 from matplotlib import rcParams
+
 rcParams["figure.dpi"] = 150
 rcParams["savefig.dpi"] = 300
 
@@ -9,7 +10,7 @@ import matplotlib.pyplot as plt
 import exoplanet as xo
 import pymc3 as pm
 from maelstrom import Maelstrom
-from astropy.stats import LombScargle
+from astropy.timeseries import LombScargle
 from astropy.convolution import convolve, Box1DKernel
 import math
 import matplotlib
@@ -20,41 +21,45 @@ from exoplanet.orbits import get_true_anomaly
 import pymc3 as pm
 import theano.tensor as tt
 
-red = '#e41a1c'
-blue = '#377eb8'
-green = '#4daf4a'
-purple = '#984ea3'
-orange = '#ff7f00'
+red = "#e41a1c"
+blue = "#377eb8"
+green = "#4daf4a"
+purple = "#984ea3"
+orange = "#ff7f00"
 
-overleaf_path = '/Users/danielhey/Dropbox (Sydney Uni)/Apps/Overleaf/Maelstrom/figs/'
+overleaf_path = "/Users/danielhey/Dropbox (Sydney Uni)/Apps/Overleaf/Maelstrom/figs/"
 matplotlib.rcParams["font.size"] = 7.5
-matplotlib.rcParams['font.family'] = 'Arial'
-#plt.rc('font', family='serif')
-matplotlib.rcParams['xtick.labelsize'] = 7
-matplotlib.rcParams['ytick.labelsize'] = 7
+matplotlib.rcParams["font.family"] = "Arial"
+# plt.rc('font', family='serif')
+matplotlib.rcParams["xtick.labelsize"] = 7
+matplotlib.rcParams["ytick.labelsize"] = 7
+
 
 def mnras_size(fig_width_pt, square=False):
-    inches_per_pt = 1.0/72.00              # Convert pt to inches
-    golden_mean = (np.sqrt(5)-1.0)/2.0     # Most aesthetic ratio
-    fig_width = fig_width_pt*inches_per_pt # Figure width in inches
+    inches_per_pt = 1.0 / 72.00  # Convert pt to inches
+    golden_mean = (np.sqrt(5) - 1.0) / 2.0  # Most aesthetic ratio
+    fig_width = fig_width_pt * inches_per_pt  # Figure width in inches
     if square:
         fig_height = fig_width
     else:
-        fig_height = fig_width*golden_mean
-    return [fig_width,fig_height]
+        fig_height = fig_width * golden_mean
+    return [fig_width, fig_height]
 
-def smooth(freq, power, method='boxkernel', filter_width=0.1):
 
-    if method == 'boxkernel':
-        if filter_width <= 0.:
-            raise ValueError("the `filter_width` parameter must be "
-                             "larger than 0 for the 'boxkernel' method.")
+def smooth(freq, power, method="boxkernel", filter_width=0.1):
+
+    if method == "boxkernel":
+        if filter_width <= 0.0:
+            raise ValueError(
+                "the `filter_width` parameter must be "
+                "larger than 0 for the 'boxkernel' method."
+            )
         fs = np.mean(np.diff(freq))
-        box_kernel = Box1DKernel(math.ceil((filter_width/fs)))
+        box_kernel = Box1DKernel(math.ceil((filter_width / fs)))
         smooth_power = convolve(power, box_kernel)
         return smooth_power
 
-    if method == 'logmedian':
+    if method == "logmedian":
         count = np.zeros(len(freq), dtype=int)
         bkg = np.zeros_like(freq)
         x0 = np.log10(freq[0])
@@ -68,14 +73,15 @@ def smooth(freq, power, method='boxkernel', filter_width=0.1):
         smooth_power = bkg
         return smooth_power
 
-def get_lightcurve(target, type='flux', **kwargs):
+
+def get_lightcurve(target, type="flux", **kwargs):
     lc_collection = search_lightcurvefile(target, **kwargs).download_all()
 
     lc = lc_collection[0].PDCSAP_FLUX.normalize()
     for l in lc_collection[1:]:
         lc = lc.append(l.PDCSAP_FLUX.normalize())
     lc = lc.remove_nans()
-    if type is 'flux':
+    if type is "flux":
         return lc
     magnitude = -2.5 * np.log10(lc.flux)
     magnitude = magnitude - np.average(magnitude)
