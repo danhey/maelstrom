@@ -112,5 +112,4 @@ class Orbit:
             )
         )
         rv *= 299792.458  # c in km/s
-
         return tt.squeeze(rv)

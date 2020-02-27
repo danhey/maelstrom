@@ -3,7 +3,7 @@ from __future__ import division, print_function
 
 import seaborn as sns
 import numpy as np
-from astropy.stats import LombScargle
+from astropy.timeseries import LombScargle
 from astropy.convolution import convolve, Box1DKernel
 from astropy import constants as const
 import astropy.units as u

@@ -13,7 +13,7 @@ import pymc3 as pm
 from pymc3.model import Model
 import exoplanet as xo
 from exoplanet.orbits import get_true_anomaly
-from astropy.stats import LombScargle
+from astropy.timeseries import LombScargle
 
 __all__ = ["Periodogram"]
 

@@ -21,14 +21,13 @@ import seaborn as sns
 
 import exoplanet as xo
 from exoplanet.orbits import get_true_anomaly
-from astropy.stats import LombScargle
+from astropy.timeseries import LombScargle
 import tqdm
 
 __all__ = ["Maelstrom", "PB1Model", "BaseOrbitModel"]
 
 
 class BaseOrbitModel(Model):
-
     def __init__(self, time, flux, freq=None, name="", model=None, **kwargs):
         """A base orbit model from which all other orbit models inherit.
         
@@ -79,10 +78,10 @@ class BaseOrbitModel(Model):
     #     """Calculates the Fisher information of the current model, returning
     #     an estimate of the covariance of the parameters in the model. Note that this will
     #     *not* work if any GP (celerite) kernels are active in your model.
-        
+
     #     Args:
     #         map_soln (dict): Optimisation results.
-        
+
     #     Returns:
     #         array: Diagonals of the covariance matrix.
     #     """

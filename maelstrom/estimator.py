@@ -3,7 +3,7 @@
 from __future__ import division, print_function
 
 import numpy as np
-from astropy.stats import LombScargle
+from astropy.timeseries import LombScargle
 from scipy import optimize
 import exoplanet as xo
 import pymc3 as pm
