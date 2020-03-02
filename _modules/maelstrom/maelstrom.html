@@ -198,14 +198,13 @@
 
 <span class="kn">import</span> <span class="nn">exoplanet</span> <span class="k">as</span> <span class="nn">xo</span>
 <span class="kn">from</span> <span class="nn">exoplanet.orbits</span> <span class="kn">import</span> <span class="n">get_true_anomaly</span>
-<span class="kn">from</span> <span class="nn">astropy.stats</span> <span class="kn">import</span> <span class="n">LombScargle</span>
+<span class="kn">from</span> <span class="nn">astropy.timeseries</span> <span class="kn">import</span> <span class="n">LombScargle</span>
 <span class="kn">import</span> <span class="nn">tqdm</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Maelstrom&quot;</span><span class="p">,</span> <span class="s2">&quot;PB1Model&quot;</span><span class="p">,</span> <span class="s2">&quot;BaseOrbitModel&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="BaseOrbitModel"><a class="viewcode-back" href="../../api/maelstrom.html#maelstrom.maelstrom.BaseOrbitModel">[docs]</a><span class="k">class</span> <span class="nc">BaseOrbitModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;A base orbit model from which all other orbit models inherit.</span>
 <span class="sd">        </span>
@@ -256,10 +255,10 @@
     <span class="c1">#     &quot;&quot;&quot;Calculates the Fisher information of the current model, returning</span>
     <span class="c1">#     an estimate of the covariance of the parameters in the model. Note that this will</span>
     <span class="c1">#     *not* work if any GP (celerite) kernels are active in your model.</span>
-        
+
     <span class="c1">#     Args:</span>
     <span class="c1">#         map_soln (dict): Optimisation results.</span>
-        
+
     <span class="c1">#     Returns:</span>
     <span class="c1">#         array: Diagonals of the covariance matrix.</span>
     <span class="c1">#     &quot;&quot;&quot;</span>
